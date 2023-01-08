@@ -1,2 +1,3 @@
-# AirBnB-Clone
-Creating an AirBnB clone using React.js
+AirBnB Clone
+
+Building a simple clone of the AirBnB website using React.js
