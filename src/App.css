@@ -1,3 +1,4 @@
+/* styling for nav bar at top with the airbnb logo */
 nav{
   box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
   padding: 1rem;
@@ -6,6 +7,14 @@ nav{
 .airbnb-logo{
   height: 50px;
   width: 150px;
+}
+
+/* styling for the content area that contains a grid of photos (MainPhotoGrid.js)*/
+.MainPhotoGrid{
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
