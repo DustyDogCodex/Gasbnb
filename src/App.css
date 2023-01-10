@@ -1,3 +1,11 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  margin: 0;
+}
+
 /* styling for nav bar at top with the airbnb logo */
 nav{
   box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
@@ -18,3 +26,22 @@ nav{
 }
 
 
+
+/* styling for the intro section */
+.intro{
+  height: 20vh;
+  padding: 5rem;
+}
+
+.intro > h1{
+  font-size: 48px;
+  margin: 0;
+}
+
+.intro > p{
+  margin-top: 0;
+  max-width: 400px;
+  line-height: 110%;
+  font-weight: 300;
+  font-size: 24px;
+}
