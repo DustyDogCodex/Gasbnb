@@ -29,7 +29,7 @@ nav{
 
 /* styling for the intro section */
 .intro{
-  height: 20vh;
+  height: 15vh;
   padding: 5rem;
 }
 
@@ -44,4 +44,17 @@ nav{
   line-height: 110%;
   font-weight: 300;
   font-size: 24px;
+}
+
+/* styling for card-display-area (the area in which we display cards with activities, reviews and ratings) */
+.activity-card{
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 3rem;
+}
+
+.activity-card > img{
+  max-width: 250px;
 }
