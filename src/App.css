@@ -19,17 +19,14 @@ nav{
 
 /* styling for the content area that contains a grid of photos (MainPhotoGrid.js)*/
 .MainPhotoGrid{
-  height: 25vh;
+  padding-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-
 /* styling for the intro section */
 .intro{
-  height: 10vh;
   padding: 5rem;
 }
 
@@ -51,6 +48,8 @@ nav{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
 }
 
 .activity-card{
