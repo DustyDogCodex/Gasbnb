@@ -54,12 +54,7 @@ nav{
 }
 
 .activity-card{
-  border: 2px salmon solid;
   padding: 0.5rem;
-  /* display: flex; */
- /*  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 3rem; */
 }
 
 .activity-card > img{
