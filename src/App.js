@@ -15,6 +15,7 @@ function App() {
         location={obj.location}
         title={obj.title}
         price={obj.price}
+        openSpots={obj.openSpots}
         />
       )
   })

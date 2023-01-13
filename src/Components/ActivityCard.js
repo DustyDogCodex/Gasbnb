@@ -1,6 +1,14 @@
 function ActivityCard(props){
+    let textAlert
+    if(props.openSpots === 0){
+        textAlert = 'SOLD OUT!'
+    } else if(props.location === 'Online'){
+        textAlert = 'ONLINE'
+    }
+
     return(
         <div className="activity-card">
+            {textAlert && <div className="textAlert">{textAlert}</div>}
             <img src={props.img} alt="" />
             <div className="cardStats">
                 <img src="Star 1.png" alt="a star" />
