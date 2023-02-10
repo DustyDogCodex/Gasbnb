@@ -9,7 +9,7 @@ function ActivityCard(props){
     return(
         <div className="activity-card">
             {textAlert && <div className="textAlert">{textAlert}</div>}
-            <img src={props.img} alt="" />
+            <img src={props.img} alt="activity screenshot" />
             <div className="cardStats">
                 <img src="Star 1.png" alt="a star" />
                 <span> {props.rating} </span>
