@@ -4,6 +4,7 @@
 
 body{
   margin: 0;
+  height: 100vh;
 }
 
 /* styling for nav bar at top with the airbnb logo */
