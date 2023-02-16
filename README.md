@@ -1,3 +1,16 @@
-AirBnB Clone
+# AirBnB Clone
 
-Building a simple clone of the AirBnB website using React.js
+Building a simple frontend clone of the AirBnB website using React.js.
+
+Through this project I learnt to:
+
+1. Create custom react components.
+2. Create and use props with custom components.
+3. Condistionally render to display/hide components based on meeting specific conditions.
+
+Future enhancements/features to be added:
+
+1. Connect to a database to allow displaying activities from an API call.
+2. Setting up a backend for this clone.
+3. Adding more pages that redirect to an activity booking page like the real AirBnB.
+4. Basically turn this into a full stack clone of AirBnB.
