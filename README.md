@@ -2,11 +2,13 @@
 
 ![seinfeld-vacation-chaos](https://tenor.com/view/airport-seinfeld-funny-run-lets-go-gif-13734995.gif)
 
-<a href="https://dustydogcodex.github.io/AirBnB-Clone/"> LIVE DEMO </a>
+<!-- <a href="https://dustydogcodex.github.io/AirBnB-Clone/"> LIVE DEMO </a> -->
 
 ![airplane-traveling-globe](https://tenor.com/view/travel-airplane-globe-map-gif-10671781.gif)
 
 Building a simple frontend clone of the AirBnB website using React.js.
+
+Currently in the process of turning this from a one page front-end clone of the AirBnB home page into a full stack MERN AirBnB clone. Check back in later to see the fully functioning app!
 
 Through this project I learnt to:
 
