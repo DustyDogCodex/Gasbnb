@@ -1,9 +1,10 @@
 import './App.css'
+import { Header } from './components/Header'
 
-function App() {
+function App(){
   return (
     <>
-      <p className="text-3xl font-bold underline bg-red-500">Greatness from small beginnings</p>
+      <Header/>
     </>
   )
 }
