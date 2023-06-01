@@ -4,7 +4,7 @@ import { faMagnifyingGlass, faBars, faCircleUser, faGlobe } from "@fortawesome/f
 
 function Header(){
     return(
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-between border-b-2 border-gray-100 p-1">
             <div className="flex items-center p-5">
                 <FontAwesomeIcon 
                     icon={faAirbnb} 
