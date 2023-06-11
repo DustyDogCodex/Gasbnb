@@ -10,7 +10,9 @@ function Login() {
         </h1>
         <h3
             className="mt-5 text-xl font-semibold"
-        >Log in</h3>
+        >
+            Log in
+        </h3>
         <form
             className="flex flex-col items-center justify-center"
         >

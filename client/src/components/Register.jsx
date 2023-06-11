@@ -10,7 +10,9 @@ function Register() {
         </h1>
         <h3
             className="mt-5 text-xl font-semibold"
-        >Sign up</h3>
+        >
+            Sign up
+        </h3>
         <form
             className="flex flex-col items-center justify-center"
         >
