@@ -6,7 +6,7 @@ const { Schema } = mongoose
 //setting avatar default value to '' to allow users to creat accounts without avatars/profile pics.
 
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String
     },
     password: {

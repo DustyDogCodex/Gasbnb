@@ -13,14 +13,12 @@ Router.post(
     '/register', 
     asyncHandler( async(req,res,next) => {
         
-        //if username already exists, a 418 status is sent back because you can't brew coffee in a teapot. The route will respond with a 'failed' message which will trigger a bootstrap alert on our frontend. 
-        const invalidUsername = await User.findOne({ username: req.body.username })
-        if(invalidUsername){
-            /* res.status(418) */
-            console.log(invalidUsername)
+        //if email already exists, the route will respond with a 'failed' message which will trigger an alert on our frontend. 
+        const invalidEmail = await User.findOne({ email: req.body.email })
+        if(invalidEmail){
             res.send('failed')
         } else {
-            //username is unique, we can proceed with saving user information
+            //email is unique, we can proceed with saving user information
             //generating salt
             const salt = await bcrypt.genSalt(10)
             //hashing password
@@ -28,7 +26,7 @@ Router.post(
 
             //passing req info + hashed pasword into User model
             const newUser = new User({
-                username: req.body.username,
+                email: req.body.email,
                 password: hashedPassword
             })
 
