@@ -2,13 +2,28 @@ import './App.css'
 import { Header } from './components/Header'
 import { Login } from './components/Login'
 import { Register } from './components/Register'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App(){
   return (
     <>
       <Header/>
-      <Register/>
-      <Login/>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={<Login/>}
+          />
+          <Route
+            path='/login'
+            element={<Login/>}
+          />
+          <Route
+            path='/register'
+            element={<Register/>}
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

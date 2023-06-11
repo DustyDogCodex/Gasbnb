@@ -3,6 +3,11 @@ function Login() {
     <div 
         className="flex flex-col items-center justify-center border-2"
     >   
+        <h1
+            className="font-semibold text-2xl border-b-2 pb-3"
+        >
+            Welcome to Gasbnb
+        </h1>
         <h3
             className="mt-5 text-xl font-semibold"
         >Log in</h3>
