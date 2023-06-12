@@ -46,10 +46,13 @@ Router.post(
 //app is small enough to justify not using passport
 Router.post(
     '/login', 
-    passport.authenticate('local', { failureRedirect: '/login' }),
+    (req,res) => {
+        res.json({email: req.body.email, password: req.body.password})
+    }
+    /* passport.authenticate('local', { failureRedirect: '/login' }),
     function(req, res) {
         res.send('ok')
-    }
+    } */
 );
 
 //simple get request to check if a user is authenticated and retrieve user information
