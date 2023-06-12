@@ -14,7 +14,7 @@ Router.post(
     asyncHandler( async(req,res,next) => {
         
         //for testing and dev
-        res.json({ email: req.body.email, password: req.body.password})
+        res.json({ name: req.body.name, email: req.body.email, password: req.body.password})
 
         //if email already exists, the route will respond with a 'failed' message which will trigger an alert on our frontend. 
         /* const invalidEmail = await User.findOne({ email: req.body.email })
@@ -29,6 +29,7 @@ Router.post(
 
             //passing req info + hashed pasword into User model
             /* const newUser = new User({
+                name: req.body.name
                 email: req.body.email,
                 password: hashedPassword
             }) */
@@ -37,7 +38,7 @@ Router.post(
             /* const user = await newUser.save() */
 
             //if user account is successfully created, the route will send a success message that will trigger a bootstap alert on the frontend letting the user know an account was created.
-            res.send('success')  
+            /* res.send('success')  */ 
         }
     /* } */)
 )

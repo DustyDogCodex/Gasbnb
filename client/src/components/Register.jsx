@@ -9,11 +9,13 @@ function Register() {
 
     //state variables for email and password
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
     //create post request to submit registration info
     async function registerUser(){
         await axios.post('http://localhost:5000/auth/register', {
+            name,
             email,
             password
         })
@@ -40,7 +42,23 @@ function Register() {
                 onSubmit={handleSubmit(registerUser)}
             >
                 <input 
-                    className="border-solid border-2 rounded-md p-2 mt-5"
+                    className="border-solid border-2 rounded-md p-2 my-2"
+                    {...register("name", {
+                        required: true
+                    })}
+                    type="text"
+                    placeholder="Enter your name"  
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                {errors.name && (
+                    <p className="text-red mt-1">
+                        {errors.email.type === "required" && "Name is required."}
+                    </p>
+                )}
+
+                <input 
+                    className="border-solid border-2 rounded-md p-2 my-2"
                     {...register("email", {
                         required: true,
                         pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -56,8 +74,9 @@ function Register() {
                         {errors.email.type === "pattern" && "Invalid email address."}
                     </p>
                 )}
+
                 <input 
-                    className="border-solid border-2 rounded-md p-2"
+                    className="border-solid border-2 rounded-md p-2 my-2"
                     {...register("password", {
                         required: true
                     })}
