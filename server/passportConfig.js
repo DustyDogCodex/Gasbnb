@@ -8,11 +8,11 @@ const User = require('./models/Users')
 
 /* -------------------- LOCAL STRATEGY -------------------------------------- */
 
-passport.use(new LocalStrategy({
-    usernameField: 'email'
-  },
-  function(email, password, done) {
-    User.findOne({ email: email })
+passport.use(
+  new LocalStrategy(
+    { usernameField: 'email' },
+    function(email, password, done) {
+    User.findOne({ email })
       .then(user => {
         if(!user){
           return done(null, false);
@@ -35,14 +35,17 @@ passport.use(new LocalStrategy({
 /*-------------------- SERIALISE AND DESERIALISE USERS ------------------------- */
 
 passport.serializeUser((user, cb) => {
+  console.log(user._id)
   return cb(null, user._id)
 });
 
 passport.deserializeUser(async(id, cb) => {
  try {
     const user = await User.findById(id);
+    console.log("user is", user)
     //omitting password otherwise we will make a big OOPSIE
     const { password, ...others } = user._doc
+    console.log("others",others)
     cb(null, others);
   } catch(err) {
     cb(err);

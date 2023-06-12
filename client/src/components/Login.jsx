@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import { Navigate } from "react-router-dom"
 import axios from "axios"
 
 function Login() {
@@ -11,19 +12,25 @@ function Login() {
     const [password, setPassword] = useState('')
 
     //create post request to submit registration info
-    async function loginUser(e){
+    async function loginUser(){
         try{
             await axios.post('http://localhost:5000/auth/login', 
                 {
                     email,
                     password
-                }
+                },
+                { withCredentials: true}
             )
-            .then(res => console.log(res))
+            .then(res => {
+                if(res.data == 'ok'){
+                    window.location.replace('/')
+                }
+            })
         }catch(err) {
             console.log(err)
         }
     }
+
     return (
         <div 
             className="flex flex-col items-center justify-center border-2"
@@ -78,6 +85,7 @@ function Login() {
 
                 <button 
                     className="bg-red text-white px-8 py-2 rounded-md my-5"
+                    type="submit"
                 >
                     Continue
                 </button>

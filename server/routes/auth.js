@@ -47,7 +47,7 @@ Router.post(
 //app is small enough to justify not using passport
 Router.post(
     '/login', 
-    passport.authenticate('local', { failureRedirect: 'http://localhost:5173/login' }),
+    passport.authenticate('local', { failureRedirect: "/" }),
     function(req, res) {
         res.send('ok')
     }
