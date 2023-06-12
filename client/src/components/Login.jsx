@@ -11,13 +11,18 @@ function Login() {
     const [password, setPassword] = useState('')
 
     //create post request to submit registration info
-    async function loginUser(){
-        await axios.post('http://localhost:5000/auth/login', {
-            email,
-            password
-        })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+    async function loginUser(e){
+        try{
+            await axios.post('http://localhost:5000/auth/login', 
+                {
+                    email,
+                    password
+                }
+            )
+            .then(res => console.log(res))
+        }catch(err) {
+            console.log(err)
+        }
     }
     return (
         <div 

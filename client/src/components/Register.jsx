@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { Alert } from "react-bootstrap"
+import { Navigate } from "react-router-dom"
 
 function Register() {
     
@@ -12,6 +14,9 @@ function Register() {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
+    //if user uses an email that is already in our database, an alert will pop up
+    const [emailAlert, setEmailAlert] = useState(false)
+
     //create post request to submit registration info
     async function registerUser(){
         await axios.post('http://localhost:5000/auth/register', {
@@ -19,7 +24,15 @@ function Register() {
             email,
             password
         })
-        .then(res => console.log(res))
+        .then(res => {
+            if(res.data == 'success'){
+                <Navigate to="/login"/>
+            } else if(res.data == 'failed') {
+                setEmailAlert(true)
+            } else {
+                console.log(res.data)
+            }
+        })
         .catch(err => console.log(err))
     }
 
@@ -96,6 +109,16 @@ function Register() {
                 >
                     Continue
                 </button>
+
+                {/* Alert for duplicate email */}
+                <Alert 
+                    className="bg-yellow-300 text-red p-5 rounded-xl" 
+                    show={emailAlert} 
+                    onClose={() => setEmailAlert(false)} 
+                    dismissible
+                >
+                    This email is already being used. Please choose a different email.
+                </Alert>
             </form>
         </div>
     )
