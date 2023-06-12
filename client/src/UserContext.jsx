@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
             const res = await axios.get(
             'http://localhost:5000/auth/getuser',
             { withCredentials: true })
-                .then(res => console.log(res.data))
+                .then(res => setUserInfo(res.data))
         }
         getProfile()
     }, [])

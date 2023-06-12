@@ -64,9 +64,12 @@ Router.get(
 //logout user 
 Router.get(
     "/logout", 
-    (req, res) => {
-    req.logout()
-    res.send('success')
-})
+    (req, res, next) => {
+        req.logout(function(err) {
+            if (err) return next(err)
+            res.send('success')
+        })
+    }
+)
 
 module.exports = Router
