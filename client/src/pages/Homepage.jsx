@@ -1,4 +1,4 @@
-import { Header } from "../components/Header"
+import { NavBar } from "../components/NavBar"
 import { UserContext } from '../UserContext'
 import { useContext } from 'react'
 
@@ -9,7 +9,7 @@ function Homepage() {
 
   return (
     <>
-        <Header/>
+        <NavBar/>
     </>
   )
 }
