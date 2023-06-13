@@ -8,6 +8,7 @@ import Homepage from './pages/Homepage'
 import { Account } from './pages/Account'
 import { MyRentals } from './pages/MyRentals'
 import { Profile } from './pages/Profile'
+import MyTrips from './pages/MyTrips'
 
 function App(){
   //using context to check for logged in user
@@ -37,7 +38,7 @@ function App(){
             element={ userInfo ? <Account /> : <Login />}
           >
             <Route index element={<Profile />} />
-            <Route path='trips' element={<Account />} />
+            <Route path='trips' element={<MyTrips />} />
             <Route path='rentals' element={<MyRentals />} />
           </Route>
         </Routes>
