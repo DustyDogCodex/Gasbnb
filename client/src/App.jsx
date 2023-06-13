@@ -6,6 +6,8 @@ import { UserContext } from './UserContext'
 import { useContext } from 'react'
 import Homepage from './pages/Homepage'
 import { Account } from './pages/Account'
+import { MyRentals } from './pages/MyRentals'
+import { Profile } from './pages/Profile'
 
 function App(){
   //using context to check for logged in user
@@ -23,17 +25,21 @@ function App(){
             element={<Homepage/>}
           />
           <Route
-            path='/register'
+            path='register'
             element={<Register/>}
           />
           <Route
-            path='/login'
+            path='login'
             element={<Login/>}
           />
           <Route
-            path='/account/:subpage?'
-            element={ userInfo ? <Account/> : <Login/>}
-          />
+            path='account'
+            element={ userInfo ? <Account /> : <Login />}
+          >
+            <Route index element={<Profile />} />
+            <Route path='trips' element={<Account />} />
+            <Route path='rentals' element={<MyRentals />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

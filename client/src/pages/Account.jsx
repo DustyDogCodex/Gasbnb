@@ -1,31 +1,16 @@
-import { useContext } from "react"
-import { UserContext } from "../UserContext"
-import AccountInfo from "../components/AccountInfo"
-import { Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { Link, Outlet, useLocation } from "react-router-dom"
 
 function Account() {
 
-    //getting userInfo from context
-    const { userInfo } = useContext(UserContext)
+    //using nested routes to render 3 subpages: Profile (index), Trips and Rentals
 
-    //using useParams to check with subpage user is in
-    //selected subpage will then be highlighted with red background
-    const { subpage } = useParams()
-    console.log(subpage)
+    //using useLocation to check with router user is on
+    //subpage is then set to whichever nested route the user has selected
+    //the tab for this route will then be highlighted with red background
+    const location = useLocation()
+    const subpage = location.pathname.split('/')[2]
+    console.log(location.pathname.split('/')[2])
 
-    //function to logout user
-    async function logout(){
-        await axios.get(
-            'http://localhost:5000/auth/logout',
-            { withCredentials: true }
-        )
-        .then(res => {
-            if(res.data){
-                window.location.href = '/'
-            }
-        })
-    }
     return (
         <div
             className="flex flex-col items-center justify-center p-10"
@@ -46,36 +31,13 @@ function Account() {
                     My Trips
                 </Link>
                 <Link 
-                    to={'/account/wishlist'}
-                    className={`py-2 px-6 ${subpage == 'wishlist' ? 'bg-red text-white rounded-full' : ''}`}
+                    to={'/account/rentals'}
+                    className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}
                 >
-                    My Wishlist
+                    My Rentals
                 </Link>
             </nav>
-            <h1>Account</h1>
-            <p>
-                <span 
-                    className="text-indigo-500 text-xl font-robotoMono font-semibold">{userInfo?.name}
-                </span>,
-                <span 
-                    className="text-indigo-500 text-md font-robotoMono font-semibold">{userInfo?.email}
-                </span>
-            </p> 
-            <div
-                className="flex flex-col items-center justify-start"
-            >
-                <h1 className="text-3xl mt-10">Personal Info</h1>
-                <AccountInfo info={"Legal Name"} value={userInfo.name} />
-                <AccountInfo info={"Email address"} value={userInfo.email} />
-                <AccountInfo info={"Address"} value={'Not provided'} />
-            </div>
-            <button
-                type="button"
-                className="bg-red text-white rounded-full text-2xl px-6 py-2 mt-5"
-                onClick={logout}
-            >
-                Log Out
-            </button>
+            <Outlet/>
         </div>
     )
 }

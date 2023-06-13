@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const BookingsSchema = new Schema ({
+    owner: {
+        type: mongoose.ObjectId, 
+        ref: 'User'
+    },
     title: {
         type: String,
         required: true
