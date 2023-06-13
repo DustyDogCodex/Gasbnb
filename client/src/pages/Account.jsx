@@ -1,4 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUser, faList, faPeopleRoof } from "@fortawesome/free-solid-svg-icons"
 
 function Account() {
 
@@ -13,28 +15,28 @@ function Account() {
 
     return (
         <div
-            className="flex flex-col items-center justify-center p-10"
+            className="flex flex-col p-10"
         >
             <nav
-                className="w-full flex justify-center mt-5 text-2xl"
+                className="w-full flex justify-center mt-5 text-2xl gap-2"
             >
                 <Link 
                     to={'/account'}
                     className= {`py-2 px-6 ${subpage == undefined ? 'bg-red text-white rounded-full' : ''}`}
                 >
-                    My Profile
+                    <FontAwesomeIcon icon={faUser} /> My Profile
                 </Link>
                 <Link 
                     to={'/account/trips'}
                     className={`py-2 px-6 ${subpage == 'trips' ? 'bg-red text-white rounded-full' : ''}`}
                 >
-                    My Trips
+                   <FontAwesomeIcon icon={faList} /> My Trips
                 </Link>
                 <Link 
                     to={'/account/rentals'}
                     className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}
                 >
-                    My Rentals
+                    <FontAwesomeIcon icon={faPeopleRoof} /> My Rentals
                 </Link>
             </nav>
             <Outlet/>

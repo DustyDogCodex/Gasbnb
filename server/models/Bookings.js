@@ -14,12 +14,13 @@ const BookingsSchema = new Schema ({
         type: String,
         required: true
     },
-    photos: [String],
     description: {
         type: String,
         required: true
     },
     extraInfo: String,
+    photos: [String],
+    amenities: [String],
     checkIn: Number,
     checkOut: Number,
     maxGuests: Number

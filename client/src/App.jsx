@@ -9,6 +9,7 @@ import { Account } from './pages/Account'
 import { MyRentals } from './pages/MyRentals'
 import { Profile } from './pages/Profile'
 import MyTrips from './pages/MyTrips'
+import CreateNewRental from './pages/CreateNewRental'
 
 function App(){
   //using context to check for logged in user
@@ -40,6 +41,7 @@ function App(){
             <Route index element={<Profile />} />
             <Route path='trips' element={<MyTrips />} />
             <Route path='rentals' element={<MyRentals />} />
+            <Route path='rentals/new' element={<CreateNewRental />} />
           </Route>
         </Routes>
       </BrowserRouter>
