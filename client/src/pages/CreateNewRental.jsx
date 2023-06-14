@@ -184,11 +184,17 @@ function CreateNewRental() {
             
             {/* gallery for displaying images queued up to be added to the listing by user */}
             <div
-                className="flex flex-wrap border-2 p-3 rounded-md"
+                className="mt-3 flex flex-wrap border-2 p-3 rounded-md"
             >
-                {imageQueue.length > 0 ? imageQueue.map(photo => {
-                    return <div>{photo}</div>
-                }) : 'Add photos' }
+                {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
+                {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
+                {imageQueue.length > 0 ? imageQueue.map(photo => 
+                    <img
+                        className="max-w-[300px] max-h-[300px] rounded-lg"
+                        src={`http://localhost:5000/uploads/${photo}`}
+                        alt="uploaded image"
+                    />
+                ) : 'Add photos' }
             </div>
             <div
                 className="flex items-center justify-center mt-8"
