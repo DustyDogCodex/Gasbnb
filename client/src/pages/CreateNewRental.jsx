@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWifi, faTv, faPaw, faDoorClosed, faCarSide } from "@fortawesome/free-solid-svg-icons"
+import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useState } from "react"
@@ -157,6 +157,9 @@ function CreateNewRental() {
                 placeholder="How many people are allowed to be here at one time" 
             />
             <label>Photos</label>
+            <p
+                className="text-sm text-stone-400 my-1"
+            >You can upload photos by using a link to a image hosting website or directly from your device!</p>
             <div
                 className="flex justify-between"
             >
@@ -176,11 +179,6 @@ function CreateNewRental() {
                     Add photo
                 </button>
             </div>
-            <span>------ OR ------</span>
-            <input 
-                className="w-full border-2 p-2 rounded-lg"
-                type="file" 
-            />
             
             {/* gallery for displaying images queued up to be added to the listing by user */}
             <div
@@ -190,11 +188,22 @@ function CreateNewRental() {
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
                 {imageQueue.length > 0 ? imageQueue.map(photo => 
                     <img
-                        className="max-w-[300px] max-h-[300px] rounded-lg"
+                        className="max-w-[300px] max-h-[300px] rounded-xl m-1"
                         src={`http://localhost:5000/uploads/${photo}`}
                         alt="uploaded image"
                     />
                 ) : 'Add photos' }
+
+                <label
+                    className="border-2 rounded-xl p-2 flex items-center gap-2 font-roboto font-semibold cursor-pointer text-stone-500 m-1"
+                >
+                <FontAwesomeIcon icon={faCloudArrowUp} style={{height:'40px', width:'40px', color:'grey'}}/>
+                    Upload images
+                <input 
+                    className="w-full border-2 p-2 rounded-lg hidden"
+                    type="file" 
+                />
+                </label>
             </div>
             <div
                 className="flex items-center justify-center mt-8"
