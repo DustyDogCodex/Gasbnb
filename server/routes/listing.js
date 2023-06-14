@@ -39,14 +39,14 @@ Router.post("/new",
 Router.post("/uploadimage-link",
     asyncHandler( async(req,res) => {
         //getting image link from user request
-        const { link } = req.body
+        const imageLink = req.body.imageLink
         //giving the file a new, unique name using date object
-        const fileName = Date() + '.jpg'
+        const fileName = 'image' + Date.now() + '.jpg'
         await imageDownloader.image({
-            url: link,
-            dest: __dirname + '/uploads' + fileName
+            url: imageLink,
+            dest: __dirname + '/uploadedImages' + `/${fileName}`
         })
-        res.json(__dirname + '/uploads' + fileName)
+        res.json(fileName)
     })
 )
 

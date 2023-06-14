@@ -8,21 +8,35 @@ function CreateNewRental() {
     //using react hook form for validation
     const { register, handleSubmit, formState: { errors } } = useForm()
 
+    //state variable tracking all images currently queued for upload by user. 
+    //These have not been submitted yet, but they will be displayed in the photo gallery below the photos section.
+    //this is the final array of images that will be sent to the server after user clicks submit.
+    const [ imageQueue, setImageQueue ] = useState([])
+
     //state variables for tracking image links submitted by user
-    const [imageLink, setImageLink] = useState('')
+    const [ imageLink, setImageLink ] = useState('')
     console.log(imageLink)
 
     //function to handle adding images that were submiited through a link
-    async function addLinkImages(){
-        await axios.post("http://localhost:5000/listing/uploadimage-link",
-
+    async function addLinkImages(e){
+        e.preventDefault()
+        axios.post("http://localhost:5000/listings/uploadimage-link",
+            { imageLink: imageLink }
         )
+        .then(res => {
+            const fileName = res.data
+            //add filename to current queue
+            setImageQueue(prev => [...prev, fileName])
+            //set image link input back to empty after successful upload
+            setImageLink('')
+        })
+        .catch(err => console.log(err))
     }
 
     return (
     <div>
         <form 
-            className="w-4/5 "
+            className="w-4/5"
             onSubmit={handleSubmit((data) => {
                 console.log(data)
             })}
@@ -157,6 +171,7 @@ function CreateNewRental() {
                 <button
                     type="button"
                     className="bg-red text-white text-xl py-2 px-4 rounded-full my-2"
+                    onClick={addLinkImages}
                 >
                     Add photo
                 </button>
@@ -167,10 +182,13 @@ function CreateNewRental() {
                 type="file" 
             />
             
+            {/* gallery for displaying images queued up to be added to the listing by user */}
             <div
-                className="grid grid-cols-3 lg:grid-cols-6 mt-5 border-2 p-3 rounded-md"
+                className="flex flex-wrap border-2 p-3 rounded-md"
             >
-                photo gallery
+                {imageQueue.length > 0 ? imageQueue.map(photo => {
+                    return <div>{photo}</div>
+                }) : 'Add photos' }
             </div>
             <div
                 className="flex items-center justify-center mt-8"
