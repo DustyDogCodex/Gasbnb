@@ -1,5 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
+const imageDownloader = require('image-downloader')
 const Router = express.Router()
 
 //import listing schema
@@ -33,5 +34,27 @@ Router.post("/new",
         res.send('you want to create a new listing? In this economy?')
     }
 ))
+
+//for uploading user images through user given link
+Router.post("/uploadimage-link",
+    asyncHandler( async(req,res) => {
+        //getting image link from user request
+        const { link } = req.body
+        //giving the file a new, unique name using date object
+        const fileName = Date() + '.jpg'
+        await imageDownloader.image({
+            url: link,
+            dest: __dirname + '/uploads' + fileName
+        })
+        res.json(__dirname + '/uploads' + fileName)
+    })
+)
+
+//for uploading images directly from user's device
+Router.post("/uploadimage-device",
+    asyncHandler( async(req,res) => {
+        res.send('image will be added from your device!')
+    })
+)
 
 module.exports = Router

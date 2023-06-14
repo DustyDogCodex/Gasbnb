@@ -37,6 +37,7 @@
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
+    "image-downloader": "^4.3.0",
     "mongoose": "^7.2.3",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",

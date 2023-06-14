@@ -1,10 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faWifi, faTv, faPaw, faDoorClosed, faCarSide } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
+import axios from "axios"
+import { useState } from "react"
 
 function CreateNewRental() {
     //using react hook form for validation
     const { register, handleSubmit, formState: { errors } } = useForm()
+
+    //state variables for tracking image links submitted by user
+    const [imageLink, setImageLink] = useState('')
+    console.log(imageLink)
+
+    //function to handle adding images that were submiited through a link
+    async function addLinkImages(){
+        await axios.post("http://localhost:5000/listing/uploadimage-link",
+
+        )
+    }
 
     return (
     <div>
@@ -134,8 +147,11 @@ function CreateNewRental() {
                 className="flex justify-between"
             >
                 <input 
+                    name="uploadimages-link"
                     className="w-4/5 border-2 p-2 rounded-lg"
                     type="text"
+                    value={imageLink}
+                    onChange={e => setImageLink(e.target.value)}
                     placeholder="Upload photos with a link" 
                 />
                 <button
