@@ -33,6 +33,12 @@ function CreateNewRental() {
         .catch(err => console.log(err))
     }
 
+    //function to handle images loaded through devices
+    async function addDeviceImages(e){
+        const file = e.target.files
+        console.log(file)
+    }
+
     return (
     <div>
         <form 
@@ -159,7 +165,9 @@ function CreateNewRental() {
             <label>Photos</label>
             <p
                 className="text-sm text-stone-400 my-1"
-            >You can upload photos by using a link to a image hosting website or directly from your device!</p>
+            >
+                You can upload photos by using a link to a image hosting website or directly from your device!
+            </p>
             <div
                 className="flex justify-between"
             >
@@ -197,12 +205,16 @@ function CreateNewRental() {
                 <label
                     className="border-2 rounded-xl p-2 flex items-center gap-2 font-roboto font-semibold cursor-pointer text-stone-500 m-1"
                 >
-                <FontAwesomeIcon icon={faCloudArrowUp} style={{height:'40px', width:'40px', color:'grey'}}/>
+                    <FontAwesomeIcon 
+                        icon={faCloudArrowUp} 
+                        style={{height:'40px', width:'40px', color:'grey'}}
+                    />
                     Upload images
-                <input 
-                    className="w-full border-2 p-2 rounded-lg hidden"
-                    type="file" 
-                />
+                    <input 
+                        className="hidden"
+                        type="file" 
+                        onChange={addDeviceImages}
+                    />
                 </label>
             </div>
             <div
