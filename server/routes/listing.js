@@ -1,10 +1,24 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
 const imageDownloader = require('image-downloader')
+const multer = require('multer')
+const fs = require('fs')
 const Router = express.Router()
 
 //import listing schema
 const Listing = require('../models/Listings')
+
+//multer upload options setup
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploadedImages')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+ '.jpg')
+  }
+})
+
+const upload = multer({ storage: storage })
 
 //for getting all available listings to display on the homepage
 Router.get('/available', 
@@ -33,7 +47,7 @@ Router.post("/new",
     asyncHandler((req,res) => {
         res.send('you want to create a new listing? In this economy?')
     }
-))
+))   
 
 //for uploading user images through user given link
 Router.post("/uploadimage-link",
@@ -42,18 +56,41 @@ Router.post("/uploadimage-link",
         const imageLink = req.body.imageLink
         //giving the file a new, unique name using date object
         const fileName = 'image' + Date.now() + '.jpg'
+
+        //trying to set the destination as the same folder used by multer
+        //trying to select the root directory and then access the uploadedimages folder
+        const dirnameSplit = __dirname.split('\\')
+        dirnameSplit.splice(-2,2)
+        const rootDirectory = dirnameSplit.join('/')
+        console.log(rootDirectory)        
         await imageDownloader.image({
             url: imageLink,
-            dest: __dirname + '/uploadedImages' + `/${fileName}`
+            dest: rootDirectory + '/uploadedImages' + `/${fileName}`
         })
         res.json(fileName)
     })
 )
 
 //for uploading images directly from user's device
+//added multer middleware to handle array of images (max 20 files per request)
 Router.post("/uploadimage-device",
+    upload.array('images', 20),
     asyncHandler( async(req,res) => {
-        res.send('image will be added from your device!')
+        //storing uploaded files in an array
+        const uploadedImages = []
+        for(let i = 0; i < req.files.length; i++){
+            const { path } = req.files[i]
+            console.log("path",path)
+            //splitting the path and just selecting the filename
+            const splitPath = path.split('\\')
+            console.log('split path', splitPath)
+            const newPath = splitPath[1]
+            /* fs.renameSync(path, newPath) */
+            console.log("newPath", newPath)
+            //replacing /uploadedImages since we already have /uploads in our client side when we display the images.
+            uploadedImages.push(newPath)
+        }
+        res.json(uploadedImages)
     })
 )
 

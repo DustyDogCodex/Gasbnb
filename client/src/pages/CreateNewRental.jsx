@@ -37,17 +37,21 @@ function CreateNewRental() {
     async function addDeviceImages(e){
         const images = e.target.files
         const data = new FormData()
-        data.set('images', images)
-        axios.post("http://localhost:5173/listings/uploadimage-device", 
+        for(let i = 0; i < images.length; i++){
+            data.append('images', images[i])
+        }
+        axios.post("http://localhost:5000/listings/uploadimage-device", 
             data,
             {
                 headers: { "Content-Type": "multipart/form-data" }
             }
         )
         .then(res => {
-            const fileName = res.data
+            //server will respond with file name of uploaded files. 
+            //we can add them to our Image queue using the spread operator as we might be receiving multiple files together.
+            const fileNames = res.data
             setImageQueue(prev => {
-                return [...prev, fileName]
+                return [...prev, ...fileNames]
             })
         })
     }
@@ -207,13 +211,14 @@ function CreateNewRental() {
             >
                 {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
-                {imageQueue.length > 0 ? imageQueue.map(photo => 
+                {imageQueue.length > 0 && imageQueue.map(photo => 
                     <img
+                        key={photo}
                         className="max-w-[300px] max-h-[300px] rounded-xl m-1"
                         src={`http://localhost:5000/uploads/${photo}`}
                         alt="uploaded image"
                     />
-                ) : 'Add photos' }
+                )}
 
                 <label
                     className="border-2 rounded-xl p-2 flex items-center gap-2 font-roboto font-semibold cursor-pointer text-stone-500 m-1"
@@ -224,6 +229,7 @@ function CreateNewRental() {
                     />
                     Upload images
                     <input 
+                        multiple
                         className="hidden"
                         type="file" 
                         onChange={addDeviceImages}

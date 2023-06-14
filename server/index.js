@@ -17,9 +17,15 @@ app.use(cors({
   credentials: true }))
 app.use(express.json())
 
+//storing a route to the root directory for the project
+//this is used to specicy a route to /uploadedImages folder 
+const dirnameSplit = __dirname.split('\\')
+dirnameSplit.splice(-1,1)
+const rootDirectory = dirnameSplit.join('/')
+
 //setting up uploads folder as a static asset
 //now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
-app.use('/uploads', express.static(__dirname + '/routes/uploadedImages'))
+app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
 
 //mongodb connection setup
 mongoose.connect(process.env.MONGO_URL)
