@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const BookingsSchema = new Schema ({
+const ListingsSchema = new Schema ({
     owner: {
         type: mongoose.ObjectId, 
         ref: 'User'
@@ -26,6 +26,6 @@ const BookingsSchema = new Schema ({
     maxGuests: Number
 })
 
-const BookingModel = mongoose.model('Booking', BookingsSchema)
+const ListingModel = mongoose.model('Listing', ListingsSchema)
 
-module.exports = BookingModel
+module.exports = ListingModel

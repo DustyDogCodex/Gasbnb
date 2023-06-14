@@ -3,7 +3,9 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
+//all imported routes and files
 const authRoute = require('./routes/auth')
+const listingRoute = require('./routes/listing')
 const passportConfig = require('./passportConfig')
 require('dotenv').config()
 
@@ -45,6 +47,8 @@ const port = process.env.PORT || 5000
 
 //routes for registering and authenticating users
 app.use('/auth', authRoute)
+//routes for creating/updating/deleting listings
+app.use('/listings', listingRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
