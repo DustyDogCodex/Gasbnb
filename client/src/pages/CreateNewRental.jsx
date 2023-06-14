@@ -18,7 +18,7 @@ function CreateNewRental() {
     console.log(imageLink)
 
     //function to handle adding images that were submiited through a link
-    async function addLinkImages(e){
+    function addLinkImages(e){
         e.preventDefault()
         axios.post("http://localhost:5000/listings/uploadimage-link",
             { imageLink: imageLink }
@@ -35,8 +35,21 @@ function CreateNewRental() {
 
     //function to handle images loaded through devices
     async function addDeviceImages(e){
-        const file = e.target.files
-        console.log(file)
+        const images = e.target.files
+        const data = new FormData()
+        data.set('images', images)
+        axios.post("http://localhost:5173/listings/uploadimage-device", 
+            data,
+            {
+                headers: { "Content-Type": "multipart/form-data" }
+            }
+        )
+        .then(res => {
+            const fileName = res.data
+            setImageQueue(prev => {
+                return [...prev, fileName]
+            })
+        })
     }
 
     return (
