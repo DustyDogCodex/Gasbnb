@@ -17,6 +17,10 @@ app.use(cors({
   credentials: true }))
 app.use(express.json())
 
+//setting up uploads folder as a static asset
+//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
+app.use('/uploads', express.static(__dirname + '/routes/uploadedImages'))
+
 //mongodb connection setup
 mongoose.connect(process.env.MONGO_URL)
 .then(console.log('Established connection to database!'))
