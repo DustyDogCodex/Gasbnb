@@ -16,7 +16,6 @@ function App(){
   //depending on whether a user is logged in, we will direct them away from certain pages. 
   //For example, no user logged in and they click the User icon, we direct them to login first before /account.
   const { userInfo } = useContext(UserContext)
-  console.log(userInfo)
 
   return (
     <>
@@ -34,6 +33,7 @@ function App(){
             path='login'
             element={<Login/>}
           />
+          {/* Account and associated subpages */}
           <Route
             path='account'
             element={ userInfo ? <Account /> : <Login />}

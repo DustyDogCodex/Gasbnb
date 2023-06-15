@@ -11,7 +11,6 @@ function Account() {
     //the tab for this route will then be highlighted with red background
     const location = useLocation()
     const subpage = location.pathname.split('/')[2]
-    console.log(location.pathname.split('/')[2])
 
     return (
         <div

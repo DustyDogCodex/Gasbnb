@@ -18,7 +18,7 @@ app.use(cors({
 app.use(express.json())
 
 //storing a route to the root directory for the project
-//this is used to specicy a route to /uploadedImages folder 
+//this is used to specify a route to /uploadedImages folder 
 const dirnameSplit = __dirname.split('\\')
 dirnameSplit.splice(-1,1)
 const rootDirectory = dirnameSplit.join('/')

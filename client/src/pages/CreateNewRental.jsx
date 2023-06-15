@@ -77,6 +77,7 @@ function CreateNewRental() {
             }
         )
         .then(res => console.log(res.data))
+        .catch(err => console.log(err))
     }
 
     return (
@@ -93,7 +94,7 @@ function CreateNewRental() {
                 type="text"
                 placeholder="My lovely apartment/house etc" 
             />
-            <label>Address</label>
+            <label>Location</label>
             <input 
                 {...register("location", { required: true })}
                 className="w-full border-2 p-2 rounded-lg"
@@ -102,7 +103,7 @@ function CreateNewRental() {
             />
             <label>Description</label>
             <textarea
-                {...register("description", { required: true, maxLength: 500 })}
+                {...register("description", { required: true, maxLength: 1000 })}
                 className="w-full border-2 p-2 rounded-lg"
                 type="text"
                 placeholder="A brief description of your rental" 
