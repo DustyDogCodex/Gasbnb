@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../UserContext'
 import axios from 'axios'
+import UserListingDisplayBox from '../components/UserListingDisplayBox'
 
 function MyRentals() {
     //fetching userInfo from context
@@ -13,11 +14,11 @@ function MyRentals() {
     const [ userListings, setUserListings ] = useState([])
   
     //function to fetch listings created by the user
+    //sending user id as params to locate listings created by user
     useEffect(() => {
         const getUserListings = async() => {
             axios.get(`http://localhost:5000/listings/userlistings/${userInfo._id}`)
             .then(res => setUserListings([ ...res.data ]))
-            console.log(userListings)
         }
         getUserListings()
     }, [])
@@ -38,16 +39,15 @@ function MyRentals() {
                 className='mt-3'
             >
                 <h1
-                    className='font-robotoMono text-2xl text-center'
+                    className='font-robotoMono text-2xl text-center my-3'
                 >
                     My Listings
                 </h1>
                 <div>
-                    {userListings.length > 0 && userListings.map(listing => 
-                        <div key={listing._id}>
-                            {listing.title}
-                        </div>    
-                    )}
+                    {/* display userlistings. If no userlistings, display "no listings created" instead */}
+                    {userListings.length > 0 ? userListings.map(listing => 
+                        <UserListingDisplayBox key={listing._id} userListing={listing}/>    
+                    ) : "No listings created"}
                 </div>
             </div>
         </div>
