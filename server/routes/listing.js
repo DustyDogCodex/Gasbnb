@@ -23,8 +23,9 @@ const upload = multer({ storage: storage })
 
 //for getting all available listings to display on the homepage
 Router.get('/available', 
-    asyncHandler((req,res) => {
-        res.send('there are available listings in your area!')
+    asyncHandler(async(req,res) => {
+        const allListings = await Listing.find({})
+        res.json(allListings)
     }
 ))
 

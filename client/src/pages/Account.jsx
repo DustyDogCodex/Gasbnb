@@ -17,7 +17,7 @@ function Account() {
             className="flex flex-col p-10"
         >
             <nav
-                className="w-full flex justify-center mt-5 text-2xl gap-2"
+                className="w-full flex justify-center my-5 text-2xl gap-2"
             >
                 <Link 
                     to={'/account'}
@@ -25,12 +25,14 @@ function Account() {
                 >
                     <FontAwesomeIcon icon={faUser} /> My Profile
                 </Link>
+
                 <Link 
                     to={'/account/trips'}
                     className={`py-2 px-6 ${subpage == 'trips' ? 'bg-red text-white rounded-full' : ''}`}
                 >
                    <FontAwesomeIcon icon={faList} /> My Trips
                 </Link>
+                
                 <Link 
                     to={'/account/rentals'}
                     className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}

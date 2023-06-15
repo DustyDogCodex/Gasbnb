@@ -1,5 +1,7 @@
 /* this is for listings specific to a user that will be displayed in the user's account page, under the My rentals subpage. For the square boxes displayed on the homepage, go to ListingDisplayBox.jsx */
+
 function UserListingDisplayBox({ userListing }) {
+    
     //extracting listing info from userListing
     const { title, location, photos } = userListing
     
