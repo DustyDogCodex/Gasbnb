@@ -76,7 +76,12 @@ function CreateNewRental() {
                 imageQueue
             }
         )
-        .then(res => console.log(res.data))
+        .then(res => {
+            //if we get a successful response, we can navigate the user to their rentals page.
+            if(res.data){
+                window.location.replace('http://localhost:5173/account/rentals')
+            }
+        })
         .catch(err => console.log(err))
     }
 

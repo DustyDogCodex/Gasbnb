@@ -44,7 +44,6 @@ passport.deserializeUser(async(id, cb) => {
     const user = await User.findById(id);
     //omitting password otherwise we will make a big OOPSIE
     const { password, ...userInfo } = user._doc
-    console.log("userInfo",userInfo)
     cb(null, userInfo);
   } catch(err) {
     cb(err);

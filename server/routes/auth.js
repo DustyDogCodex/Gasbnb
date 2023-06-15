@@ -6,7 +6,6 @@ const Router = express.Router()
 
 //importing UserSchema
 const User = require('../models/Users')
-CLIENT_URL = 'http://localhost:5173'
 
 //Register new users
 Router.post(
