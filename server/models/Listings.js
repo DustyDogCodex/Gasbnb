@@ -19,11 +19,11 @@ const ListingsSchema = new Schema ({
         required: true
     },
     extraInfo: String,
-    photos: [String],
     amenities: [String],
     checkIn: Number,
     checkOut: Number,
-    maxGuests: Number
+    maxGuests: Number,
+    photos: [String]
 })
 
 const ListingModel = mongoose.model('Listing', ListingsSchema)

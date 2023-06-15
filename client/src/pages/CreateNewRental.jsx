@@ -2,11 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { UserContext } from "../UserContext"
 
 function CreateNewRental() {
+
+    //using context to get user info
+    //userInfo._id will be used to identify the user when a new listing is created
+    const { userInfo } = useContext(UserContext)
+
     //using react hook form for validation
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    //giving maxGuests a default value of 1
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            maxGuests: 1
+        }
+    })
 
     //state variable tracking all images currently queued for upload by user. 
     //These have not been submitted yet, but they will be displayed in the photo gallery below the photos section.
@@ -15,7 +26,6 @@ function CreateNewRental() {
 
     //state variables for tracking image links submitted by user
     const [ imageLink, setImageLink ] = useState('')
-    console.log(imageLink)
 
     //function to handle adding images that were submiited through a link
     function addLinkImages(e){
@@ -56,13 +66,23 @@ function CreateNewRental() {
         })
     }
 
+    //function for submitting data using react-hook-form
+    function submitData(data){
+        axios.post("http://localhost:5000/listings/new",
+            {
+                id: userInfo._id,
+                data,
+                imageQueue
+            }
+        )
+        .then(res => console.log(res.data))
+    }
+
     return (
     <div>
         <form 
             className="w-4/5"
-            onSubmit={handleSubmit((data) => {
-                console.log(data)
-            })}
+            onSubmit={handleSubmit(submitData)}
         >   
             <h1>Please add information for your new listing:</h1>
             <label>Title</label>

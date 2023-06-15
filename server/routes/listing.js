@@ -45,7 +45,17 @@ Router.get('/userlistings/:id',
 //for creating a new listing by a logged in user.
 Router.post("/new", 
     asyncHandler((req,res) => {
-        res.send('you want to create a new listing? In this economy?')
+        //user id sent with req
+        const { id } = req.body
+        //extracting input data sent through react-hook-forms in the data object.
+        const { title, address, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+        
+        console.log(req.body.data.title)
+        const newListing = new Listing({
+            owner: id,
+            title: req.body.data.title
+        })
+        res.send('Listing was successfully created!')
     }
 ))   
 
