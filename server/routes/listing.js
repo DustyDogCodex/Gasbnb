@@ -2,7 +2,6 @@ const express = require('express')
 const asyncHandler = require('express-async-handler')
 const imageDownloader = require('image-downloader')
 const multer = require('multer')
-const fs = require('fs')
 const Router = express.Router()
 
 //import listing schema
@@ -44,18 +43,32 @@ Router.get('/userlistings/:id',
 
 //for creating a new listing by a logged in user.
 Router.post("/new", 
-    asyncHandler((req,res) => {
-        //user id sent with req
-        const { id } = req.body
-        //extracting input data sent through react-hook-forms in the data object.
-        const { title, address, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+    asyncHandler(async(req,res) => {
+        //user id and imageQueue sent with req
+        const { id, imageQueue } = req.body
         
-        console.log(req.body.data.title)
+        //extracting input data sent through react-hook-forms in the data object.
+        const { title, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+
+        //creating new listing with user info
         const newListing = new Listing({
             owner: id,
-            title: req.body.data.title
+            title,
+            location,
+            description,
+            extraInfo,
+            amenities: checkbox,
+            checkIn,
+            checkOut,
+            maxGuests,
+            photos: imageQueue
         })
-        res.send('Listing was successfully created!')
+
+        //saving newly created listing to database.
+        await newListing.save()
+        
+        //successful response
+        res.json(newListing)
     }
 ))   
 

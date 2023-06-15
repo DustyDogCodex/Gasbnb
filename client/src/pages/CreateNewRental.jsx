@@ -25,13 +25,14 @@ function CreateNewRental() {
     const [ imageQueue, setImageQueue ] = useState([])
 
     //state variables for tracking image links submitted by user
+    //this is tracking indivivual links being submitted by the user. After submission and successful download serverside, these links are added to imageQueue variable for being sent to the server and then stored in mongodb.
     const [ imageLink, setImageLink ] = useState('')
 
     //function to handle adding images that were submiited through a link
     function addLinkImages(e){
         e.preventDefault()
         axios.post("http://localhost:5000/listings/uploadimage-link",
-            { imageLink: imageLink }
+            { imageLink }
         )
         .then(res => {
             const fileName = res.data
@@ -94,10 +95,10 @@ function CreateNewRental() {
             />
             <label>Address</label>
             <input 
-                {...register("address", { required: true })}
+                {...register("location", { required: true })}
                 className="w-full border-2 p-2 rounded-lg"
                 type="text"
-                placeholder="Enter an address" 
+                placeholder="Enter a location" 
             />
             <label>Description</label>
             <textarea

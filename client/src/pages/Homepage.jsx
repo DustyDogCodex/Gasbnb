@@ -21,8 +21,6 @@ function Homepage() {
     getListings()
   }, [])
 
-  console.log("listings", typeof listings)
-
   //once listings have been fetched, they will be put into an array to be rendered on the homepage.
   const listingsElements = []
   if(listings.length > 0){

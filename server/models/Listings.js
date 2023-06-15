@@ -10,7 +10,7 @@ const ListingsSchema = new Schema ({
         type: String,
         required: true
     },
-    address: {
+    location: {
         type: String,
         required: true
     },
