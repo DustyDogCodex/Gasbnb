@@ -43,7 +43,6 @@ function EditListing() {
     //These have not been submitted yet, but they will be displayed in the photo gallery below the photos section.
     //this is the final array of images that will be sent to the server after user clicks submit.
     const [ imageQueue, setImageQueue ] = useState([])
-    console.log("image q",imageQueue)
 
     //state variables for tracking image links submitted by user
     //this is tracking indivivual links being submitted by the user. After submission and successful download serverside, these links are added to imageQueue variable for being sent to the server and then stored in mongodb.
@@ -261,7 +260,7 @@ function EditListing() {
             >
                 {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
-                {imageQueue.length > 0 && imageQueue.map(photo => 
+                {imageQueue?.length > 0 && imageQueue.map(photo => 
                     <img
                         key={photo}
                         className="max-w-[300px] max-h-[300px] rounded-xl m-1"

@@ -20,8 +20,8 @@ const ListingsSchema = new Schema ({
     },
     extraInfo: String,
     amenities: [String],
-    checkIn: Number,
-    checkOut: Number,
+    checkIn: String,
+    checkOut: String,
     maxGuests: Number,
     photos: [String]
 })
