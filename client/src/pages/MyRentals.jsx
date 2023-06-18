@@ -32,7 +32,7 @@ function MyRentals() {
                     to={'/account/rentals/new'}
                     className='bg-red text-white px-4 py-2 rounded-full text-xl'
                 >
-                    <FontAwesomeIcon icon={faPlus} /> Add new rental
+                    <FontAwesomeIcon icon={faPlus} /> Add new listing
                 </Link>
             </div>
             <div

@@ -10,6 +10,7 @@ import { MyRentals } from './pages/MyRentals'
 import { Profile } from './pages/Profile'
 import MyTrips from './pages/MyTrips'
 import CreateNewRental from './pages/CreateNewRental'
+import { ListingPage } from './pages/ListingPage'
 
 function App(){
   //using context to check for logged in user
@@ -42,6 +43,14 @@ function App(){
             <Route path='trips' element={<MyTrips />} />
             <Route path='rentals' element={<MyRentals />} />
             <Route path='rentals/new' element={<CreateNewRental />} />
+          </Route>
+          <Route
+            path='listing-page'
+          >
+            <Route 
+                path=':listingId'
+                element={<ListingPage />}    
+            />
           </Route>
         </Routes>
       </BrowserRouter>

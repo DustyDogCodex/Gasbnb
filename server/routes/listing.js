@@ -29,6 +29,16 @@ Router.get('/available',
     }
 ))
 
+//for getting one specific listings to display on listing page
+Router.get('/available/:id', 
+    asyncHandler(async(req,res) => {
+        //use given id
+        const { id } = req.params
+        const selectedListing = await Listing.findById({ _id: id })
+        res.json(selectedListing)
+    }
+))
+
 //for getting rentals created by user. These are displayed in the users account page ('/account/MyRentals)
 //user id is sent as a param from the client side and that id is used to locate all listings created by the user in our database
 Router.get('/userlistings/:id', 
