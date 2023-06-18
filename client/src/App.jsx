@@ -45,13 +45,9 @@ function App(){
             <Route path='rentals/new' element={<CreateNewRental />} />
           </Route>
           <Route
-            path='listing-page'
-          >
-            <Route 
-                path=':listingId'
-                element={<ListingPage />}    
-            />
-          </Route>
+            path='listing-page/:listingId'
+            element={<ListingPage />}
+          />
         </Routes>
       </BrowserRouter>
     </>
