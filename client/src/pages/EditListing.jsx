@@ -89,9 +89,9 @@ function EditListing() {
 
     //function for submitting data using react-hook-form
     function submitData(data){
-        axios.post("http://localhost:5000/listings/new",
+        axios.put(`http://localhost:5000/listings/edit/${listingId}`,
             {
-                id: userInfo._id,
+                ownerId: userInfo._id,
                 data,
                 imageQueue
             }

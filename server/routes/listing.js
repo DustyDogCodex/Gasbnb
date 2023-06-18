@@ -137,7 +137,39 @@ Router.put("/edit/:id",
     asyncHandler(async(req,res) => {
         //identify listing ID
         const { id } = req.params
-        res.json(id)
+
+        //extracting owner ID and image queue from body
+        const { ownerId, imageQueue } = req.body
+
+        //extracting input data sent through react-hook-forms in the data object.
+        const { title, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+
+        //finding selected listing
+        const selectedListing = await Listing.findById({ _id : id })
+        console.log(selectedListing.title)
+        //making sure authorised user is sending this request
+        if( ownerId == selectedListing.owner ){            
+            //updating selected listing with new information
+            selectedListing.set({
+                title,
+                location, 
+                description, 
+                extraInfo, 
+                amenities: checkbox, 
+                checkIn, 
+                checkOut, 
+                maxGuests,
+                photos: imageQueue
+            })
+
+            //saving new info to database
+            await selectedListing.save()
+
+            //SENDING SUCCESS MESSAGE   
+            res.send('Listing was updated')
+        } else {
+            res.status(401)
+        }
     })
 )
 
