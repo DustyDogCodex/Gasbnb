@@ -132,4 +132,13 @@ Router.post("/uploadimage-device",
     })
 )
 
+//route for editing a user created listing
+Router.put("/edit/:id",
+    asyncHandler(async(req,res) => {
+        //identify listing ID
+        const { id } = req.params
+        res.json(id)
+    })
+)
+
 module.exports = Router
