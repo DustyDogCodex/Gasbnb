@@ -15,29 +15,12 @@ function EditListing() {
     //retrieving listing info to poly fill input values
     const { listingId } = useParams()
 
-    //state variable to store listing info
-    const [ selectedListing, setSelectedListing ] = useState({})
-    
-    //api call to fetch listing info
-    useEffect(() => {
-        const getListingInfo = async() => {
-            axios.get(`http://localhost:5000/listings/available/${listingId}`)
-            .then(res => setSelectedListing(res.data))
-            .then(() => setImageQueue(selectedListing.photos))
-        }
-        getListingInfo()
-    }, [])
-
     //since this is listing that has already been created,
-    //setting deafult values to user submitted information for this specific listing
+    //importing useForm's reset method to load listing data into the form after it is fetched from the server 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
-    //using react-hook-forms reset method to populate form with user input
-    useEffect(() => {
-        reset(selectedListing)
-    }, [selectedListing])
-
-    console.log(selectedListing)
+    //state variable to store listing info
+    const [ selectedListing, setSelectedListing ] = useState({})
 
     //state variable tracking all images currently queued for upload by user. 
     //These have not been submitted yet, but they will be displayed in the photo gallery below the photos section.
@@ -47,6 +30,27 @@ function EditListing() {
     //state variables for tracking image links submitted by user
     //this is tracking indivivual links being submitted by the user. After submission and successful download serverside, these links are added to imageQueue variable for being sent to the server and then stored in mongodb.
     const [ imageLink, setImageLink ] = useState('')
+
+    //api call to fetch listing info
+    useEffect(() => {
+        const getListingInfo = async() => {
+            axios.get(`http://localhost:5000/listings/available/${listingId}`)
+            .then(res => { 
+                setSelectedListing(res.data)
+            })
+        }
+        getListingInfo()
+    }, [])
+
+    //useeffect to load photos once selectedListing is populated with listing data fetched from the server
+    //additionally, this block is also using react-hook-forms reset method to populate form with user input once selectedListing is populated
+    useEffect(() => {
+        const loadPhotos = () => {
+            selectedListing ? setImageQueue(selectedListing.photos) : ''
+        }
+        reset(selectedListing)
+        loadPhotos()
+    }, [selectedListing])
 
     //function to handle adding images that were submiited through a link
     function addLinkImages(e){
@@ -260,7 +264,7 @@ function EditListing() {
             >
                 {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
-                {imageQueue?.length > 0 && imageQueue.map(photo => 
+                {imageQueue && imageQueue.map(photo => 
                     <img
                         key={photo}
                         className="max-w-[300px] max-h-[300px] rounded-xl m-1"
