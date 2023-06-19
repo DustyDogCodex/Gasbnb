@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom"
+
 /* this is for displaying all available listings on the homepage. For listings displayed under my Rentals in the users account page, see UserListingDisplayBox */
 function ListingDisplayBox({ listing }) {
     //extracting all needed info from listing object
-    const { location, photos } = listing
+    const { _id, title, location, photos } = listing
+    console.log(listing)
 
     return (
-        <div
-            className="m-4"
+        <Link
+            to={`listing-page/${_id}`}
+            className="m-4 w-80 max-h-96"
         >
             <img 
                 className="w-80 h-80 rounded-lg" 
@@ -13,11 +17,16 @@ function ListingDisplayBox({ listing }) {
                 alt="listing cover image" 
             />
             <p
-                className="font-semibold text-sm mt-3"
+                className="mt-2 font-semibold text-wrap max-w-80"
+            >
+                {title}
+            </p>
+            <p
+                className="text-sm"
             >
                 {location}
             </p>
-        </div>
+        </Link>
     )
 }
 
