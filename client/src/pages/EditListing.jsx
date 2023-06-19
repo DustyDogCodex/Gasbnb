@@ -91,6 +91,11 @@ function EditListing() {
         })
     }
 
+    //function for deleting photos from photo gallery
+    function deletePhoto(photo){
+        setImageQueue(imageQueue.filter(pic => pic !== photo))
+    }
+
     //function for submitting data using react-hook-form
     function submitData(data){
         axios.put(`http://localhost:5000/listings/edit/${listingId}`,
@@ -265,15 +270,18 @@ function EditListing() {
                 {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
                 {imageQueue && imageQueue.map(photo => 
-                    <div className="flex relative">
+                    <div 
+                        key={photo}
+                        className="flex relative"
+                    >
                         <img
-                            key={photo}
                             className="max-w-[300px] max-h-[300px] rounded-xl m-1"
                             src={`http://localhost:5000/uploads/${photo}`}
                             alt="uploaded image"
                         />
                         <div
-                            className="absolute bottom-2 right-2 bg-white p-1 rounded-full flex items-center"
+                            className="absolute bottom-2 right-2 bg-white p-1 rounded-full flex items-center cursor-pointer"
+                            onClick={() => deletePhoto(photo)}
                         >
                             <FontAwesomeIcon icon={faTrash} style={{color: "#f00000", height:"20px", width:"20px"}} />
                         </div>
