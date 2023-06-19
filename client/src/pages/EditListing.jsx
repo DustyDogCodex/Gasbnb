@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons"
+import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
@@ -265,12 +265,19 @@ function EditListing() {
                 {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                 {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
                 {imageQueue && imageQueue.map(photo => 
-                    <img
-                        key={photo}
-                        className="max-w-[300px] max-h-[300px] rounded-xl m-1"
-                        src={`http://localhost:5000/uploads/${photo}`}
-                        alt="uploaded image"
-                    />
+                    <div className="flex relative">
+                        <img
+                            key={photo}
+                            className="max-w-[300px] max-h-[300px] rounded-xl m-1"
+                            src={`http://localhost:5000/uploads/${photo}`}
+                            alt="uploaded image"
+                        />
+                        <div
+                            className="absolute bottom-2 right-2 bg-white p-1 rounded-full flex items-center"
+                        >
+                            <FontAwesomeIcon icon={faTrash} style={{color: "#f00000", height:"20px", width:"20px"}} />
+                        </div>
+                    </div>
                 )}
 
                 <label
