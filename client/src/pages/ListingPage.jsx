@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faXmark } from "@fortawesome/free-solid-svg-icons"
 
 /* page with detailed and complete information on the user selected listing. User's can access this page by clicking on a listig either on the homepage or in their accounts  */
 function ListingPage() {
@@ -24,6 +26,22 @@ function ListingPage() {
 
     //state variable to toggle showing more photos or not
     const [ showMore, setShowMore ] = useState(false)
+
+    //if user clicks on show more photos, a screen wide div will pop up that will show all the photos associated with this listing
+    if(showMore){
+        return (
+            <div
+                className="fixed bg-white"
+            >
+                All photos  
+                <FontAwesomeIcon 
+                    icon={faXmark} 
+                    style={{color: "#070212", cursor:"pointer", height:'40px', width:'40px'}} 
+                    onClick={() => setShowMore(false)}    
+                />  
+            </div>
+        )
+    }
     
     return (
         <div>
