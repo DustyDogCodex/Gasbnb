@@ -26,7 +26,8 @@ function ListingPage() {
 
     //state variable to toggle showing more photos or not
     const [ showMore, setShowMore ] = useState(false)
-
+    
+    //show more photos modal
     //if user clicks on show more photos, a screen wide div will pop up that will show all the photos associated with this listing
     if(showMore){
         return (
@@ -61,6 +62,13 @@ function ListingPage() {
                 </div>
             </div>
         )
+    }
+
+    /* function to convert checkin/checkout times from 24hr to 12 hr times */
+    function MilitaryToStandardTime(time){
+        const time_array = time.split(':')
+        const amOrPm = time_array[0] >= 12 ? 'PM' : 'AM'
+        return(`${Number(time_array[0]) - 12}:${time_array[1]} ${amOrPm}`)
     }
     
     return (
@@ -126,7 +134,30 @@ function ListingPage() {
                         </div>
                     </div>  
                 </div>
-                <p>{selectedListing.description}</p>
+                <p
+                    className="mt-5"
+                >
+                    {selectedListing.description}
+                </p>
+                {/* the additional information is displayed only if additional information is available about the listing */}
+                {selectedListing.extraInfo && 
+                <p
+                    className="mt-5"
+                >
+                    <h3 className="font-semibold">
+                        Additional information:
+                    </h3>
+                    {selectedListing.extraInfo}
+                </p>}
+                <p
+                    className="mt-5"
+                >
+                    <strong>Check In:</strong> {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} <br/>
+                    <strong>Check Out:</strong> {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
+                </p>
+                <p className="mt-5">
+                    <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
+                </p>
             </div>
             : "Loading"  }
         </div>
