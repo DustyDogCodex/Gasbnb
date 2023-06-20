@@ -147,14 +147,17 @@ function ListingPage() {
                         </p>
                         {/* the additional information is displayed only if additional information is available about the listing */}
                         {selectedListing.extraInfo && 
-                        <p
-                            className="mt-5"
-                        >
-                            <h3 className="font-semibold">
+                        <>
+                            <h3 className="mt-5 font-semibold">
                                 Additional information:
                             </h3>
-                            {selectedListing.extraInfo}
-                        </p>}
+                            <p
+                                className="mt-2"
+                            >
+                                {selectedListing.extraInfo}
+                            </p>
+                        </>
+                        }
                         <p
                             className="mt-5"
                         >
