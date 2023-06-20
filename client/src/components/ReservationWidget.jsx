@@ -10,6 +10,11 @@ function ReservationWidget({ listing }) {
 
     //react-hook-form for input validation and error handling
     const { register, handleSubmit, formState: { errors } } = useForm()
+
+    //submit data
+    async function submitReservation(data){
+        console.log(data)
+    }
     
     return (
         <div 
@@ -18,7 +23,9 @@ function ReservationWidget({ listing }) {
             <h1>
                 <strong className="text-2xl font-medium">${listing.price}</strong> night
             </h1>
-            <div>
+            <form
+                onSubmit={handleSubmit(submitReservation)}
+            >
                 <div
                     className="flex flex-col md:flex-row mt-5"
                 >
@@ -56,12 +63,13 @@ function ReservationWidget({ listing }) {
                         placeholder="1 guest"
                     />
                 </div>
-            </div>
-            <button
-                className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3"
-            >
-                Reserve
-            </button>
+                <button
+                    type="submit"
+                    className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3"
+                >
+                    Reserve
+                </button>
+            </form>
         </div>
     )
 }
