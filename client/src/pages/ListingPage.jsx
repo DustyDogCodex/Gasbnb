@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 
 /* page with detailed and complete information on the user selected listing. User's can access this page by clicking on a listig either on the homepage or in their accounts  */
 function ListingPage() {
@@ -31,12 +31,16 @@ function ListingPage() {
     if(showMore){
         return (
             <div
-                className="fixed bg-white p-3"
+                className="absolute bg-white p-3"
             >
                 <div
                     className="flex items-center justify-between w-full"
                 >
-                    <p>All photos</p> 
+                    <p 
+                        className="font-robotoMono font-semibold text-xl"
+                    >
+                        All photos for {selectedListing.title}
+                    </p> 
                     <FontAwesomeIcon 
                         icon={faXmark} 
                         style={{color: "#070212", cursor:"pointer", height:'40px', width:'40px'}} 
@@ -76,8 +80,12 @@ function ListingPage() {
                     href={`https://maps.google.com/?q=${selectedListing.location}`} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="underline text-sm font-semibold"
-                >
+                    className="underline text-sm font-semibold flex items-center gap-2"
+                >   
+                    <FontAwesomeIcon 
+                        icon={faLocationDot} 
+                        style={{color: "#050415",}} 
+                    />
                     {selectedListing.location}
                 </a>
                 {/* photo gallery */}
