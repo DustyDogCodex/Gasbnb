@@ -165,7 +165,7 @@ function ListingPage() {
                             <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
                         </p>
                     </div>
-                    <ReservationWidget/>
+                    <ReservationWidget listing={selectedListing}/>
                 </div>
             </div>
             : "Loading"  }
