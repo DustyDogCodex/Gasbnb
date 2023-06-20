@@ -31,14 +31,30 @@ function ListingPage() {
     if(showMore){
         return (
             <div
-                className="fixed bg-white"
+                className="fixed bg-white p-3"
             >
-                All photos  
-                <FontAwesomeIcon 
-                    icon={faXmark} 
-                    style={{color: "#070212", cursor:"pointer", height:'40px', width:'40px'}} 
-                    onClick={() => setShowMore(false)}    
-                />  
+                <div
+                    className="flex items-center justify-between w-full"
+                >
+                    <p>All photos</p> 
+                    <FontAwesomeIcon 
+                        icon={faXmark} 
+                        style={{color: "#070212", cursor:"pointer", height:'40px', width:'40px'}} 
+                        onClick={() => setShowMore(false)}    
+                    />  
+                </div>
+                <div
+                    className="p-3"
+                >
+                    {selectedListing?.photos?.length > 0 && selectedListing.photos.map(photo =>
+                        <img 
+                            key={photo}
+                            src={`http://localhost:5000/uploads/${photo}`} 
+                            alt="" 
+                            className="rounded-lg m-2"
+                        />    
+                    )}
+                </div>
             </div>
         )
     }
@@ -69,7 +85,7 @@ function ListingPage() {
                     className="grid gap-3 grid-cols-[2fr_1fr] my-3"
                 >
                     <div>
-                        {selectedListing.photos && (
+                        {selectedListing?.photos?.[0] && (
                             <img 
                                 src={`http://localhost:5000/uploads/${selectedListing.photos[0]}`} 
                                 alt="main photo for listing" 
@@ -80,14 +96,14 @@ function ListingPage() {
                     <div
                         className="grid relative"
                     >
-                        {selectedListing.photos && (
+                        {selectedListing?.photos?.[1] && (
                             <img 
                                 src={`http://localhost:5000/uploads/${selectedListing.photos[1]}`} 
                                 alt="second photo for listing" 
                                 className="aspect-square object-cover rounded-lg"
                             />
                         )}
-                        {selectedListing.photos && (
+                        {selectedListing?.photos?.[2] && (
                             <img 
                                 src={`http://localhost:5000/uploads/${selectedListing.photos[2]}`} 
                                 alt="listing photo" 
