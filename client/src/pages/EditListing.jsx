@@ -122,13 +122,20 @@ function EditListing() {
             className="w-4/5"
             onSubmit={handleSubmit(submitData)}
         >   
-            <h1>Please add information for your new listing:</h1>
+            <h1>Please edit the information for yous listing below:</h1>
             <label>Title</label>
             <input 
                 {...register("title", { required: true })}
                 className="w-full border-2 p-2 rounded-lg"
                 type="text"
                 placeholder="My lovely apartment/house etc" 
+            />
+            <label>Price per night</label>
+            <input 
+                {...register("price", { required: true })}
+                className="w-full border-2 p-2 rounded-lg"
+                type="number"
+                placeholder="$100 per night" 
             />
             <label>Location</label>
             <input 

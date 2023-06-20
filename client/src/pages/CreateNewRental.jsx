@@ -99,6 +99,13 @@ function CreateNewRental() {
                 type="text"
                 placeholder="My lovely apartment/house etc" 
             />
+            <label>Price per night</label>
+            <input 
+                {...register("price", { required: true })}
+                className="w-full border-2 p-2 rounded-lg"
+                type="number"
+                placeholder="$100 per night" 
+            />
             <label>Location</label>
             <input 
                 {...register("location", { required: true })}

@@ -60,13 +60,14 @@ Router.post("/new",
         const { id, imageQueue } = req.body
         
         //extracting input data sent through react-hook-forms in the data object.
-        const { title, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+        const { title, price, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
 
         //creating new listing with user info
         const newListing = new Listing({
             owner: id,
             title,
             location,
+            price,
             description,
             extraInfo,
             amenities: checkbox,
@@ -142,7 +143,7 @@ Router.put("/edit/:id",
         const { ownerId, imageQueue } = req.body
 
         //extracting input data sent through react-hook-forms in the data object.
-        const { title, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
+        const { title, price, location, description, extraInfo, checkbox, checkIn, checkOut, maxGuests } = req.body.data
 
         //finding selected listing
         const selectedListing = await Listing.findById({ _id : id })
@@ -153,6 +154,7 @@ Router.put("/edit/:id",
             selectedListing.set({
                 title,
                 location, 
+                price,
                 description, 
                 extraInfo, 
                 amenities: checkbox, 
