@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import ReservationWidget from "../components/ReservationWidget"
 
 /* page with detailed and complete information on the user selected listing. User's can access this page by clicking on a listig either on the homepage or in their accounts  */
 function ListingPage() {
@@ -134,30 +135,38 @@ function ListingPage() {
                         </div>
                     </div>  
                 </div>
-                <p
-                    className="mt-5"
+                {/* this div contains listing related information and the reservation widget */}
+                <div
+                    className="flex"
                 >
-                    {selectedListing.description}
-                </p>
-                {/* the additional information is displayed only if additional information is available about the listing */}
-                {selectedListing.extraInfo && 
-                <p
-                    className="mt-5"
-                >
-                    <h3 className="font-semibold">
-                        Additional information:
-                    </h3>
-                    {selectedListing.extraInfo}
-                </p>}
-                <p
-                    className="mt-5"
-                >
-                    <strong>Check In:</strong> {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} <br/>
-                    <strong>Check Out:</strong> {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
-                </p>
-                <p className="mt-5">
-                    <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
-                </p>
+                    <div>
+                        <p
+                            className="mt-5"
+                        >
+                            {selectedListing.description}
+                        </p>
+                        {/* the additional information is displayed only if additional information is available about the listing */}
+                        {selectedListing.extraInfo && 
+                        <p
+                            className="mt-5"
+                        >
+                            <h3 className="font-semibold">
+                                Additional information:
+                            </h3>
+                            {selectedListing.extraInfo}
+                        </p>}
+                        <p
+                            className="mt-5"
+                        >
+                            <strong>Check In:</strong> {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} <br/>
+                            <strong>Check Out:</strong> {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
+                        </p>
+                        <p className="mt-5">
+                            <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
+                        </p>
+                    </div>
+                    <ReservationWidget/>
+                </div>
             </div>
             : "Loading"  }
         </div>
