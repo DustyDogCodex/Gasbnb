@@ -2,16 +2,24 @@ import { useForm } from "react-hook-form"
 
 function ReservationWidget({ listing }) {
 
+    //react-hook-form for input validation and error handling
+    const { register, watch, handleSubmit, formState: { errors } } = useForm()
+
+    //watching checkInDate and checkOutDate to calculate total price of selected reservation window
+    const watchCheckIn = watch("checkInDate")
+    const watchCheckOut = watch("checkOutDate")
+
     //setting up dates to pass as default values to useForm
     const time = new Date()
     const today = time.toISOString().substring(0, 10)
     const oneWeekFromToday = Date.now() + 604800000 //one week in milliseconds
     const dateOneWeekFromToday = new Date(oneWeekFromToday).toISOString().substring(0,10)
 
-    //react-hook-form for input validation and error handling
-    const { register, handleSubmit, formState: { errors } } = useForm()
-
-    //submit data
+    //difference in time divided by one week's worth of milliseconds. This gives the time difference in days
+    //this will be used to calculate the total price of the reservation
+    let differenceInDays = (new Date(watchCheckOut) - new Date(watchCheckIn)) / (24 * 60 * 60 * 1000)  
+    
+    //submit data using react-hook-form
     async function submitReservation(data){
         console.log(data)
     }
@@ -70,6 +78,22 @@ function ReservationWidget({ listing }) {
                     Reserve
                 </button>
             </form>
+            <div
+                className="mt-5 grid grid-cols-[2fr_1fr] grid-rows-3 border-b-2 pb-3"
+            >
+                <p className="my-2">${listing.price} x {differenceInDays} nights</p>
+                <p className="my-2">${listing.price * differenceInDays}</p>
+                <p className="my-2">Cleaning Fee</p>
+                <p className="my-2">$100</p>
+                <p className="my-2">Gasbnb service fee</p>
+                <p className="my-2">${Math.ceil(listing.price * differenceInDays * 0.0420)}</p>
+            </div>
+            <div
+                className="mt-5 grid grid-cols-[2fr_1fr] grid-row-1"
+            >
+                <p className="my-2 font-semibold">Total before taxes</p>
+                <p className="my-2">${(listing.price * differenceInDays) + 100 + Math.ceil(listing.price * differenceInDays * 0.0420)}</p>
+            </div>
         </div>
     )
 }
