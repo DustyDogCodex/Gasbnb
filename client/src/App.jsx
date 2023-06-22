@@ -12,6 +12,7 @@ import MyTrips from './pages/MyTrips'
 import CreateNewRental from './pages/CreateNewRental'
 import { ListingPage } from './pages/ListingPage'
 import EditListing from './pages/EditListing'
+import ConfirmReservation from './pages/ConfirmReservation'
 
 function App(){
   //using context to check for logged in user
@@ -50,6 +51,11 @@ function App(){
           <Route
             path='listing-page/:listingId'
             element={<ListingPage />}
+          />
+          {/* Page for confirming listing after clicking on the reserve link in reservation widget */}
+          <Route
+            path='confirm-payment/:checkInDate/:checkOutDate/:numGuests'
+            element={<ConfirmReservation />}
           />
         </Routes>
       </BrowserRouter>

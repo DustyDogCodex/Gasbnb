@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom"
 
 function ReservationWidget({ listing }) {
 
     //react-hook-form for input validation and error handling
-    const { register, watch, handleSubmit, formState: { errors } } = useForm()
+    const { register, watch, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            numGuests: 1
+        }
+    })
 
     //watching checkInDate and checkOutDate to calculate total price of selected reservation window
     const watchCheckIn = watch("checkInDate")
     const watchCheckOut = watch("checkOutDate")
+    const watchNumGuests = watch("numGuests")
 
     //setting up dates to pass as default values to useForm
     const time = new Date()
@@ -63,7 +69,7 @@ function ReservationWidget({ listing }) {
                 >
                     <label className="text-xs font-semibold">Guests</label>
                     <input 
-                        {...register("NumGuests", { 
+                        {...register("numGuests", { 
                             required: true, 
                             max: listing.maxGuests
                         })}
@@ -71,12 +77,15 @@ function ReservationWidget({ listing }) {
                         placeholder="1 guest"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3"
+                <div
+                    className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3 text-center"
                 >
-                    Reserve
-                </button>
+                    <Link
+                        to={`/confirm-payment/${watchCheckIn}/${watchCheckOut}/${watchNumGuests}`}
+                    >
+                        Reserve
+                    </Link>
+                </div>
             </form>
             <div
                 className="mt-5 grid grid-cols-[2fr_1fr] grid-rows-3 border-b-2 pb-3"
