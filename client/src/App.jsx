@@ -54,7 +54,7 @@ function App(){
           />
           {/* Page for confirming listing after clicking on the reserve link in reservation widget */}
           <Route
-            path='confirm-payment/:checkInDate/:checkOutDate/:numGuests'
+            path='confirm-payment/:listingId/:checkInDate/:checkOutDate/:numGuests'
             element={<ConfirmReservation />}
           />
         </Routes>
