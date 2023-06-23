@@ -29,7 +29,7 @@ function ConfirmReservation() {
                 className="flex lg:w-4/5 lg:items-center lg:justify-center border-4 border-emerald-700"
             >
                 <div
-                    className="w-1/2 p-5 border-2 border-red "
+                    className="w-1/2 p-5 m-3 border-2 border-red"
                 >   
                     <h1
                         className="text-3xl"
@@ -69,25 +69,76 @@ function ConfirmReservation() {
                             </p>
                         </div>
                     </div>
+                    <p 
+                        className="text-sm text-slate-400 mt-5"
+                    >
+                        *** This is not a real payment system. Please do not enter real financial information. Click confirm reservation to continue ***
+                    </p>
+                    <h2
+                        className="my-5 text-2xl font-semibold"
+                    >
+                        Payment
+                    </h2>
+                    <form>
+                        <input
+                            type="number"
+                            placeholder="Card Number"
+                            className="border w-full p-2 rounded-lg"
+                        />
+                        <div
+                            className="flex"
+                        >
+                            <input
+                                type="number"
+                                placeholder="Expiration"
+                                className="border w-full p-2 rounded-lg"
+                            />
+                            <input
+                                type="number"
+                                placeholder="CVV"
+                                className="border w-full p-2 rounded-lg"
+                            />
+                        </div>
+                        <input
+                            type="number"
+                            placeholder="ZIP Code"
+                            className="border w-full p-2 rounded-lg mt-5"
+                        />
+                        <input
+                            type="number"
+                            placeholder="Country/Region"
+                            className="border w-full p-2 rounded-lg mt-5"
+                        />
+                    </form>
+                    <button
+                        type="button"
+                        className="bg-red py-3 px-6 text-white font-semibold rounded-lg mt-8"
+                    >
+                        Confirm Reservation
+                    </button>
                 </div>
                 <div
                     className="w-1/2 p-5 m-3 border-2 rounded-lg"
                 >   
+                    {listing &&
+                    <>
                     <div
-                        className="flex items-center gap-3"
+                        className="flex items-center gap-3 border-b-2 py-5"
                     >
                         <img 
                             className="h-28 rounded-lg" 
-                            src={`http://localhost:5000/uploads/${listing.photos[0]}`} 
+                            src={`http://localhost:5000/uploads/${listing?.photos?.[0]}`} 
                             alt="" 
                         />
                         <h2
-                            className=""
+                            className="font-semibold"
                         >
                             {listing.title}
                         </h2>
                     </div>
                     <PriceCalculator price={listing.price} checkIn={checkInDate} checkOut={checkOutDate}/>
+                    </>
+                    }
                 </div>
             </div>
         </div>
