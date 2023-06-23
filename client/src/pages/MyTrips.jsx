@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../UserContext"
 import axios from 'axios'
+import UserBookings from "../components/UserBookings"
 
 function MyTrips() {
     //userContext for grabbing userId
@@ -13,22 +14,27 @@ function MyTrips() {
     useEffect(() => {
         async function userBookings(){
             axios.get(`http://localhost:5000/bookings/booking-info/${userInfo._id}`)
-            .then(res => console.log(res.data))
+            .then(res => setUserTrips(res.data))
         }
         userBookings()
     }, [])
 
+    console.log(userTrips)
+
     return (
         <div
-            className="flex items-center justify-center"
+            className="flex flex-col items-center justify-center"
         >
             <h1
                 className="text-2xl"
             >
                 My Trips
             </h1>
-            <div>
-                
+            <div
+                className="mt-8"
+            >
+                {userTrips && userTrips.map(booking => <UserBookings booking={booking}/>)}
+                {!userTrips && 'No trips currently booked.'}
             </div>
         </div>
     )
