@@ -1,4 +1,4 @@
-function PriceCalculator({ price, checkIn, checkOut}) {
+function PriceCalculator({ price, checkIn, checkOut }) {
 
     //calculating difference in days
     //difference in time divided by one week's worth of milliseconds. This gives the time difference in days

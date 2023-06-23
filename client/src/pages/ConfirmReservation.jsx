@@ -1,15 +1,23 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import PriceCalculator from "../components/PriceCalculator"
+import { UserContext } from "../UserContext"
 
 function ConfirmReservation() {
+    //using context to grab user ID for bookig
+    const { userInfo } = useContext(UserContext)
+
     //using useParams to identify passed parameters from listing page 
     const { listingId, checkInDate, checkOutDate, numGuests } = useParams()
 
-    /* lsiting info */
+    /* listing info */
     const [ listing, setListing ] = useState({})
 
+    //calculating total price for storing in database
+    let differenceInDays = (new Date(checkOutDate) - new Date(checkInDate)) / (24 * 60 * 60 * 1000) 
+    let totalCost = (listing.price * differenceInDays) + 100 + Math.ceil((listing.price * differenceInDays) * 0.0420)
+    
     //fetching listing info from backend
     useEffect(() => {
         const getListingInfo = async() => {
@@ -19,17 +27,27 @@ function ConfirmReservation() {
         getListingInfo()
     }, [])
 
-    console.log(listing)
+    //function to confirm booking and send booking data to server
+    async function confirmBooking(e){
+        e.preventDefault()
+        axios.post("http://localhost:5000/bookings/new-booking",
+            { owner: userInfo._id, listingId, checkInDate, checkOutDate, numGuests, totalCost }
+        ).then(res => {
+            if(res.data == 'success'){
+                window.location.replace('/account/trips')
+            }
+        })
+    }
 
     return (
         <div 
             className="w-screen h-screen p-10 flex item-center justify-center"
         >
             <div
-                className="flex lg:w-4/5 lg:items-center lg:justify-center border-4 border-emerald-700"
+                className="flex lg:w-4/5 lg:items-center lg:justify-center border-2 border-emerald-500 rounded-lg"
             >
                 <div
-                    className="w-1/2 p-5 m-3 border-2 border-red"
+                    className="w-1/2 p-5 m-3"
                 >   
                     <h1
                         className="text-3xl"
@@ -79,6 +97,7 @@ function ConfirmReservation() {
                     >
                         Payment
                     </h2>
+                    {/* dummy payment system, users do not need to fill oout info to reserve a booking */}
                     <form>
                         <input
                             type="number"
@@ -113,6 +132,7 @@ function ConfirmReservation() {
                     <button
                         type="button"
                         className="bg-red py-3 px-6 text-white font-semibold rounded-lg mt-8"
+                        onClick={(e) => confirmBooking(e)}
                     >
                         Confirm Reservation
                     </button>
@@ -136,7 +156,11 @@ function ConfirmReservation() {
                             {listing.title}
                         </h2>
                     </div>
-                    <PriceCalculator price={listing.price} checkIn={checkInDate} checkOut={checkOutDate}/>
+                    <PriceCalculator 
+                        price={listing.price} 
+                        checkIn={checkInDate} 
+                        checkOut={checkOutDate}
+                    />
                     </>
                     }
                 </div>

@@ -84,7 +84,11 @@ function ReservationWidget({ listing }) {
                     </Link>
                 </div>
             </form>
-            <PriceCalculator price={listing.price} checkIn={watchCheckIn} checkOut={watchCheckOut} />
+            <PriceCalculator 
+                price={listing.price} 
+                checkIn={watchCheckIn} 
+                checkOut={watchCheckOut} 
+            />
         </div>
     )
 }

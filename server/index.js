@@ -6,6 +6,7 @@ const passport = require('passport')
 //all imported routes and files
 const authRoute = require('./routes/auth')
 const listingRoute = require('./routes/listing')
+const bookingRoute = require('./routes/booking')
 const passportConfig = require('./passportConfig')
 require('dotenv').config()
 
@@ -59,6 +60,8 @@ const port = process.env.PORT || 5000
 app.use('/auth', authRoute)
 //routes for creating/updating/deleting listings
 app.use('/listings', listingRoute)
+//routes for creating/updating/deleting listings
+app.use('/bookings', bookingRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
