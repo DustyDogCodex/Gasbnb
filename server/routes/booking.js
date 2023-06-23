@@ -28,6 +28,7 @@ Router.post('/new-booking',
     })
 )
 
+/* route to get all bookings belonging to a particular userId */
 Router.get('/booking-info/:userId',
     asyncHandler(async(req,res) => {
         //find booking by userId
@@ -36,6 +37,30 @@ Router.get('/booking-info/:userId',
         const selectedBooking = await Booking.find({ userId }).populate('listingId')
 
         res.send(selectedBooking)
+    })
+)
+
+/* route to get info about one particular booking using a bookingId */
+Router.get('/:bookingId',
+    asyncHandler(async(req,res) => {
+        //find booking by bookingId
+        const { bookingId } = req.params
+
+        const selectedBooking = await Booking.find({ _id: bookingId }).populate('listingId')
+
+        res.send(selectedBooking)
+    })
+)
+
+/* route to delete one particular booking using a bookingId */
+Router.delete('/:bookingId',
+    asyncHandler(async(req,res) => {
+        //find booking by bookingId
+        const { bookingId } = req.params
+        //delete the selected booking
+        const selectedBooking = await Booking.deleteOne({ _id: bookingId })
+
+        res.send('booking deleted')
     })
 )
 

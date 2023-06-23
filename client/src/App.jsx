@@ -13,6 +13,7 @@ import CreateNewRental from './pages/CreateNewRental'
 import { ListingPage } from './pages/ListingPage'
 import EditListing from './pages/EditListing'
 import ConfirmReservation from './pages/ConfirmReservation'
+import BookingPage from './pages/BookingPage'
 
 function App(){
   //using context to check for logged in user
@@ -56,6 +57,10 @@ function App(){
           <Route
             path='confirm-payment/:listingId/:checkInDate/:checkOutDate/:numGuests'
             element={userInfo ? <ConfirmReservation /> : <Login/>}
+          />
+          <Route
+            path='booking-page/:bookingId'
+            element={<BookingPage />}
           />
         </Routes>
       </BrowserRouter>

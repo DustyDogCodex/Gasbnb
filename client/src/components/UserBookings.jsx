@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import { faPeopleRoof } from "@fortawesome/free-solid-svg-icons"
+import { Link } from 'react-router-dom'
 
 function UserBookings({ booking }) {
     //extracting needed info from booking object
-    const { listingId, checkInDate, checkOutDate, numGuests } = booking
+    const { _id, listingId, checkInDate, checkOutDate, numGuests } = booking
 
     return (
-        <div
+        <Link
+            to={`/booking-page/${_id}`}
             className="w-full flex items-center justify-around bg-slate-400 rounded-lg"
         >
             <img 
@@ -42,7 +44,7 @@ function UserBookings({ booking }) {
                     {numGuests} {numGuests > 1 ? 'Guests' : 'Guest'}
                 </p>
             </div>
-        </div>
+        </Link>
   )
 }
 
