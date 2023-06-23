@@ -17,13 +17,13 @@ import BookingPage from './pages/BookingPage'
 
 function App(){
   //using context to check for logged in user
-  //depending on whether a user is logged in, we will direct them away from certain pages. 
-  //For example, no user logged in and they click the User icon, we direct them to login first before /account.
+  //depending on whether a user is logged in, they will be directed away from certain pages. 
+  //For example, if the user is not logged in and they click the User icon, they will be directed to login first before /account.
   const { userInfo } = useContext(UserContext)
 
   return (
     <>
-      <BrowserRouter>
+        <BrowserRouter>
         <Routes>
           <Route
             path='/'
@@ -63,7 +63,7 @@ function App(){
             element={<BookingPage />}
           />
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
     </>
   )
 }
