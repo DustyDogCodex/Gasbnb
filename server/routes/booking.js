@@ -1,6 +1,5 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
-const mongoose = require('mongoose')
 const Router = express.Router()
 
 //importing bookings model
@@ -9,11 +8,11 @@ const Booking = require('../models/Bookings')
 Router.post('/new-booking',
     asyncHandler(async(req,res) => {
         //extract data from req.body.data
-        const { owner, listingId, checkInDate, checkOutDate, numGuests, totalCost } = req.body
+        const { userId, listingId, checkInDate, checkOutDate, numGuests, totalCost } = req.body
         
         //create new instance of booking
         const newBooking = new Booking({
-            owner,
+            userId,
             listingId, 
             checkInDate, 
             checkOutDate, 
@@ -34,7 +33,7 @@ Router.get('/booking-info/:id',
         //find booking by bookingId
         const { id } = req.params
 
-        const selectedBooking = await Booking.find({ owner : id })
+        const selectedBooking = await Booking.find({ userId : id })
 
         res.send(selectedBooking)
     })

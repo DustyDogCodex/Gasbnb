@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const BookingsSchema = new Schema ({
-    owner: mongoose.ObjectId,
-    listingID: mongoose.ObjectId,
+    userId: mongoose.ObjectId,
+    listingId: mongoose.ObjectId,
     checkInDate: String,
     checkOutDate: String,
     numGuests: Number,
