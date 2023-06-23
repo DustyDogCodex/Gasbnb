@@ -28,12 +28,12 @@ Router.post('/new-booking',
     })
 )
 
-Router.get('/booking-info/:id',
+Router.get('/booking-info/:userId',
     asyncHandler(async(req,res) => {
-        //find booking by bookingId
-        const { id } = req.params
+        //find booking by userId
+        const { userId } = req.params
 
-        const selectedBooking = await Booking.find({ userId : id })
+        const selectedBooking = await Booking.find({ userId }).populate('listingId')
 
         res.send(selectedBooking)
     })

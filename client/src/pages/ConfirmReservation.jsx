@@ -31,7 +31,7 @@ function ConfirmReservation() {
     async function confirmBooking(e){
         e.preventDefault()
         axios.post("http://localhost:5000/bookings/new-booking",
-            { userId: userInfo._id, listingId:listing._id, checkInDate, checkOutDate, numGuests, totalCost }
+            { userId: userInfo._id, listingId, checkInDate, checkOutDate, numGuests, totalCost }
         ).then(res => {
             if(res.data == 'success'){
                 window.location.replace('/account/trips')
