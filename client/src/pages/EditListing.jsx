@@ -12,10 +12,10 @@ function EditListing() {
     //userInfo._id will be used to identify the user when a new listing is created
     const { userInfo } = useContext(UserContext)
 
-    //retrieving listing info to poly fill input values
+    //retrieving listing info to pre fill input values
     const { listingId } = useParams()
 
-    //since this is listing that has already been created,
+    //since this is a listing that has already been created,
     //importing useForm's reset method to load listing data into the form after it is fetched from the server 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 

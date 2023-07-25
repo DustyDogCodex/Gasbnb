@@ -14,10 +14,12 @@ export const ContextProvider = ({ children }) => {
     //then the user info is passed into our context using setUserInfo
     useEffect(() => {
         const getProfile = async() => {
-            const res = await axios.get(
-            'http://localhost:5000/auth/getuser',
-            { withCredentials: true })
-                .then(res => setUserInfo(res.data))
+            axios.get(
+                'http://localhost:5000/auth/getuser',
+                { withCredentials: true }
+            )
+            .then(res => setUserInfo(res.data))
+            .catch(err => console.log(err))
         }
         getProfile()
     }, [])
