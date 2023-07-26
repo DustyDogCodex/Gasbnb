@@ -5,7 +5,7 @@ import ListingDisplayBox from "../components/ListingDisplayBox"
 
 function Homepage() {
     //state variable to store all available listings
-    const [listings, setListings] = useState([])
+    const [ listings, setListings ] = useState([])
 
     //using useEffect to make an API call to retrieve all available listings and display it on homepage
     useEffect(() => {

@@ -72,9 +72,11 @@ function EditListing() {
     async function addDeviceImages(e){
         const images = e.target.files
         const data = new FormData()
+
         for(let i = 0; i < images.length; i++){
             data.append('images', images[i])
         }
+
         axios.post("http://localhost:5000/listings/uploadimage-device", 
             data,
             {
@@ -89,6 +91,7 @@ function EditListing() {
                 return [...prev, ...fileNames]
             })
         })
+        .catch(err => console.log(err))
     }
 
     //function for deleting photos from photo gallery
