@@ -11,8 +11,9 @@ export default {
         red: "#ff385c"
       },
       fontFamily:{
-        roboto:  ["Roboto", "sans-serif"],
-        robotoMono: ["Roboto Mono", "monospace"],
+        roboto:  [ "Roboto", "sans-serif" ],
+        robotoMono: [ "Roboto Mono", "monospace" ],
+        mont: [ 'Montserrat', 'sans-serif' ]
       },
       screens: {
         xs: "480px",

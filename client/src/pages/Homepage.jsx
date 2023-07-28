@@ -12,6 +12,7 @@ function Homepage() {
         const getListings = async() =>{
             axios.get("http://localhost:5000/listings/available")
             .then(res => setListings(res.data))
+            .catch(err => console.log(err))
         }
         getListings()
     }, [])
@@ -23,7 +24,10 @@ function Homepage() {
                 className="flex flex-wrap px-16 py-5"
             >
                 {listings.length > 0 && listings.map((listing,index) => 
-                    <ListingDisplayBox key={index} listing={listing}/> 
+                    <ListingDisplayBox 
+                        key={index} 
+                        listing={listing}
+                    /> 
                 )}
             </div>
         </>
