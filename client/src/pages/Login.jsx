@@ -35,7 +35,7 @@ function Login() {
             <div
                 className="flex flex-col items-center justify-center bg-white p-16 rounded-lg"
             >
-
+                {/* headings */}
                 <h1
                     className="font-semibold font-mont text-3xl border-b border-b-red pb-3"
                 >
