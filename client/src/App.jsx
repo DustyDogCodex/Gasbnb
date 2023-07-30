@@ -1,6 +1,6 @@
 import './App.css'
 import { Login } from './pages/Login'
-import { Register } from './components/Register'
+import { Register } from './pages/Register'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { UserContext } from './UserContext'
 import { useContext } from 'react'
