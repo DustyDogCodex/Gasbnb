@@ -10,7 +10,7 @@ const User = require('../models/Users')
 //Register new users
 Router.post(
     '/register', 
-    asyncHandler( async(req,res,next) => {
+    asyncHandler(async(req,res) => {
         //get user info from data object
         const { name, email, password } = req.body.data
 
@@ -41,8 +41,7 @@ Router.post(
     })
 )
 
-//Login existing users. Using bcrypt compare now instead of passport local
-//app is small enough to justify not using passport
+//Login existing users
 Router.post(
     '/login', 
     passport.authenticate('local'),

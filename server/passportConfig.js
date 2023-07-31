@@ -1,7 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
-require('dotenv').config()
 
 //import User model for local strategy
 const User = require('./models/Users')
@@ -35,17 +34,16 @@ passport.use(
 /*-------------------- SERIALISE AND DESERIALISE USERS ------------------------- */
 
 passport.serializeUser((user, cb) => {
-  console.log(user._id)
-  return cb(null, user._id)
-});
+    return cb(null, user._id)
+})
 
 passport.deserializeUser(async(id, cb) => {
- try {
-    const user = await User.findById(id);
-    //omitting password otherwise we will make a big OOPSIE
-    const { password, ...userInfo } = user._doc
-    cb(null, userInfo);
-  } catch(err) {
-    cb(err);
-  };
-});
+    try {
+        const user = await User.findById(id);
+        //omitting password otherwise we will make a big OOPSIE
+        const { password, ...userInfo } = user._doc
+        cb(null, userInfo)
+    } catch(err) {
+        cb(err)
+    }
+})

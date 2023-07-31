@@ -11,8 +11,8 @@ function Register() {
     const [ emailAlert, setEmailAlert ] = useState(false)
 
     //create post request to submit registration info
-    async function registerUser(){
-        await axios.post('http://localhost:5000/auth/register', 
+    async function registerUser(data){
+        axios.post('http://localhost:5000/auth/register', 
             {
                 data
             }
@@ -22,8 +22,6 @@ function Register() {
                 window.location.replace('/login')
             } else if(res.data == 'failed') {
                 setEmailAlert(true)
-            } else {
-                console.log(res.data)
             }
         })
         .catch(err => console.log(err))

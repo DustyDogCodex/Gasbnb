@@ -1,31 +1,43 @@
 import { useForm } from "react-hook-form"
-import { useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 function Login() {
-     //setting up react-hhok-form
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    //setting up react-hook-form
+    const { register, handleSubmit, formState: { errors }, watch } = useForm()
 
-    //state variables for email and password
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    //using watch to track user input
+    const watchEmail = watch('email')
+    const watchPassword = watch('password')
+
+    //variable to toggle invalid login alert
+    const [ invalidLogin, setInvalidLogin ] = useState(false)
 
     //create post request to submit registration info
+    //sending watchEmail and watchPassword as passport is expecting these fieldnames and not the data object
     async function loginUser(){
-        await axios.post('http://localhost:5000/auth/login', 
+        axios.post('http://localhost:5000/auth/login', 
             {
-                email,
-                password
+                email: watchEmail, 
+                password: watchPassword
             },
             { withCredentials: true}
         )
         .then(res => {
-            if(res.data == 'ok'){
+            /* if successful response, navigate to homepage */
+            if (res.data == 'ok'){
                 window.location.replace('/')
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => { 
+            console.log(err)
+            /* toggle invalid login alert. This will disappear after 5 secs */
+            setInvalidLogin(true)
+            setTimeout(() => {
+                setInvalidLogin(false)
+            }, 5000)
+        })
     }
 
     return (
@@ -61,8 +73,6 @@ function Login() {
                         })}
                         type="email"
                         placeholder="Enter your email"  
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                     />
                     {errors.email && (
                         <p className="text-red mt-1">
@@ -78,8 +88,6 @@ function Login() {
                         })}
                         type="password"
                         placeholder="Enter your password"  
-                        value={password}  
-                        onChange={(e) => setPassword(e.target.value)}
                     />
                     {errors.password && (
                         <p className="text-red mt-1">
@@ -93,6 +101,13 @@ function Login() {
                     >
                         Continue
                     </button>
+
+                    {/* invalid credentials alert */}
+                    <p
+                        className={`${invalidLogin ? '' : 'hidden'} bg-pink-200 text-red px-4 py-1 my-2 rounded-lg`}
+                    >
+                        Invalid Credentials. Please try again.
+                    </p>
                 </form>
 
                 {/* forward to register page */}
