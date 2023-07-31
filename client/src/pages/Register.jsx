@@ -19,7 +19,7 @@ function Register() {
         )
         .then(res => {
             if(res.data == 'success'){
-                window.location.assign('/login')
+                window.location.replace('/login')
             } else if(res.data == 'failed') {
                 setEmailAlert(true)
             } else {
