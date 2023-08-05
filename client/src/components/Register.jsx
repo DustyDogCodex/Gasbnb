@@ -1,25 +1,32 @@
 import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Alert } from "react-bootstrap"
+import { Navigate } from "react-router-dom"
 
-function Register() {    
+function Register() {
+    
     //setting up react-hhok-form
     const { register, handleSubmit, formState: { errors } } = useForm()
 
+    //state variables for email and password
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+
     //if user uses an email that is already in our database, an alert will pop up
-    const [ emailAlert, setEmailAlert ] = useState(false)
+    const [emailAlert, setEmailAlert] = useState(false)
 
     //create post request to submit registration info
     async function registerUser(){
-        await axios.post('http://localhost:5000/auth/register', 
-            {
-                data
-            }
-        )
+        await axios.post('http://localhost:5000/auth/register', {
+            name,
+            email,
+            password
+        })
         .then(res => {
             if(res.data == 'success'){
-                window.location.assign('/login')
+                <Navigate to="/login"/>
             } else if(res.data == 'failed') {
                 setEmailAlert(true)
             } else {
@@ -31,26 +38,26 @@ function Register() {
 
     return (
         <div 
-            className="flex items-center justify-center p-10 bg-stone-200 min-h-screen h-full"
+            className="flex flex-col items-center justify-center"
         >   
             <div
                 className="flex flex-col items-center justify-center bg-white p-16 rounded-lg"
             >
                 <h1
-                    className="font-semibold font-mont text-3xl border-b border-b-red pb-3"
+                    className="font-semibold text-2xl border-b-2 pb-3"
                 >
                     Welcome to Gasbnb
                 </h1>
 
                 <h3
-                    className="mt-5 text-xl font-semibold font-mont"
+                    className="mt-5 text-xl font-semibold"
                 >
                     Sign up
                 </h3>
             
                 {/* form for creating a new account */}
                 <form
-                    className="flex flex-col items-center justify-center border-b border-b-red"
+                    className="flex flex-col items-center justify-center"
                     onSubmit={handleSubmit(registerUser)}
                 >
                     <input 
@@ -101,7 +108,7 @@ function Register() {
                         className="bg-red text-white px-8 py-2 rounded-md my-5"
                         type="submit"
                     >
-                        Register
+                        Continue
                     </button>
 
                     {/* Alert for duplicate email */}
@@ -112,19 +119,6 @@ function Register() {
                         This email is already being used. Please choose a different email.
                     </p>
                 </form>
-
-                {/* forward to login page */}
-                <div 
-                    className="mt-5 font-mont flex flex-col items-center justify-center"
-                >
-                    <span>Already have an account?</span>
-                    <Link
-                        to={'/login'}
-                        className="mt-5 bg-sky-400 text-white text-lg px-8 py-2 rounded-lg"
-                    >
-                        Login
-                    </Link>
-                </div>
             </div>
         </div>
     )

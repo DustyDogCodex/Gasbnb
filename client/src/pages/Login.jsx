@@ -91,7 +91,7 @@ function Login() {
                         className="bg-red text-white px-8 py-2 rounded-md my-5 text-lg"
                         type="submit"
                     >
-                        Login
+                        Continue
                     </button>
                 </form>
 
@@ -104,7 +104,7 @@ function Login() {
                         to={'/register'}
                         className="mt-5 bg-sky-400 text-white text-lg px-8 py-2 rounded-lg"
                     >
-                        Register
+                        Create an account
                     </Link>
                 </div>
             </div>
