@@ -11,24 +11,30 @@ passport.use(
   new LocalStrategy(
     { usernameField: 'email' },
     function(email, password, done) {
-    User.findOne({ email })
-      .then(user => {
-        if(!user){
-          return done(null, false);
-        }
-        bcrypt.compare(password, user.password, (err,isMatch) => {
-          if(err) throw(err)
+        User.findOne({ email })
+        .then(user => {
+            //if no user exists with this account return false
+            if(!user){
+                return done(null, false);
+            }
+        
+            //if user exists, compare passwords
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if(err) throw(err)
 
-          if (isMatch) {
-            return done(null,user)
-          } else {
-            return done(null, false, { message: "Wrong password!" })
-          }
+                if (isMatch) {
+                    //if passwords match return user document
+                    return done(null,user)
+                } else {
+                    //if passwords don't match return error
+                    return done(null, false, { message: "Wrong password!" })
+                }
+            })
         })
-      }).catch(err => {
-        return done(null, false, { message: err })
-      })
-  }
+        .catch(err => {
+            return done(null, false, { message: err })
+        })
+    }
 ))
 
 /*-------------------- SERIALISE AND DESERIALISE USERS ------------------------- */

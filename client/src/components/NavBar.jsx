@@ -12,7 +12,7 @@ function NavBar(){
     const { userInfo } = useContext(UserContext)
 
     //state variables that control drop down menu when user clicks on the user icon in the navbar
-    const [ showMenu, setShowMenu ] = useState(true)
+    const [ showMenu, setShowMenu ] = useState(false)
 
     return(
         <header
@@ -56,6 +56,7 @@ function NavBar(){
                             icon={faBars} 
                             style={{color: "#7e8186", height:'20px', marginLeft:'8px'}} 
                         />
+                        
                         {/* show userInfo.avatar if a user is logged in or if user doesn't have a logo/not logged in, display a default user icon */}
                         { userInfo.avatar || 
                         <FontAwesomeIcon 

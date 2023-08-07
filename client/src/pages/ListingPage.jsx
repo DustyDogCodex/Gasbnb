@@ -18,6 +18,7 @@ function ListingPage() {
         const getSelectedListing = async() => {
             axios.get(`http://localhost:5000/listings/available/${listingId}`)
             .then(res => setSelectedListing(res.data))
+            .catch(err => console.log(err))
         }
         getSelectedListing()
     }, []) 
@@ -73,68 +74,76 @@ function ListingPage() {
     }
     
     return (
-        <div>
+        <div
+            className="flex items-center justify-center p-5 bg-slate-200"
+        >
             { selectedListing  
             ? 
             <div
-                className="p-3"
+                className="p-3 border border-sky-400 bg-white rounded-lg md:w-3/5"
             >
                 <h1
                     className="text-3xl font-semibold"
                 >
                     {selectedListing.title}
                 </h1>
+
                 {/* link to google maps result for given location */}
                 <a 
                     href={`https://maps.google.com/?q=${selectedListing.location}`} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="underline text-sm font-semibold flex items-center gap-2"
+                    className="underline text-sm md:text-base font-semibold flex items-center mt-1"
                 >   
                     <FontAwesomeIcon 
                         icon={faLocationDot} 
-                        style={{color: "#050415",}} 
+                        style={{color: "#050415", marginRight:'10px'}} 
                     />
                     {selectedListing.location}
                 </a>
+
                 {/* photo gallery */}
                 <div
-                    className="grid gap-3 grid-cols-[2fr_1fr] my-3"
+                    className="h-1/4 my-5 flex border border-red"
                 >
-                    <div>
-                        {selectedListing?.photos?.[0] && (
-                            <img 
-                                src={`http://localhost:5000/uploads/${selectedListing.photos[0]}`} 
-                                alt="main photo for listing" 
-                                className="aspect-square object-cover rounded-lg"
-                            />
-                        )}
-                    </div>
+                    {/* main image on left hand side */}
+                    {selectedListing?.photos?.[0] && (
+                        <img 
+                            src={`http://localhost:5000/uploads/${selectedListing.photos[0]}`} 
+                            alt="main photo for listing" 
+                            className="w-2/3 h-fit rounded-lg mr-3"
+                        />
+                    )}
+                    
+                    {/* more images on the right hand side */}
                     <div
-                        className="grid relative"
+                        className="h-full relative"
                     >
                         {selectedListing?.photos?.[1] && (
                             <img 
                                 src={`http://localhost:5000/uploads/${selectedListing.photos[1]}`} 
                                 alt="second photo for listing" 
-                                className="aspect-square object-cover rounded-lg"
+                                className="h-1/2 object-cover rounded-lg my-3"
                             />
                         )}
                         {selectedListing?.photos?.[2] && (
                             <img 
                                 src={`http://localhost:5000/uploads/${selectedListing.photos[2]}`} 
                                 alt="listing photo" 
-                                className="aspect-square object-cover rounded-lg"
+                                className="h-1/2 rounded-lg"
                             />
                         )}
+
+                        {/* toggle show more modal for viewing all photos for listing */}
                         <div
-                            className="absolute bottom-2 right-2 bg-slate-300/70 p-1 rounded-md cursor-pointer"
+                            className="absolute bottom-5 right-2 bg-slate-300/70 p-1 rounded-md cursor-pointer"
                             onClick={() => setShowMore(true)}
                         >
                             Show more photos
                         </div>
                     </div>  
                 </div>
+
                 {/* this div contains listing related information and the reservation widget */}
                 <div
                     className="flex"
@@ -145,29 +154,38 @@ function ListingPage() {
                         >
                             {selectedListing.description}
                         </p>
+
                         {/* the additional information is displayed only if additional information is available about the listing */}
                         {selectedListing.extraInfo && 
-                        <>
-                            <h3 className="mt-5 font-semibold">
-                                Additional information:
-                            </h3>
-                            <p
-                                className="mt-2"
-                            >
-                                {selectedListing.extraInfo}
-                            </p>
-                        </>
+                            <>
+                                <h3 className="mt-5 font-semibold">
+                                    Additional information:
+                                </h3>
+                                <p
+                                    className="mt-2"
+                                >
+                                    {selectedListing.extraInfo}
+                                </p>
+                            </>
                         }
+
                         <p
                             className="mt-5"
                         >
-                            <strong>Check In:</strong> {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} <br/>
-                            <strong>Check Out:</strong> {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
+                            <strong>Check In:</strong> 
+                            {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} 
+                            
+                            <br/>
+                            
+                            <strong>Check Out:</strong> 
+                            {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
                         </p>
+
                         <p className="mt-5">
                             <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
                         </p>
                     </div>
+
                     <ReservationWidget listing={selectedListing}/>
                 </div>
             </div>
