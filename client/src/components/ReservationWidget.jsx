@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import PriceCalculator from "./PriceCalculator"
 
 function ReservationWidget({ listing }) {
@@ -21,25 +21,25 @@ function ReservationWidget({ listing }) {
     const today = time.toISOString().substring(0, 10)
     const oneWeekFromToday = Date.now() + 604800000 //one week in milliseconds
     const dateOneWeekFromToday = new Date(oneWeekFromToday).toISOString().substring(0,10)
-    
-    //submit data using react-hook-form
-    async function submitReservation(data){
-        console.log(data)
+
+    function validateInfo() {
+        return <Navigate to={`/confirm-payment/${listing._id}/${watchCheckIn}/${watchCheckOut}/${watchNumGuests}`} />
     }
     
     return (
         <div 
-            className="m-3 border-2 rounded-lg p-3"
+            className="m-3 border-2 rounded-lg p-3 shadow-xl shadow-slate-300"
         >
             <h1>
-                <strong className="text-2xl font-medium">${listing.price}</strong> night
+                <strong className="text-2xl font-bold">${listing.price}</strong> night
             </h1>
-            <form
-                onSubmit={handleSubmit(submitReservation)}
-            >
+
+            {/* form for collecting reservation info */}
+            <form onSubmit={handleSubmit(validateInfo)}>
                 <div
                     className="flex flex-col md:flex-row mt-5"
                 >
+                    {/* checkin/checkout dates */}
                     <div
                         className="flex flex-col items-start border p-2"
                     >
@@ -49,7 +49,14 @@ function ReservationWidget({ listing }) {
                             type="date"
                             defaultValue={today}
                         />
+                        {errors.checkInDate && (
+                            <p className="text-red mt-1">
+                                {errors.checkInDate.type === "required" && "A check-in date is required"}
+                            </p>
+                        )}
+
                     </div>
+
                     <div
                         className="flex flex-col items-start border p-2"
                     >
@@ -59,8 +66,15 @@ function ReservationWidget({ listing }) {
                             type="date"
                             defaultValue={dateOneWeekFromToday}
                         />
+                        {errors.checkOutDate && (
+                            <p className="text-red mt-1">
+                                {errors.checkOutDate.type === "required" && "A check-out date is required"}
+                            </p>
+                        )}
                     </div>
                 </div>
+
+                {/* num of guests */}
                 <div
                     className="flex flex-col items-start border p-2"
                 >
@@ -73,17 +87,21 @@ function ReservationWidget({ listing }) {
                         type="number" 
                         placeholder="1 guest"
                     />
+                    {errors.numGuests && (
+                        <p className="text-red mt-1">
+                            {errors.numGuests.type === "required" && "A check-in date is required"}
+                            {errors.numGuests.type === "max" && `Listing only allows ${listing.maxGuests} guests`}
+                        </p>
+                    )}
                 </div>
-                <div
-                    className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3 text-center"
+                <button
+                    type="submit"
+                    className="bg-red w-full text-white font-bold py-3 rounded-lg mt-3 text-center cursor-pointer"
                 >
-                    <Link
-                        to={`/confirm-payment/${listing._id}/${watchCheckIn}/${watchCheckOut}/${watchNumGuests}`}
-                    >
-                        Reserve
-                    </Link>
-                </div>
+                    Reserve
+                </button>
             </form>
+
             <PriceCalculator 
                 price={listing.price} 
                 checkIn={watchCheckIn} 

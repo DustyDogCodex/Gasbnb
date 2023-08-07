@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 function ListingDisplayBox({ listing }) {
     //extracting all needed info from listing object
     const { _id, title, location, photos } = listing
-    console.log(listing)
 
     return (
         <Link
