@@ -4,7 +4,7 @@ import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import ReservationWidget from "../components/ReservationWidget"
-import SmallNavBar from '../components/SmallNavBar'
+import { NavBar } from '../components/NavBar'
 
 /* page with detailed and complete information on the user selected listing. User's can access this page by clicking on a listig either on the homepage or in their accounts  */
 function ListingPage() {
@@ -76,14 +76,14 @@ function ListingPage() {
     
     return (
         <>
-            <SmallNavBar />
+            <NavBar />
             <div
                 className="flex items-center justify-center p-5 bg-slate-200"
             >
                 {selectedListing  
                     ? 
                         <div
-                            className="p-3 border border-sky-400 bg-white rounded-lg md:w-3/5"
+                            className="p-3 bg-white rounded-lg md:w-3/5"
                         >
                             <h1
                                 className="text-3xl font-semibold"
@@ -107,7 +107,7 @@ function ListingPage() {
 
                             {/* photo gallery */}
                             <div
-                                className="grid grid-cols-[2fr_1fr] gap-2 my-5 border border-red"
+                                className="grid grid-cols-[2fr_1fr] gap-2 my-5"
                             >
                     
                                 {/* main image on left hand side */}

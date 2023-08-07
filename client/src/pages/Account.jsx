@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faList, faPeopleRoof } from "@fortawesome/free-solid-svg-icons"
-import SmallNavBar from "../components/SmallNavBar"
+import { NavBar } from "../components/NavBar"
 
 function Account() {
 
@@ -15,9 +15,9 @@ function Account() {
 
     return (
         <>
-            <SmallNavBar/>
+            <NavBar />
             <div
-                className="flex flex-col p-10"
+                className="flex flex-col p-10 items-center justify-center"
             >
                 <nav
                     className="w-full flex justify-center my-5 text-2xl gap-2"
@@ -43,6 +43,8 @@ function Account() {
                         <FontAwesomeIcon icon={faPeopleRoof} /> My Rentals
                     </Link>
                 </nav>
+
+                {/* outlet for displaying sub pages */}
                 <Outlet/>
             </div>
         </> 

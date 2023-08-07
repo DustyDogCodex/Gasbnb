@@ -21,19 +21,20 @@ function NavBar(){
             <div
                 className="flex items-center justify-between p-1 lg:w-4/5"
             >
-                <div>
-                    <Link 
-                        to={'/'}
-                        className="flex items-center p-5"
-                    >
-                        <FontAwesomeIcon 
-                            icon={faAirbnb} 
-                            style={{color: "#ff385c", height:'40px'}} 
-                            className="ml-3"
-                        />
-                        <span className="text-red ml-2 text-xl font-bold">gasbnb</span>
-                    </Link>
-                </div>
+                {/* logo, always redirects to home */}
+                <Link 
+                    to={'/'}
+                    className="flex items-center p-5"
+                >
+                    <FontAwesomeIcon 
+                        icon={faAirbnb} 
+                        style={{color: "#ff385c", height:'40px'}} 
+                        className="ml-3"
+                    />
+                    <span className="text-red ml-2 text-xl font-bold">gasbnb</span>
+                </Link>
+
+                {/* search bar */}
                 <div className="flex items-center border-2 p-2 rounded-full shadow-md shadow-gray-300">
                     <span className="border-r-2 py-1 px-4">Anywhere</span>
                     <span className="border-r-2 py-1 px-4">Any week</span>
@@ -47,6 +48,8 @@ function NavBar(){
                         />
                     </button>
                 </div>
+
+                {/* menu and account section */}
                 <div className="flex items-center p-5">
                     <div 
                         className="flex items-center border-2 p-2 rounded-full relative cursor-pointer"
@@ -63,6 +66,8 @@ function NavBar(){
                             icon={faCircleUser} 
                             style={{color: "#9e9e9e", height:'30px', marginLeft:'20px'}} 
                         />}
+
+                        {/* flyout menu displayed when user clicks on the div above */}
                         {showMenu ? <FlyoutMenu userInfo={userInfo} /> : ''}
                     </div>
                 </div>

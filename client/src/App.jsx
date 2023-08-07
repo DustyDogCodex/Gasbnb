@@ -25,43 +25,49 @@ function App(){
     <>
         <BrowserRouter>
         <Routes>
-          <Route
-            path='/'
-            element={<Homepage/>}
-          />
-          <Route
-            path='register'
-            element={<Register/>}
-          />
-          <Route
-            path='login'
-            element={<Login/>}
-          />
-          {/* Account and associated subpages */}
-          <Route
-            path='account'
-            element={ userInfo ? <Account /> : <Login />}
-          >
-            <Route index element={<Profile />} />
-            <Route path='trips' element={<MyTrips />} />
-            <Route path='rentals' element={<MyRentals />} />
-            <Route path='rentals/new' element={<CreateNewRental />} />
-            <Route path='rentals/edit/:listingId' element={<EditListing />} />
-          </Route>
-          {/* Page for displaying complete information about a selected listing */}
-          <Route
-            path='listing-page/:listingId'
-            element={<ListingPage />}
-          />
-          {/* Page for confirming listing after clicking on the reserve link in reservation widget */}
-          <Route
-            path='confirm-payment/:listingId/:checkInDate/:checkOutDate/:numGuests'
-            element={userInfo ? <ConfirmReservation /> : <Login/>}
-          />
-          <Route
-            path='booking-page/:bookingId'
-            element={<BookingPage />}
-          />
+            <Route
+                path='/'
+                element={<Homepage/>}
+            />
+
+            <Route
+                path='register'
+                element={<Register/>}
+            />
+
+            <Route
+                path='login'
+                element={<Login/>}
+            />
+
+            {/* Account and associated subpages */}
+            <Route
+                path='account'
+                element={ userInfo ? <Account /> : <Login />}
+            >
+                <Route index element={<Profile />} />
+                <Route path='trips' element={<MyTrips />} />
+                <Route path='rentals' element={<MyRentals />} />
+                <Route path='rentals/new' element={<CreateNewRental />} />
+                <Route path='rentals/edit/:listingId' element={<EditListing />} />
+            </Route>
+
+            {/* Page for displaying complete information about a selected listing */}
+            <Route
+                path='listing-page/:listingId'
+                element={<ListingPage />}
+            />
+
+            {/* Page for confirming listing after clicking on the reserve link in reservation widget */}
+            <Route
+                path='confirm-payment/:listingId/:checkInDate/:checkOutDate/:numGuests'
+                element={userInfo ? <ConfirmReservation /> : <Login/>}
+            />
+
+            <Route
+                path='booking-page/:bookingId'
+                element={<BookingPage />}
+            />
         </Routes>
         </BrowserRouter>
     </>
