@@ -19,7 +19,7 @@ function Account() {
         >
             <NavBar />
             <div
-                className="flex flex-col p-10 items-center justify-start bg-stone-200 h-full"
+                className="flex flex-col p-10 items-center justify-start bg-stone-200 min-h-screen h-full"
             >
                 <div
                     className="bg-white p-8 rounded-lg"
