@@ -23,6 +23,7 @@ function ConfirmReservation() {
         const getListingInfo = async() => {
             await axios.get(`http://localhost:5000/listings/available/${listingId}`)
             .then(res => setListing(res.data))
+            .catch(err => console.log(err))
         }
         getListingInfo()
     }, [])
@@ -37,23 +38,26 @@ function ConfirmReservation() {
                 window.location.replace('/account/trips')
             }
         })
+        .catch(err => console.log(err))
     }
 
     return (
         <div 
-            className="w-screen h-screen p-10 flex item-center justify-center"
+            className="w-screen h-screen p-10 flex item-center justify-center bg-stone-200"
         >
             <div
-                className="flex lg:w-4/5 lg:items-center lg:justify-center border-2 border-emerald-500 rounded-lg"
+                className="flex bg-white border rounded-lg w-full lg:w-3/5 lg:items-center lg:justify-center"
             >
                 <div
-                    className="w-1/2 p-5 m-3"
+                    className="w-1/2 p-5 m-3 border-2 border-sky-200 rounded-lg"
                 >   
                     <h1
                         className="text-3xl"
                     >
                         Request to book
                     </h1>
+
+                    {/* Info about currently selected reservation: dates, num guests etc */}
                     <div
                         className="mt-8 border-b-2"
                     >
@@ -97,13 +101,15 @@ function ConfirmReservation() {
                     >
                         Payment
                     </h2>
-                    {/* dummy payment system, users do not need to fill oout info to reserve a booking */}
+
+                    {/* dummy payment system, users do not need to fill out info to reserve a booking */}
                     <form>
                         <input
                             type="number"
                             placeholder="Card Number"
                             className="border w-full p-2 rounded-lg"
                         />
+
                         <div
                             className="flex"
                         >
@@ -118,6 +124,7 @@ function ConfirmReservation() {
                                 className="border w-full p-2 rounded-lg"
                             />
                         </div>
+
                         <input
                             type="number"
                             placeholder="ZIP Code"
@@ -129,6 +136,8 @@ function ConfirmReservation() {
                             className="border w-full p-2 rounded-lg mt-5"
                         />
                     </form>
+
+                    {/* confirm reservation/form submit button */}
                     <button
                         type="button"
                         className="bg-red py-3 px-6 text-white font-semibold rounded-lg mt-8"
@@ -137,31 +146,37 @@ function ConfirmReservation() {
                         Confirm Reservation
                     </button>
                 </div>
+
+                {/* listing summary and price for selected dates */}
                 <div
-                    className="w-1/2 p-5 m-3 border-2 rounded-lg"
+                    className="w-1/2 p-5 m-3 border-2 border-sky-200 rounded-lg"
                 >   
                     {listing &&
-                    <>
-                    <div
-                        className="flex items-center gap-3 border-b-2 py-5"
-                    >
-                        <img 
-                            className="h-28 rounded-lg" 
-                            src={`http://localhost:5000/uploads/${listing?.photos?.[0]}`} 
-                            alt="" 
-                        />
-                        <h2
-                            className="font-semibold"
-                        >
-                            {listing.title}
-                        </h2>
-                    </div>
-                    <PriceCalculator 
-                        price={listing.price} 
-                        checkIn={checkInDate} 
-                        checkOut={checkOutDate}
-                    />
-                    </>
+                        <>
+                            {/* listing title + cover image */}
+                            <div
+                                className="flex items-center gap-3 border-b-2 py-5"
+                            >
+                                <img 
+                                    className="h-28 rounded-lg" 
+                                    src={`http://localhost:5000/uploads/${listing?.photos?.[0]}`} 
+                                    alt={`${listing.title} cover image`} 
+                                />
+
+                                <h2
+                                    className="font-semibold"
+                                >
+                                    {listing.title}
+                                </h2>
+                            </div>
+
+                            {/* price calculation for selected dates */}
+                            <PriceCalculator 
+                                price={listing.price} 
+                                checkIn={checkInDate} 
+                                checkOut={checkOutDate}
+                            />
+                        </>
                     }
                 </div>
             </div>
