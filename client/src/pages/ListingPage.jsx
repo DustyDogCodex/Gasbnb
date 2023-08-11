@@ -176,17 +176,17 @@ function ListingPage() {
                                 <p
                                     className="mt-5"
                                 >
-                                    <strong>Check In:</strong> 
+                                    <span className="mr-5 font-bold">Check In:</span> 
                                     {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} 
                             
                                     <br/>
                             
-                                    <strong>Check Out:</strong> 
+                                    <span className="mr-5 font-bold">Check Out:</span> 
                                     {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
                                 </p>
 
                                 <p className="mt-5">
-                                    <strong>Maximum number of guests:</strong> {selectedListing.maxGuests}
+                                    <span className="mr-5 font-bold">Maximum number of guests:</span> {selectedListing.maxGuests}
                                 </p>
                             </div>
 

@@ -15,7 +15,7 @@ function Profile() {
         )
         .then(res => {
             if(res.data){
-                window.location.href = '/'
+                window.location.replace('/')
             }
         })
         .catch(err => console.log(err))
