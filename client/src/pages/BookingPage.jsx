@@ -1,20 +1,27 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
+import pikachu from '../assets/pikachu.gif'
+import { NavBar } from '../components/NavBar'
 
 function BookingPage() {
     //grabbing booking id from params
     const { bookingId } = useParams()
-
-    //state variable for storing booking info
+    
+    //state variable for storing booking info + loading animation
     const [ booking, setBooking ] = useState({})
+    const [ loading, setLoading ] = useState(true)
 
     //fetching booking info from backend
     useEffect(() => {
         const getBookingInfo = async() => {
             axios.get(`http://localhost:5000/bookings/${bookingId}`)
-            .then(res => setBooking(...res.data))
+            .then(res => {
+                setBooking(res.data)
+                //once data is loaded, remove loading animation
+                setLoading(false)    
+            })
+            .catch(err => console.log(err))
         }
         getBookingInfo()
     }, [])
@@ -28,78 +35,112 @@ function BookingPage() {
                 window.location.assign('/account/trips')
             }
         })
+        .catch(err => console.log(err))
     }
 
-    console.log(booking)
-
     return (
+        <>
+        <NavBar />
         <div
-            className="flex flex-col items-center justify-center border border-emerald-600"
+            className="h-screen flex flex-col items-center justify-center bg-stone-200"
         >
-            <h1
-                className="text-3xl my-5"
-            >
-                Your Scheduled Trip
-            </h1>
-            <div>
-                <Link
-                    to={`/listing-page/${booking?.listingId?._id}`}
-                    className="flex items-center m-3 bg-slate-200 rounded-lg"
-                >
-                    <img 
-                        src={`http://localhost:5000/uploads/${booking?.listingId?.photos?.[0]}`}
-                        alt="" 
-                        className="h-48 rounded-lg"
-                    />
-                    <div
-                        className="ml-3 p-3"
+            {loading 
+                ?   
+                /* loading screen with a running pikachu animation :) */
+                (
+                    <div 
+                        className="w-full h-screen flex justify-center items-center bg-black/80 z-10"
                     >
-                        <h1
-                            className="text-2xl"
-                        >
-                            {booking?.listingId?.title}
-                        </h1>
-                        <p>
-                            {booking.listingId.location}
-                        </p>
+                        <img 
+                            src={pikachu}
+                            alt="pikachu running loading animation" 
+                            className="w-40 h-40"
+                        />
                     </div>
-                </Link>
+                )
+                :    
+                /* reservation info which is displayed once booking info is fetched from server */                
                 <div
-                    className="p-3"
+                    className="flex flex-col items-center justify-center bg-white rounded-lg p-5"
                 >
                     <h1
-                        className="text-2xl"
+                        className="text-3xl my-5"
                     >
-                        Itinerary
+                        Your Scheduled Trip
                     </h1>
-                    <div
-                        className="mt-3"
-                    >
-                        <p
-                            className="text-lg"
+
+                    <div>
+                        {/* link to listing page for selected booking */}
+                        <Link
+                            to={`/listing-page/${booking?.listingId?._id}`}
+                            className="flex items-center m-3 bg-slate-200 rounded-lg"
                         >
-                            Check In: {new Date(booking.checkInDate).toLocaleDateString()}
-                        </p>
-                        <p
-                            className="text-lg"
+                        
+                            <img 
+                                src={`http://localhost:5000/uploads/${booking?.listingId?.photos?.[0]}`}
+                                alt={`${booking?.listingId?.title} cover image`} 
+                                className="h-48 rounded-lg"
+                            />
+                            
+                            <div
+                                className="ml-3 p-3"
+                            >
+                                <h1
+                                    className="text-2xl"
+                                >
+                                    {booking?.listingId?.title}
+                                </h1>
+                                <p>
+                                    {booking?.listingId?.location}
+                                </p>
+                            </div>
+                        </Link>
+
+                        {/* Itinerary including dates for this booking */}
+                        <div
+                            className="p-3 border-2 border-sky-200 rounded-lg"
                         >
-                            Check Out: {new Date(booking.checkOutDate).toLocaleDateString()}
-                        </p>
-                        <p
-                            className="text-lg"
-                        >
-                            Total Cost: ${booking.totalCost}
-                        </p>
+                            <h1
+                                className="text-2xl text-center"
+                            >
+                                Itinerary
+                            </h1>
+
+                            <div
+                                className="mt-3"
+                            >
+                                <p
+                                    className="text-lg"
+                                >
+                                    <span className="font-bold">Check In:</span> {new Date(booking.checkInDate).toLocaleDateString()}
+                                </p>
+
+                                <p
+                                    className="text-lg"
+                                >
+                                    <span className="font-bold">Check Out:</span> {new Date(booking.checkOutDate).toLocaleDateString()}
+                                </p>
+                                    
+                                <p
+                                    className="text-lg"
+                                >
+                                    <span className="font-bold">Total Cost:</span> ${booking.totalCost}
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
+                    {/* button to cancel reservation and delete listing */}
+                    <button
+                        className="bg-red my-8 text-xl text-white py-3 px-8 rounded-full"
+                        onClick={(e) => deleteReservation(e)}
+                    >
+                        Cancel Reservation
+                    </button>
                 </div>
-            </div>
-            <button
-                className="bg-red my-8 text-xl text-white py-3 px-8 rounded-full"
-                onClick={(e) => deleteReservation(e)}
-            >
-                Cancel Reservation
-            </button>
+            }
         </div>
+        </>
     )
 }
 

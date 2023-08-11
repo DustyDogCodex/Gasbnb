@@ -15,6 +15,7 @@ function MyTrips() {
         async function userBookings(){
             axios.get(`http://localhost:5000/bookings/booking-info/${userInfo._id}`)
             .then(res => setUserTrips(res.data))
+            .catch(err => console.log(err))
         }
         userBookings()
     }, [])
@@ -25,15 +26,20 @@ function MyTrips() {
         <div
             className="flex flex-col items-center justify-center"
         >
+            {/* heading */}
             <h1
                 className="text-2xl"
             >
                 My Trips
             </h1>
+
+            {/* display for reservations made by the user */}
             <div
                 className="mt-8"
             >
-                {userTrips && userTrips.map(booking => <UserBookings booking={booking}/>)}
+                {userTrips && userTrips.map((booking, index) => <UserBookings key={index} booking={booking}/>)}
+
+                {/* if user has no current reservations */}
                 {!userTrips && 'No trips currently booked.'}
             </div>
         </div>

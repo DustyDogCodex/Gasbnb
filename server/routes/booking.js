@@ -24,7 +24,7 @@ Router.post('/new-booking',
         await newBooking.save()
         .catch(err => console.log(err))
 
-        res.send('success')
+        res.status(200).send('success')
     })
 )
 
@@ -36,7 +36,7 @@ Router.get('/booking-info/:userId',
 
         const selectedBooking = await Booking.find({ userId }).populate('listingId')
 
-        res.send(selectedBooking)
+        res.status(200).send(selectedBooking)
     })
 )
 
@@ -45,10 +45,10 @@ Router.get('/:bookingId',
     asyncHandler(async(req,res) => {
         //find booking by bookingId
         const { bookingId } = req.params
+        
+        const selectedBooking = await Booking.findById(bookingId).populate('listingId')
 
-        const selectedBooking = await Booking.find({ _id: bookingId }).populate('listingId')
-
-        res.send(selectedBooking)
+        res.status(200).send(selectedBooking)
     })
 )
 
@@ -58,9 +58,9 @@ Router.delete('/:bookingId',
         //find booking by bookingId
         const { bookingId } = req.params
         //delete the selected booking
-        const selectedBooking = await Booking.deleteOne({ _id: bookingId })
+        await Booking.deleteOne({ _id: bookingId })
 
-        res.send('booking deleted')
+        res.status(200).send('booking deleted')
     })
 )
 
