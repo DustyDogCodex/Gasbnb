@@ -14,40 +14,50 @@ function Account() {
     const subpage = location.pathname.split('/')[2]
 
     return (
-        <>
+        <div
+            className="min-h-screen h-full"
+        >
             <NavBar />
             <div
-                className="flex flex-col p-10 items-center justify-center"
+                className="flex flex-col p-10 items-center justify-start bg-stone-200 h-full"
             >
-                <nav
-                    className="w-full flex justify-center my-5 text-2xl gap-2"
+                <div
+                    className="bg-white p-8 rounded-lg"
                 >
-                    <Link 
-                        to={'/account'}
-                        className= {`py-2 px-6 ${subpage == undefined ? 'bg-red text-white rounded-full' : ''}`}
+                    {/* simple nav for navigating subpages on this page */}
+                    <nav
+                        className="flex justify-center my-5 text-2xl gap-2 p-5 border-b-2 border-sky-300"
                     >
-                        <FontAwesomeIcon icon={faUser} /> My Profile
-                    </Link>
+                        {/* account link */}
+                        <Link 
+                            to={'/account'}
+                            className= {`py-2 px-6 ${subpage == undefined ? 'bg-red text-white rounded-full' : ''}`}
+                        >
+                            <FontAwesomeIcon icon={faUser} /> My Profile
+                        </Link>
 
-                    <Link 
-                        to={'/account/trips'}
-                        className={`py-2 px-6 ${subpage == 'trips' ? 'bg-red text-white rounded-full' : ''}`}
-                    >
-                        <FontAwesomeIcon icon={faList} /> My Trips
-                    </Link>
-                
-                    <Link 
-                        to={'/account/rentals'}
-                        className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}
-                    >
-                        <FontAwesomeIcon icon={faPeopleRoof} /> My Rentals
-                    </Link>
-                </nav>
+                        {/* trips */}
+                        <Link 
+                            to={'/account/trips'}
+                            className={`py-2 px-6 ${subpage == 'trips' ? 'bg-red text-white rounded-full' : ''}`}
+                        >
+                            <FontAwesomeIcon icon={faList} /> My Trips
+                        </Link>
 
-                {/* outlet for displaying sub pages */}
-                <Outlet/>
+                        {/* rentals */}
+                        <Link 
+                            to={'/account/rentals'}
+                            className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}
+                        >
+                            <FontAwesomeIcon icon={faPeopleRoof} /> My Rentals
+                        </Link>
+                    </nav>
+
+                    {/* outlet for displaying sub pages */}
+                    <Outlet/>
+                </div>
             </div>
-        </> 
+        </div> 
     )
 }
 

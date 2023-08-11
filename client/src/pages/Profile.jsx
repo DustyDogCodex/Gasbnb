@@ -22,14 +22,18 @@ function Profile() {
     }
 
     return (
-        <>
+        <div
+            className="flex flex-col items-center justify-center"
+        >
             <h1
-                className="text-3xl"
+                className="text-2xl mb-3 font-mont"
             >
                 Account
             </h1>
 
-            <p>
+            <p
+                className="mb-5"
+            >
                 <span 
                     className="text-indigo-500 text-xl font-robotoMono font-semibold">{userInfo?.name}
                 </span>,
@@ -40,17 +44,19 @@ function Profile() {
 
             {/* user account info */}
             <div
-                className="flex flex-col items-center justify-start"
+                className="flex flex-col items-center justify-start p-5"
             >
                 <h2 
-                    className="text-2xl mt-10"
+                    className="text-2xl border-b-2 border-fuchsia-300"
                 >
                     Personal Info
                 </h2>
                 <AccountInfo info={"Legal Name"} value={userInfo.name} />
                 <AccountInfo info={"Email address"} value={userInfo.email} />
-                <AccountInfo info={"Address"} value={'Not provided'} />
+                <AccountInfo info={"Address"} value={userInfo.address} />
             </div>
+
+            {/* logout button */}
             <button
                 type="button"
                 className="bg-red text-white rounded-full text-2xl px-6 py-2 mt-5"
@@ -58,7 +64,7 @@ function Profile() {
             >
                 Log Out
             </button>
-        </>
+        </div>
     )
 }
 

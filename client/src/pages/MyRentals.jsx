@@ -19,12 +19,14 @@ function MyRentals() {
         const getUserListings = async() => {
             axios.get(`http://localhost:5000/listings/userlistings/${userInfo._id}`)
             .then(res => setUserListings([ ...res.data ]))
+            .catch(err => console.log(err))
         }
         getUserListings()
     }, [])
 
     return (
         <div>
+            {/* create a new listing */}
             <div
                 className='flex items-center justify-center my-3'
             >
@@ -35,6 +37,8 @@ function MyRentals() {
                     <FontAwesomeIcon icon={faPlus} /> Add new listing
                 </Link>
             </div>
+
+            {/* display any currently created listings */}
             <div
                 className='mt-3'
             >
@@ -43,11 +47,20 @@ function MyRentals() {
                 >
                     My Listings
                 </h1>
+
+                {/* display userlistings. If no userlistings, display "no listings created" instead */}
                 <div>
-                    {/* display userlistings. If no userlistings, display "no listings created" instead */}
-                    {userListings.length > 0 ? userListings.map(listing => 
-                        <UserListingDisplayBox key={listing._id} userListing={listing}/>    
-                    ) : "No listings created"}
+                    {userListings.length > 0 
+                        ? 
+                        userListings.map(listing => 
+                            <UserListingDisplayBox 
+                                key={listing._id} 
+                                userListing={listing}
+                            />    
+                        ) 
+                        : 
+                        "No listings created"
+                    }
                 </div>
             </div>
         </div>

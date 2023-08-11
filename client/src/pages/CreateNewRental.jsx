@@ -65,6 +65,7 @@ function CreateNewRental() {
                 return [...prev, ...fileNames]
             })
         })
+        .catch(err => console.log(err))
     }
 
     //function for submitting data using react-hook-form
