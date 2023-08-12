@@ -2,6 +2,7 @@ const express = require('express')
 const asyncHandler = require('express-async-handler')
 const imageDownloader = require('image-downloader')
 const multer = require('multer')
+const fs = require('fs')
 const Router = express.Router()
 
 //import listing schema
@@ -147,7 +148,7 @@ Router.put("/edit/:id",
 
         //finding selected listing
         const selectedListing = await Listing.findById({ _id : id })
-        console.log(selectedListing.title)
+       
         //making sure authorised user is sending this request
         if( ownerId == selectedListing.owner ){            
             //updating selected listing with new information
@@ -168,10 +169,38 @@ Router.put("/edit/:id",
             await selectedListing.save()
 
             //SENDING SUCCESS MESSAGE   
-            res.send('Listing was updated')
+            res.status(200).send('Listing was updated')
         } else {
-            res.status(401)
+            res.status(401).send('Silly boy, you did not create this listing!!!')
         }
+    })
+)
+
+//route for deleting a listing
+Router.delete("/delete/:id",
+    asyncHandler(async(req,res) => {
+        //grab listing if from params
+        const { id } = req.params
+
+        //find relevant post
+        const selectedListing = await Listing.findById(id)
+
+        //delete photos associated with post from server
+        if(selectedListing.photos){
+            //delete files from server
+            for(let i = 0; i < selectedListing.photos.length; i++){
+                fs.unlink('uploadedImages/' + selectedListing.photos[i], (err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                })
+            }
+        }
+
+        //delete listing
+        await Listing.findByIdAndDelete(id)
+
+        res.status(204)
     })
 )
 

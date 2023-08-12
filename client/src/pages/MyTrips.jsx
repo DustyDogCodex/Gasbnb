@@ -20,15 +20,13 @@ function MyTrips() {
         userBookings()
     }, [])
 
-    console.log(userTrips)
-
     return (
         <div
             className="flex flex-col items-center justify-center"
         >
             {/* heading */}
             <h1
-                className="text-2xl"
+                className="text-2xl font-mont"
             >
                 My Trips
             </h1>
