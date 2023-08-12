@@ -64,6 +64,7 @@ function App(){
                 element={userInfo ? <ConfirmReservation /> : <Login/>}
             />
 
+            {/* page for info about a booked reservation */}
             <Route
                 path='booking-page/:bookingId'
                 element={<BookingPage />}

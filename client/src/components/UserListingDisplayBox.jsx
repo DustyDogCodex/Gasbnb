@@ -27,9 +27,6 @@ function UserListingDisplayBox({ userListing }) {
     
     return (
         <>
-        <div 
-            className="flex flex-col"
-        >
         <div
             className="border p-3 bg-sky-200 rounded-lg flex items-center justify-between cursor-pointer" 
         >   
@@ -84,7 +81,6 @@ function UserListingDisplayBox({ userListing }) {
                     />
                 </button>
             </div>
-        </div>
         </div>
 
         {/* confirm deleting this listing */}

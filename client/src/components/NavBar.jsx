@@ -19,7 +19,7 @@ function NavBar(){
             className="border-b-2 border-gray-100 flex items-center justify-center"
         >
             <div
-                className="flex items-center justify-between p-1 lg:w-4/5"
+                className="flex items-center justify-between p-1 xl:w-[90%]"
             >
                 {/* logo, always redirects to home */}
                 <Link 

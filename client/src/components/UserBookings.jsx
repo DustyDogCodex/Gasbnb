@@ -25,7 +25,7 @@ function UserBookings({ booking }) {
             >
                 {/* listing title */}
                 <p
-                    className="text-xl border-b-2 border-fuchsia-500 py-2"
+                    className="text-base font-semibold sm:text-xl border-b-2 border-fuchsia-500 py-2"
                 >
                     {listingId.title}
                 </p>
