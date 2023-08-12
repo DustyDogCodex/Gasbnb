@@ -19,7 +19,7 @@ function NavBar(){
             className="border-b-2 border-gray-100 flex items-center justify-center"
         >
             <div
-                className="flex items-center justify-between p-1 xl:w-[90%]"
+                className="flex items-center justify-between p-1 w-full xl:w-[90%]"
             >
                 {/* logo, always redirects to home */}
                 <Link 
@@ -35,10 +35,13 @@ function NavBar(){
                 </Link>
 
                 {/* search bar */}
-                <div className="flex items-center border-2 p-2 rounded-full shadow-md shadow-gray-300">
+                <div 
+                    className="flex items-center border-2 p-2 rounded-full shadow-md shadow-gray-300"
+                >
                     <span className="border-r-2 py-1 px-4">Anywhere</span>
                     <span className="border-r-2 py-1 px-4">Any week</span>
                     <span className="py-1 px-4">Add guests</span>
+
                     <button 
                         className="bg-red h-10 w-10 rounded-full flex items-center justify-center ml-3 py-1 px-4"
                     >
