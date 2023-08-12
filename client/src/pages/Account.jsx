@@ -26,30 +26,30 @@ function Account() {
                 >
                     {/* simple nav for navigating subpages on this page */}
                     <nav
-                        className="flex justify-center my-5 text-2xl gap-2 p-5 border-b-2 border-sky-300"
+                        className="flex justify-center my-5 text-lg sm:text-2xl gap-2 p-5 border-b-2 border-sky-300"
                     >
                         {/* account link */}
                         <Link 
                             to={'/account'}
-                            className= {`py-2 px-6 ${subpage == undefined ? 'bg-red text-white rounded-full' : ''}`}
+                            className= {`py-2 px-4 mx-3 rounded-full ${subpage == undefined ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faUser} /> My Profile
+                            <FontAwesomeIcon icon={faUser} /> <span className="hidden sm:inline">My Profile</span>
                         </Link>
 
                         {/* trips */}
                         <Link 
                             to={'/account/trips'}
-                            className={`py-2 px-6 ${subpage == 'trips' ? 'bg-red text-white rounded-full' : ''}`}
+                            className={`py-2 px-4 mx-3 rounded-full ${subpage == 'trips' ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faList} /> My Trips
+                            <FontAwesomeIcon icon={faList} /> <span className="hidden sm:inline">My Trips</span>
                         </Link>
 
                         {/* rentals */}
                         <Link 
                             to={'/account/rentals'}
-                            className={`py-2 px-6 ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : ''}`}
+                            className={`py-2 px-4 mx-3 rounded-full ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faPeopleRoof} /> My Rentals
+                            <FontAwesomeIcon icon={faPeopleRoof} /> <span className="hidden sm:inline">My Rentals</span>
                         </Link>
                     </nav>
 
