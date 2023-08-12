@@ -5,6 +5,7 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../UserContext"
 import { useParams } from "react-router-dom"
+import pikachu from '../assets/pikachu.gif'
 
 function EditListing() {
 
@@ -26,7 +27,7 @@ function EditListing() {
     const [ cancelForm, setCancelForm ] = useState(false)
     
     //toggle for loading animation while data is fetched from server
-    const [ loading, setLoading ] = useState(false)
+    const [ loading, setLoading ] = useState(true)
 
     //state variable tracking all images currently queued for upload by user. 
     //These have not been submitted yet, but they will be displayed in the photo gallery below the photos section.
@@ -43,6 +44,7 @@ function EditListing() {
             axios.get(`http://localhost:5000/listings/available/${listingId}`)
             .then(res => { 
                 setSelectedListing(res.data)
+                setLoading(false)
             })
             .catch(err => console.log(err))
         }
@@ -71,7 +73,7 @@ function EditListing() {
 
             //add filename to current queue
             setImageQueue(prev => [...prev, fileName])
-            
+
             //set image link input back to empty after successful upload
             setImageLink('')
         })
@@ -131,8 +133,21 @@ function EditListing() {
     <div
         className="flex flex-col items-center border p-3 rounded-lg"
     >
-        {selectedListing 
-            ? 
+        {loading 
+            ?
+            /* loading screen with a running pikachu animation :) */
+            (
+                <div 
+                    className="w-full h-screen flex justify-center items-center bg-slate-300/80 z-10"
+                >
+                    <img 
+                        src={pikachu}
+                        alt="pikachu running loading animation" 
+                        className="w-60 h-60"
+                    />
+                </div>
+            )
+            :
             <>
                 <h1
                     className="text-3xl mb-5"
@@ -142,11 +157,11 @@ function EditListing() {
 
                 {/* form for creating a new listing to rent out */}            
                 <form 
-                    className="w-full lg:w-4/5"
+                    className="w-full"
                     onSubmit={handleSubmit(submitData)}
                 >   
                 <div
-                    className="flex items-center justify-center"
+                    className="flex flex-col sm:flex-row items-center justify-center"
                 >
                     <label className="mr-3">Title</label>
                     <input 
@@ -164,7 +179,7 @@ function EditListing() {
                 )}
                 
                 <div
-                    className="flex items-center justify-center mt-2" 
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2" 
                 >
                     <label className="mr-3">Price</label>
                     <input 
@@ -181,7 +196,7 @@ function EditListing() {
                 )}
             
                 <div
-                    className="flex items-center justify-center mt-2"
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2"
                 >
                     <label className="mr-3">Location</label>
                     <input 
@@ -198,7 +213,7 @@ function EditListing() {
                 )}
 
                 <div
-                    className="flex items-center justify-center mt-2"
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2"
                 >
                     <label className="mr-3">Description</label>
                     <textarea
@@ -217,7 +232,7 @@ function EditListing() {
                 )}
 
                 <div
-                    className="flex items-center justify-center mt-2" 
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2" 
                 >
                     <label className="mr-3">Additional Information</label>
                     <textarea
@@ -236,7 +251,7 @@ function EditListing() {
 
                 {/* amenities checkboxes */}
                 
-                <label className="text-lg mt-2">Amenities</label>
+                <h4 className="text-lg text-center sm:text-left mt-2">Amenities</h4>
                 
                 <div
                     className="flex items-center justify-center flex-wrap border-2 border-sky-300 mt-2 p-3 rounded-lg" 
@@ -318,7 +333,7 @@ function EditListing() {
                 </div>
                 
                 <div
-                    className="flex items-center justify-center mt-3 w-full"
+                    className="flex flex-col sm:flex-row items-center mt-3 w-full"
                 > 
                     <div
                         className="w-1/2 flex items-center justify-evenly"
@@ -328,7 +343,6 @@ function EditListing() {
                             {...register("checkIn")} 
                             className="border-2 border-sky-300 p-2 rounded-lg"
                             type="time"
-                            placeholder="Check in times" 
                         />
                     </div>
 
@@ -339,14 +353,13 @@ function EditListing() {
                         <input 
                             {...register("checkOut")}
                             className="border-2 border-sky-300 p-2 rounded-lg"
-                            type="time"
-                            placeholder="Check out times" 
+                            type="time" 
                         />
                     </div>
                 </div>
 
                 <div
-                    className="flex items-center justify-between mt-2 w-full"
+                    className="flex flex-col sm:flex-row items-center justify-between mt-2 w-full"
                 >
                     <label>Maximum number of guests allowed</label>
                     <input 
@@ -362,9 +375,9 @@ function EditListing() {
                     </div>
                 )}
 
-                <label className="text-lg mt-2">Photos</label>
+                <h4 className="text-lg text-center sm:text-left mt-2">Photos</h4>
                 <p
-                    className="text-sm text-stone-400 my-1"
+                    className="text-sm text-center text-stone-400 my-1"
                 >
                     You can upload photos by using a link to a image hosting website or directly from your device!
                 </p>
@@ -376,7 +389,7 @@ function EditListing() {
                     {/* add images through a url */}
                     <input 
                         name="uploadimages-link"
-                        className="w-4/5 border-2 border-sky-300 p-2 rounded-lg"
+                        className="sm:w-4/5 border-2 border-sky-300 p-2 rounded-lg"
                         type="text"
                         value={imageLink}
                         onChange={e => setImageLink(e.target.value)}
@@ -485,8 +498,8 @@ function EditListing() {
                     </div>
                 </div>
                 )}
-            </>
-            : "Loading data..."}
+            </>    
+        }
     </div>
   )
 }

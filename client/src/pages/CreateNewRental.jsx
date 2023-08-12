@@ -39,9 +39,12 @@ function CreateNewRental() {
             { imageLink }
         )
         .then(res => {
+            //server responds with name of file
             const fileName = res.data
+
             //add filename to current queue
             setImageQueue(prev => [ ...prev, fileName ])
+            
             //set image link input back to empty after successful upload
             setImageLink('')
         })
@@ -67,6 +70,7 @@ function CreateNewRental() {
             //server will respond with file name of uploaded files. 
             //we can add them to our Image queue using the spread operator as we might be receiving multiple files together.
             const fileNames = res.data
+            
             setImageQueue(prev => {
                 return [...prev, ...fileNames]
             })
@@ -104,11 +108,11 @@ function CreateNewRental() {
 
             {/* form for creating a new listing to rent out */}            
             <form 
-                className="w-full lg:w-4/5"
+                className="w-full"
                 onSubmit={handleSubmit(submitData)}
             >   
                 <div
-                    className="flex items-center justify-center"
+                    className="flex flex-col sm:flex-row items-center justify-center"
                 >
                     <label className="mr-3">Title</label>
                     <input 
@@ -126,7 +130,7 @@ function CreateNewRental() {
                 )}
                 
                 <div
-                    className="flex items-center justify-center mt-2" 
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2" 
                 >
                     <label className="mr-3">Price</label>
                     <input 
@@ -143,7 +147,7 @@ function CreateNewRental() {
                 )}
             
                 <div
-                    className="flex items-center justify-center mt-2"
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2"
                 >
                     <label className="mr-3">Location</label>
                     <input 
@@ -160,7 +164,7 @@ function CreateNewRental() {
                 )}
 
                 <div
-                    className="flex items-center justify-center mt-2"
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2"
                 >
                     <label className="mr-3">Description</label>
                     <textarea
@@ -178,7 +182,7 @@ function CreateNewRental() {
                 )}
 
                 <div
-                    className="flex items-center justify-center mt-2" 
+                    className="flex flex-col sm:flex-row items-center justify-center mt-2" 
                 >
                     <label className="mr-3">Additional Information</label>
                     <textarea
@@ -196,7 +200,7 @@ function CreateNewRental() {
 
                 {/* amenities checkboxes */}
                 
-                <label className="text-lg mt-2">Amenities</label>
+                <h4 className="text-lg text-center sm:text-left mt-2">Amenities</h4>
                 
                 <div
                     className="flex items-center justify-center flex-wrap border-2 border-sky-300 mt-2 p-3 rounded-lg" 
@@ -278,7 +282,7 @@ function CreateNewRental() {
                 </div>
                 
                 <div
-                    className="flex items-center justify-center mt-3 w-full"
+                    className="flex flex-col sm:flex-row items-center justify-center mt-3 w-full"
                 > 
                     <div
                         className="w-1/2 flex items-center justify-evenly"
@@ -287,8 +291,7 @@ function CreateNewRental() {
                         <input 
                             {...register("checkIn")} 
                             className="border-2 border-sky-300 p-2 rounded-lg"
-                            type="time"
-                            placeholder="Check in times" 
+                            type="time" 
                         />
                     </div>
 
@@ -300,13 +303,12 @@ function CreateNewRental() {
                             {...register("checkOut")}
                             className="border-2 border-sky-300 p-2 rounded-lg"
                             type="time"
-                            placeholder="Check out times" 
                         />
                     </div>
                 </div>
 
                 <div
-                    className="flex items-center justify-between mt-2 w-full"
+                    className="flex flex-col sm:flex-row items-center justify-between mt-2 w-full"
                 >
                     <label>Maximum number of guests allowed</label>
                     <input 
@@ -322,7 +324,7 @@ function CreateNewRental() {
                     </div>
                 )}
             
-                <label className="text-lg mt-2">Photos</label>
+                <h4 className="text-lg text-center sm:text-left mt-2">Photos</h4>
                 <p
                     className="text-sm text-stone-400 my-1"
                 >
@@ -336,7 +338,7 @@ function CreateNewRental() {
                     {/* add images through a url */}
                     <input 
                         name="uploadimages-link"
-                        className="w-4/5 border-2 border-sky-300 p-2 rounded-lg"
+                        className="sm:w-4/5 border-2 border-sky-300 p-2 rounded-lg"
                         type="text"
                         value={imageLink}
                         onChange={e => setImageLink(e.target.value)}
@@ -423,7 +425,11 @@ function CreateNewRental() {
                 <div
                     className="mt-3 bg-stone-300 p-5 rounded-lg"
                 >
-                    <p className="text-lg">Are you sure you want to cancel your form submission?</p>
+                    <p 
+                        className="text-lg"
+                    >
+                        Are you sure you want to cancel your form submission?
+                    </p>
 
                     <div
                         className="flex items-center justify-evenly mt-2"

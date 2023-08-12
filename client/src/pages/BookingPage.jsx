@@ -54,7 +54,7 @@ function BookingPage() {
                         <img 
                             src={pikachu}
                             alt="pikachu running loading animation" 
-                            className="w-40 h-40"
+                            className="w-60 h-60"
                         />
                     </div>
                 )
