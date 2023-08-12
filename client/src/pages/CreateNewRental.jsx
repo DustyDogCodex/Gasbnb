@@ -322,7 +322,7 @@ function CreateNewRental() {
                     </div>
                 )}
             
-                <label className="text-lg">Photos</label>
+                <label className="text-lg mt-2">Photos</label>
                 <p
                     className="text-sm text-stone-400 my-1"
                 >
@@ -359,12 +359,24 @@ function CreateNewRental() {
                     {/* calling the saved files from our server if they have been uploaded already. if no images have been placed in the queue, a simple "add photos" will be displayed */}
                     {/* server has a static folder with all uploaded images available at route /uploads/file-name.jpg */}
                     {imageQueue.length > 0 && imageQueue.map(photo => 
-                        <img
+                        <div 
                             key={photo}
-                            className="max-w-[300px] max-h-[300px] rounded-xl m-1"
-                            src={`http://localhost:5000/uploads/${photo}`}
-                            alt="uploaded image"
-                        />
+                            className="flex relative"
+                        >
+                            <img
+                                className="max-w-[300px] max-h-[300px] rounded-xl m-1"
+                                src={`http://localhost:5000/uploads/${photo}`}
+                                alt="uploaded image"
+                            />
+
+                            {/* option to delete added photos */}
+                            <div
+                                className="absolute bottom-2 right-2 bg-white p-1 rounded-full flex items-center cursor-pointer"
+                                onClick={() => deletePhoto(photo)}
+                            >
+                                <FontAwesomeIcon icon={faTrash} style={{color: "#f00000", height:"20px", width:"20px"}} />
+                            </div>
+                        </div>
                     )}
 
                     {/* upload images from device */}
