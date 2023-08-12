@@ -1,24 +1,78 @@
-# AirBnB Clone
-
-![seinfeld-vacation-chaos](https://tenor.com/view/airport-seinfeld-funny-run-lets-go-gif-13734995.gif)
+<h1 align='center'>✈️🗺️ Gasbnb 🗺️✈️</h1>
 
 <!-- <a href="https://dustydogcodex.github.io/AirBnB-Clone/"> LIVE DEMO </a> -->
 
-![airplane-traveling-globe](https://tenor.com/view/travel-airplane-globe-map-gif-10671781.gif)
+<p align='center'>
+    A full stack clone of Airbnb built using React, Express, MongoDb and TailwindCSS. Currently in the process of turning this from a one page front-end clone of the AirBnB home page into a full stack MERN AirBnB clone. Check back in later to see the fully functioning app!
+</p>
 
-Building a simple frontend clone of the AirBnB website using React.js.
+<div align='center'>
+    <img src='https://tenor.com/view/airport-seinfeld-funny-run-lets-go-gif-13734995.gif'>
+</div>
 
-Currently in the process of turning this from a one page front-end clone of the AirBnB home page into a full stack MERN AirBnB clone. Check back in later to see the fully functioning app!
+## Table of Contents
 
-Through this project I learnt to:
+- [Features](#features)
+    - [Future Enhancements](#future-enhancements)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+- [Usage](#usage)
+- [Customization](#customization)
+- [License](#license)
 
-1. Create custom react components.
-2. Create and use props with custom components.
-3. Condistionally render to display/hide components based on meeting specific conditions.
+## Features
 
-Future enhancements/features to be added:
+- Integration of React components and Bootstrap styles.
+- Responsive design that adapts to various screen sizes.
+- Content can changed quickly for easy expansion and customisation.
+- Simple project structure that promotes scalability.
+- Pre-configured GitHub pages scripts for easy deployment to GH Pages.
 
-1. Connect to a database to allow displaying activities from an API call.
-2. Setting up a backend for this clone.
-3. Adding more pages that redirect to an activity booking page like the real AirBnB.
-4. Basically turn this into a full stack clone of AirBnB.
+### Future enhancements:
+
+- To be added
+
+## Getting Started
+
+Follow these instructions to get the project up and running on your local machine.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js and npm (Node Package Manager)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/DustyDogCodex/Gasbnb
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd Gasbnb
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+Since this project is scaffolded using Vite, to run the development server and view the project in your browser, run:
+
+```bash
+npm run dev
+```
+
+This will launch the application at `http://localhost:5173`.
+
+## License
+
+This project is built using the ISC license.
