@@ -7,7 +7,7 @@ const Booking = require('../models/Bookings')
 
 Router.post('/new-booking',
     asyncHandler(async(req,res) => {
-        //extract data from req.body.data
+        //extract data from req.body
         const { userId, listingId, checkInDate, checkOutDate, numGuests, totalCost } = req.body
         
         //create new instance of booking
@@ -17,12 +17,12 @@ Router.post('/new-booking',
             checkInDate, 
             checkOutDate, 
             numGuests,
-            totalCost
+            totalCost,
+            expirationDate: new Date(checkOutDate)
         })
 
         //save booking to database
         await newBooking.save()
-        .catch(err => console.log(err))
 
         res.status(200).send('success')
     })
