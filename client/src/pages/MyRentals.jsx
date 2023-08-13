@@ -58,8 +58,8 @@ function MyRentals() {
                                 userListing={listing}
                             />    
                         ) 
-                        : 
-                        "No listings created"
+                        :
+                        <p className='text-center'>No listings created</p> 
                     }
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons"
+import { faWifi, faTv, faPaw, faDoorClosed, faCarSide, faCloudArrowUp, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useContext, useState } from "react"
@@ -48,7 +48,7 @@ function CreateNewRental() {
             //set image link input back to empty after successful upload
             setImageLink('')
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('Error while downloading image from link',err))
     }
 
     //function to handle images loaded through devices
@@ -75,7 +75,12 @@ function CreateNewRental() {
                 return [...prev, ...fileNames]
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('Error while uploading image from device',err))
+    }
+
+    //function for deleting photos from photo gallery
+    function deletePhoto(photo){
+        setImageQueue(imageQueue.filter(pic => pic !== photo))
     }
 
     //function for submitting data using react-hook-form
@@ -172,6 +177,7 @@ function CreateNewRental() {
                         className="w-full border-2 p-2 border-sky-300 rounded-lg"
                         type="text"
                         placeholder="A brief description of your rental" 
+                        rows={5}
                     />
                 </div>
                 {errors.description && (
@@ -190,6 +196,7 @@ function CreateNewRental() {
                         className="w-full border-2 border-sky-300 p-2 rounded-lg"
                         type="text"
                         placeholder="Any additional information for guests. Ex: house rules, check-in procedure etc" 
+                        rows={4}
                     />
                 </div>
                 {errors.extraInfo && (

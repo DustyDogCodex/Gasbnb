@@ -22,7 +22,7 @@ function Account() {
                 className="flex flex-col p-10 items-center justify-start bg-stone-200 min-h-screen h-full"
             >
                 <div
-                    className="bg-white p-8 rounded-lg"
+                    className="bg-white p-8 rounded-lg xl:w-3/5"
                 >
                     {/* simple nav for navigating subpages on this page */}
                     <nav

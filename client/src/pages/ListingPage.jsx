@@ -70,8 +70,11 @@ function ListingPage() {
     /* function to convert checkin/checkout times from 24hr to 12 hr times */
     function MilitaryToStandardTime(time){
         const time_array = time.split(':')
+        
+        //determining if time is am or pm since values are military time/24hr time format
         const amOrPm = time_array[0] >= 12 ? 'PM' : 'AM'
-        return(`${Number(time_array[0]) - 12}:${time_array[1]} ${amOrPm}`)
+
+        return(`${amOrPm == 'PM' ? Number(time_array[0]) - 12 : Number(time_array[0])}:${time_array[1]} ${amOrPm}`)
     }
     
     return (
@@ -83,7 +86,7 @@ function ListingPage() {
                 {selectedListing  
                     ? 
                         <div
-                            className="p-3 bg-white rounded-lg md:w-3/5"
+                            className="p-3 bg-white rounded-lg xl:w-3/5"
                         >
                             <h1
                                 className="text-3xl font-semibold"
@@ -153,6 +156,9 @@ function ListingPage() {
                             className="flex"
                         >
                             <div>
+                                <h2
+                                    className="mt-5 text-lg md:text-2xl font-mont font-bold"
+                                >Description</h2>
                                 <p
                                     className="mt-5"
                                 >
@@ -162,7 +168,7 @@ function ListingPage() {
                                 {/* the additional information is displayed only if additional information is available about the listing */}
                                 {selectedListing.extraInfo && 
                                     <>
-                                        <h3 className="mt-5 font-semibold">
+                                        <h3 className="mt-5 font-semibold text-base md:text-lg">
                                             Additional information:
                                         </h3>
                                         <p
@@ -173,6 +179,7 @@ function ListingPage() {
                                     </>
                                 }
 
+                                {/* checkin and checkout times */}
                                 <p
                                     className="mt-5"
                                 >

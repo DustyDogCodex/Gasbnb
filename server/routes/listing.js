@@ -100,14 +100,20 @@ Router.post("/uploadimage-link",
         const dirnameSplit = __dirname.split('\\')
         dirnameSplit.splice(-2,2)
         const rootDirectory = dirnameSplit.join('/')
-
+        
+        let error
         await imageDownloader.image({
             url: imageLink,
             dest: rootDirectory + '/uploadedImages' + `/${fileName}`
         })
+        .catch(err => error = err)
 
-        //responding with filename so front-end can find the correct image to call and display
-        res.json(fileName)
+        if(error){
+            res.status(500).send(error)
+        } else {
+            //responding with filename so front-end can find the correct image to call and display
+            res.json(fileName)
+        }
     })
 )
 

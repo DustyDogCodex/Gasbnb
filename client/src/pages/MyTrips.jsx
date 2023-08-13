@@ -35,10 +35,10 @@ function MyTrips() {
             <div
                 className="mt-8"
             >
-                {userTrips && userTrips.map((booking, index) => <UserBookings key={index} booking={booking}/>)}
-
-                {/* if user has no current reservations */}
-                {!userTrips && 'No trips currently booked.'}
+                {userTrips.length 
+                    ?  userTrips.map((booking, index) => <UserBookings key={index} booking={booking}/>)
+                    : 'No trips scheduled.'    
+                }   
             </div>
         </div>
     )

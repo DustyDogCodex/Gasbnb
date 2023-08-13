@@ -63,12 +63,20 @@ function NavBar(){
                             style={{color: "#7e8186", height:'20px', marginLeft:'8px'}} 
                         />
                         
-                        {/* show userInfo.avatar if a user is logged in or if user doesn't have a logo/not logged in, display a default user icon */}
-                        { userInfo.avatar || 
-                        <FontAwesomeIcon 
-                            icon={faCircleUser} 
-                            style={{color: "#9e9e9e", height:'30px', marginLeft:'20px'}} 
-                        />}
+                        {/* show user avatar if a user is logged in or if user doesn't have a profile pic/not logged in, display a default user icon */}
+                        {userInfo.avatar 
+                            ?
+                                <img 
+                                    src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
+                                    alt="user profile pic"
+                                    className="w-10 h-10 rounded-full ml-3" 
+                                />
+                            :
+                            <FontAwesomeIcon 
+                                icon={faCircleUser} 
+                                style={{color: "#9e9e9e", height:'30px', marginLeft:'20px'}} 
+                            />
+                        }
 
                         {/* flyout menu displayed when user clicks on the div above */}
                         {showMenu ? <FlyoutMenu userInfo={userInfo} /> : ''}
