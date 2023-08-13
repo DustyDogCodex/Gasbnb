@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { NavBar } from "../components/NavBar"
 
 function Login() {
     //setting up react-hook-form
@@ -41,6 +42,8 @@ function Login() {
     }
 
     return (
+        <>
+        <NavBar />
         <div 
             className="flex items-center justify-center p-10 bg-stone-200 min-h-screen h-full"
         >   
@@ -124,6 +127,7 @@ function Login() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

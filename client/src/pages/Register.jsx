@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import { NavBar } from "../components/NavBar"
 
 function Register() {    
     //setting up react-hhok-form
@@ -53,6 +54,8 @@ function Register() {
     }
 
     return (
+        <>
+        <NavBar/>
         <div 
             className="flex items-center justify-center p-10 bg-stone-200 min-h-screen h-full"
         >   
@@ -158,6 +161,7 @@ function Register() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

@@ -34,7 +34,7 @@ function ReservationWidget({ listing }) {
     
     return (
         <div 
-            className="m-3 border-2 rounded-lg p-3 shadow-xl shadow-slate-300 h-fit"
+            className="mt-3 ml-10 border-2 rounded-lg p-3 shadow-xl shadow-slate-300 h-fit"
         >
             <h1>
                 <strong className="text-2xl font-bold">${listing.price}</strong> night
