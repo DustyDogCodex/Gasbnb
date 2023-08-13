@@ -3,19 +3,22 @@ const session = require('express-session')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const multer = require('multer')
 //all imported routes and files
 const authRoute = require('./routes/auth')
 const listingRoute = require('./routes/listing')
 const bookingRoute = require('./routes/booking')
 const passportConfig = require('./passportConfig')
+const { createAccount } = require('./controller/auth')
 require('dotenv').config()
 
 const app = express()
 
 //SETTING UP CORS
 app.use(cors({ 
-  origin: ['http://localhost:5173','http://localhost:5173/login'],
-  credentials: true }))
+    origin: ['http://localhost:5173','http://localhost:5173/login'],
+    credentials: true 
+}))
 app.use(express.json())
 
 //storing a route to the root directory for the project
@@ -35,24 +38,43 @@ mongoose.connect(process.env.MONGO_URL)
 
 //setting up express sessions and initializing passportjs
 app.use(session({ 
-  secret: process.env.SESSION_SECRET,
-  resave: false, 
-  saveUninitialized: true,
-  cookie: { 
-    sameSite: "lax",
-    secure: "auto",  //for dev environment
-    maxAge: 24 * 60 * 60 * 1000 //one day 
-  }
+    secret: process.env.SESSION_SECRET,
+    resave: false, 
+    saveUninitialized: true,
+    cookie: { 
+        sameSite: "lax",
+        secure: "auto",  //for dev environment
+        maxAge: 24 * 60 * 60 * 1000 //one day 
+    }
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.urlencoded({ extended: false }))
 
 //creating local variables using middleware
 app.use(function(req, res, next) {
-  res.locals.currentUser = req.user;
-  next();
-});
+    res.locals.currentUser = req.user
+    next()
+})
+
+/* ----------- Routes involving image upload with multer ------------------ */
+
+//FILE STORAGE / MULTER setup
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploadedImages/");
+    },
+    filename: function (req, file, cb) {
+        //randomizing file name to avoid filename conflicts
+        cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg")
+    }
+})
+const upload = multer({ storage })
+
+//ROUTES INVOLVING UPLOADING FILES
+app.post("/auth/register", upload.single('image'), createAccount)
+
+/* ------------------------------------------------------------------------ */
 
 const port = process.env.PORT || 5000
 

@@ -8,7 +8,7 @@ function ListingDisplayBox({ listing }) {
     return (
         <Link
             to={`listing-page/${_id}`}
-            className="h-96"
+            className="h-80 xl:h-96"
         >
             <img 
                 className="w-full h-4/5 rounded-lg" 

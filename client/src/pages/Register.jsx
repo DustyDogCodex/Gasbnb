@@ -9,13 +9,31 @@ function Register() {
 
     //if user uses an email that is already in our database, an alert will pop up
     const [ emailAlert, setEmailAlert ] = useState(false)
+    
+    //variable for tracking user file upload
+    const [ image, setImage ] = useState('')
 
     //create post request to submit registration info
+    //data is the data object from react-hook forms
     async function registerUser(data){
+        //form data to append image if user uploads a profile pic
+        const formData = new FormData()
+        formData.append("name", data.name)
+        formData.append("email", data.email)
+        formData.append("password", data.password)
+        
+        //if user has uploaded an image for their profile pic, append that to formdata object
+        if(image){
+            formData.append('image', image)
+        }
+
+        //post request
         axios.post('http://localhost:5000/auth/register', 
+            formData,
             {
-                data
-            }
+                headers: { "Content-Type": "multipart/form-data" }
+            },
+            { withCredentials: true }
         )
         .then(res => {
             if(res.data == 'success'){
@@ -24,7 +42,14 @@ function Register() {
                 setEmailAlert(true)
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => { 
+            console.log(err)
+            //if failed, post invalid email alert and console.log errr status
+            setInvalidEmail(true)
+            setTimeout(() => {
+                setInvalidEmail(false)
+            }, 5000) 
+        })
     }
 
     return (
@@ -56,7 +81,7 @@ function Register() {
                             required: true
                         })}
                         type="text"
-                        placeholder="Enter your name"  
+                        placeholder="Name"  
                         className="border-solid border-2 rounded-md p-2 my-2"
                     />
                     {errors.name && (
@@ -72,7 +97,7 @@ function Register() {
                             pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         })}
                         type="email"
-                        placeholder="Enter your email"  
+                        placeholder="Email"  
                     />
                     {errors.email && (
                         <p className="text-red mt-1">
@@ -87,13 +112,21 @@ function Register() {
                             required: true
                         })}
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="Choose a password"
                     />
                     {errors.password && (
                         <p className="text-red mt-1">
                             {errors.password.type === "required" && "Password is required"}
                         </p>
                     )}
+
+                    <label className="text-slate-400">Profile Picture</label>
+                    <input 
+                        className="border-solid border-2 rounded-md p-2 my-2"
+                        name="image"
+                        type="file"
+                        onChange={e => setImage(e.target.files[0])}
+                    />
 
                     <button 
                         className="bg-red text-white px-8 py-2 rounded-md my-5"
