@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faXmark, faLocationDot, faWifi, faTv, faPaw, faDoorClosed, faCarSide } from "@fortawesome/free-solid-svg-icons"
+import { faXmark, faLocationDot, faWifi, faTv, faPaw, faDoorClosed, faCarSide, faUser } from "@fortawesome/free-solid-svg-icons"
 import ReservationWidget from "../components/ReservationWidget"
 import { NavBar } from '../components/NavBar'
 
@@ -185,11 +185,21 @@ function ListingPage() {
                                         >
                                             Listing hosted by <span className="font-bold font-mont">{selectedListing?.owner?.name}</span>
                                         </p>
-                                        <img 
-                                            src={`http://localhost:5000/uploads/${selectedListing?.owner?.avatar}`} 
-                                            alt={`${selectedListing?.owner?.name}'s profile picture`}
-                                            className="w-14 h-14 rounded-full" 
-                                        />
+
+                                        {/* if profile pic present, display it or otherwise display a default icon */}
+                                        {selectedListing?.owner?.avatar
+                                            ?
+                                            <img 
+                                                src={`http://localhost:5000/uploads/${selectedListing?.owner?.avatar}`} 
+                                                alt={`${selectedListing?.owner?.name}'s profile picture`}
+                                                className="w-14 h-14 rounded-full" 
+                                            />
+                                            :
+                                            <FontAwesomeIcon 
+                                                icon={faUser} 
+                                                style={{color:'skyblue', height:'40px', width:'40px'}}     
+                                            />
+                                        }
                                     </div>
 
                                     <h2
@@ -201,7 +211,7 @@ function ListingPage() {
                                     <p
                                         className="mt-5"
                                     >
-                                        {fixedDescription.map((line,index) => 
+                                        {fixedDescription?.map((line,index) => 
                                             <p key={index}>
                                                 {line}
                                                 <br />
@@ -221,7 +231,7 @@ function ListingPage() {
                                             <p
                                                 className="mt-2"
                                             >
-                                                {fixedAdditionalInfo.map((line,index) => 
+                                                {fixedAdditionalInfo?.map((line,index) => 
                                                     <p key={index}>
                                                         {line}
                                                         <br />
