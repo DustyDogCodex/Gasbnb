@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import { faXmark, faLocationDot, faWifi, faTv, faPaw, faDoorClosed, faCarSide } from "@fortawesome/free-solid-svg-icons"
 import ReservationWidget from "../components/ReservationWidget"
 import { NavBar } from '../components/NavBar'
 
@@ -25,7 +25,7 @@ function ListingPage() {
     }, []) 
 
     //useeffect to get owner's name?
-    console.log(selectedListing)
+    console.log('selected listing', selectedListing)
 
     //state variable to toggle showing more photos or not
     const [ showMore, setShowMore ] = useState(false)
@@ -77,6 +77,22 @@ function ListingPage() {
         return(`${amOrPm == 'PM' ? Number(time_array[0]) - 12 : Number(time_array[0])}:${time_array[1]} ${amOrPm}`)
     }
     
+    //function to load appropriate font awesome icon in amenities/What this place offers section
+    function perksIcon(perk){
+        switch(perk){
+            case 'WiFi':
+                return faWifi
+            case 'TV':
+                return faTv
+            case 'Pets Allowed':
+                return faPaw
+            case 'Private Entrance':
+                return faDoorClosed
+            case 'Free Parking Spot':
+                return faCarSide
+        }
+    }
+
     return (
         <>
             <NavBar />
@@ -148,57 +164,103 @@ function ListingPage() {
                                     >
                                         Show more photos
                                     </div>
-                            </div>  
-                        </div>
-
-                        {/* this div contains listing related information and the reservation widget */}
-                        <div
-                            className="flex"
-                        >
-                            <div>
-                                <h2
-                                    className="mt-5 text-lg md:text-2xl font-mont font-bold"
-                                >Description</h2>
-                                <p
-                                    className="mt-5"
-                                >
-                                    {selectedListing.description}
-                                </p>
-
-                                {/* the additional information is displayed only if additional information is available about the listing */}
-                                {selectedListing.extraInfo && 
-                                    <>
-                                        <h3 className="mt-5 font-semibold text-base md:text-lg">
-                                            Additional information:
-                                        </h3>
-                                        <p
-                                            className="mt-2"
-                                        >
-                                            {selectedListing.extraInfo}
-                                        </p>
-                                    </>
-                                }
-
-                                {/* checkin and checkout times */}
-                                <p
-                                    className="mt-5"
-                                >
-                                    <span className="mr-5 font-bold">Check In:</span> 
-                                    {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} 
-                            
-                                    <br/>
-                            
-                                    <span className="mr-5 font-bold">Check Out:</span> 
-                                    {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
-                                </p>
-
-                                <p className="mt-5">
-                                    <span className="mr-5 font-bold">Maximum number of guests:</span> {selectedListing.maxGuests}
-                                </p>
+                                </div>  
                             </div>
 
-                            <ReservationWidget listing={selectedListing}/>
-                        </div>
+                            {/* this div contains listing related information and the reservation widget */}
+                            <div
+                                className="flex"
+                            >
+                                <div>
+                                    <div
+                                        className="flex items-center justify-between mt-3 pb-3 border-b border-red"
+                                    >
+                                        <p
+                                            className="text-lg md:text-2xl"
+                                        >
+                                            Listing hosted by <span className="font-bold font-mont">{selectedListing?.owner?.name}</span>
+                                        </p>
+                                        <img 
+                                            src={`http://localhost:5000/uploads/${selectedListing?.owner?.avatar}`} 
+                                            alt={`${selectedListing?.owner?.name}'s profile picture`}
+                                            className="w-14 h-14 rounded-full" 
+                                        />
+                                    </div>
+
+                                    <h2
+                                        className="mt-5 text-lg md:text-2xl font-mont font-bold"
+                                    >
+                                        Description
+                                    </h2>
+                                
+                                    <p
+                                        className="mt-5"
+                                    >
+                                        {selectedListing.description}
+                                    </p>
+
+                                    {/* the additional information is displayed only if additional information is available about the listing */}
+                                    {selectedListing.extraInfo && 
+                                        <>
+                                            <h3 
+                                                className="mt-5 font-semibold text-base md:text-lg"
+                                            >
+                                                Additional information:
+                                            </h3>
+
+                                            <p
+                                                className="mt-2"
+                                            >
+                                                {selectedListing.extraInfo}
+                                            </p>
+                                        </>
+                                    }
+                                    
+                                    {/* amenities/What this place offers */}
+                                    <div>
+                                        <h3
+                                            className="mt-5 font-semibold text-base md:text-lg"
+                                        >
+                                            What this place offers
+                                        </h3>
+
+                                        <div
+                                            className="flex flex-wrap p-3 mt-3 rounded-lg border border-fuchsia-300 w-fit"
+                                        >
+                                            {selectedListing?.amenities?.map((perk,index) => 
+                                            <div
+                                                key={index}
+                                                className="flex items-center justify-center border-2 p-2 rounded-md m-2"
+                                            >
+                                                <FontAwesomeIcon 
+                                                    icon={perksIcon(perk)} 
+                                                    style={{ margin:'8px' }}
+                                                /> {perk}
+                                            </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* checkin and checkout times */}
+                                    <p
+                                        className="mt-5"
+                                    >
+                                        <span className="mr-5 font-bold">Check In:</span> 
+                                        {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} 
+                            
+                                        <br/>
+                            
+                                        <span className="mr-5 font-bold">Check Out:</span> 
+                                        {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
+                                    </p>
+
+                                    <p className="mt-5">
+                                        <span className="mr-5 font-bold">Maximum number of guests:</span> {selectedListing.maxGuests}
+                                    </p>
+                                </div>
+
+                                <ReservationWidget listing={selectedListing}/>
+                            </div>
                         </div>
                     : 
                     "Loading"  

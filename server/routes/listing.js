@@ -30,13 +30,17 @@ Router.get('/available',
     }
 ))
 
-//for getting one specific listings to display on listing page
+//for getting one specific listing to display on listing page
 Router.get('/available/:id', 
     asyncHandler(async(req,res) => {
-        //use given id
+        //get id from params
         const { id } = req.params
-        const selectedListing = await Listing.findById({ _id: id })
-        res.json(selectedListing)
+        
+        //find selected listing and populate owner with user name and avatar
+        const selectedListing = await Listing.findById(id).populate('owner', ['name','avatar'])
+        
+        //send listing to client
+        res.status(200).send(selectedListing)
     }
 ))
 
@@ -46,6 +50,7 @@ Router.get('/userlistings/:id',
     asyncHandler(async(req,res) => {
         //grabbing user id from req.params
         const { id } = req.params
+
         //finding all listings associated with user id
         const userlistings = await Listing.find({ owner: id })
 
