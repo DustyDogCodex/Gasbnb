@@ -93,6 +93,11 @@ function ListingPage() {
         }
     }
 
+    //splitting description + additional info at newline tags \n to allow text to be rendered the way it was inputed by the user
+    //this variables will then be mapped and rendered with <br /> tags to display them properly
+    const fixedDescription = selectedListing?.description?.split('\n')
+    const fixedAdditionalInfo = selectedListing?.extraInfo?.split('\n')
+
     return (
         <>
             <NavBar />
@@ -196,7 +201,12 @@ function ListingPage() {
                                     <p
                                         className="mt-5"
                                     >
-                                        {selectedListing.description}
+                                        {fixedDescription.map((line,index) => 
+                                            <p key={index}>
+                                                {line}
+                                                <br />
+                                            </p>
+                                        )}
                                     </p>
 
                                     {/* the additional information is displayed only if additional information is available about the listing */}
@@ -211,7 +221,12 @@ function ListingPage() {
                                             <p
                                                 className="mt-2"
                                             >
-                                                {selectedListing.extraInfo}
+                                                {fixedAdditionalInfo.map((line,index) => 
+                                                    <p key={index}>
+                                                        {line}
+                                                        <br />
+                                                    </p>)
+                                                }
                                             </p>
                                         </>
                                     }
@@ -230,7 +245,7 @@ function ListingPage() {
                                             {selectedListing?.amenities?.map((perk,index) => 
                                             <div
                                                 key={index}
-                                                className="flex items-center justify-center border-2 p-2 rounded-md m-2"
+                                                className="flex items-center justify-center border-2 border-sky-300 p-2 rounded-md m-2"
                                             >
                                                 <FontAwesomeIcon 
                                                     icon={perksIcon(perk)} 
