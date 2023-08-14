@@ -5,15 +5,15 @@ const Router = express.Router()
 //importing user model
 const User = require('../models/Users')
 
-Router.put('/location',
+Router.put('/name',
     asyncHandler(async(req,res) => {
         //extracting userId and location from req.body
-        const { userId, location } = req.body
+        const { userId, name } = req.body
         
         //find relevant user and update their location
         await User.findByIdAndUpdate(
             userId,
-            { location },
+            { name },
             { new: true }
         )
 
@@ -21,15 +21,15 @@ Router.put('/location',
     })
 )
 
-Router.put('/status',
+Router.put('/email',
     asyncHandler(async(req,res) => {
         //extracting userId and location from req.body
-        const { userId, status } = req.body
+        const { userId, email } = req.body
         
         //find relevant user and update their location
         await User.findByIdAndUpdate(
             userId,
-            { status },
+            { email },
             { new: true }
         )
 

@@ -8,6 +8,7 @@ const multer = require('multer')
 const authRoute = require('./routes/auth')
 const listingRoute = require('./routes/listing')
 const bookingRoute = require('./routes/booking')
+const settingsRoute = require('./routes/settings')
 const passportConfig = require('./passportConfig')
 const { createAccount } = require('./controller/auth')
 const updateProfilePic = require('./controller/settings')
@@ -86,6 +87,8 @@ app.use('/auth', authRoute)
 app.use('/listings', listingRoute)
 //routes for creating/updating/deleting listings
 app.use('/bookings', bookingRoute)
+//routes for creating/updating/deleting listings
+app.use('/settings', settingsRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

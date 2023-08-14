@@ -24,13 +24,12 @@ const updateProfilePic = asyncHandler(
         //update user profile pic
         await User.findByIdAndUpdate(
             userId,
-            { profilePic: updatedImagePath },
+            { avatar: updatedImagePath },
             { new: true }
         )
 
         res.status(200).send('updated')
     }
 )
-
 
 module.exports = updateProfilePic

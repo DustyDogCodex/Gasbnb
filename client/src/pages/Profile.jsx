@@ -3,14 +3,15 @@ import { UserContext } from "../UserContext"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons"
+import ErrorMessages from '../components/ErrorMessages'
+import { useForm } from "react-hook-form"
 
 function Profile() {
      //getting userInfo from context
     const { userInfo } = useContext(UserContext)
 
     //variables to track user input
-    const [ name, setName ] = useState('')
-    const [ email, setEmail ] = useState('')
+    const { register, handleSubmit, formState: { errors }} = useForm()
     const [ profilePic, setProfilePic ] = useState('')
 
     //toggle inputs to enter new user info
@@ -19,9 +20,9 @@ function Profile() {
     const [ editPicture, setEditPicture ] = useState(false)
 
     //api calls for updating user settings
-    async function updateName(){
+    async function updateName(data){
         axios.put(`http://localhost:5000/settings/name`,
-            { userId: userInfo._id, name },
+            { userId: userInfo._id, name: data.name },
             { withCredentials: true }
         )
         .then(res => 
@@ -34,9 +35,9 @@ function Profile() {
         .catch(err => console.log(err))
     }
 
-    async function updateEmail(){
+    async function updateEmail(data){
         axios.put(`http://localhost:5000/settings/email`,
-            { userId: userInfo._id, email },
+            { userId: userInfo._id, email: data.email },
             { withCredentials: true }
         )
         .then(res => 
@@ -133,22 +134,28 @@ function Profile() {
                 <div
                     className={`${editName ? '' : 'hidden'}`}
                 >
-                    <input 
-                        type="text"
-                        value={name} 
-                        onChange={(e) => setName(e.target.value)}
-                        className="rounded-lg p-1 border border-sky-300 ml-3"
-                    />
-                    <FontAwesomeIcon 
-                        icon={faCheck} 
-                        style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}} 
-                        onClick={updateName}
-                    />
-                    <FontAwesomeIcon 
-                        icon={faXmark} 
-                        style={{color: "#ff0000", cursor:'pointer', marginLeft:'5px'}}
-                        onClick={() => setEditName(!editName)} 
-                    />
+                    <div>
+                        <input 
+                            type="text"
+                            {...register('name', { required: true })}
+                            className="rounded-lg p-1 border border-sky-300 ml-3"
+                        />
+                    
+                        <FontAwesomeIcon 
+                            icon={faCheck} 
+                            style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}} 
+                            onClick={handleSubmit(updateName)}
+                        />
+                        <FontAwesomeIcon 
+                            icon={faXmark} 
+                            style={{color: "#ff0000", cursor:'pointer', marginLeft:'5px'}}
+                            onClick={() => setEditName(!editName)} 
+                        />
+                    </div>
+                    {/* error messages */}
+                    {errors.name && (
+                        <ErrorMessages message={'Name is required'} />
+                    )}
                 </div>
             </div>
 
@@ -175,22 +182,30 @@ function Profile() {
                 <div
                     className={`${editEmail ? '' : 'hidden'}`}
                 >
-                    <input 
-                        type="text"
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="rounded-lg p-1 border border-sky-300"
-                    />
-                    <FontAwesomeIcon 
-                        icon={faCheck} 
-                        style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}}
-                        onClick={updateEmail} 
-                    />
-                    <FontAwesomeIcon 
-                        icon={faXmark} 
-                        style={{color: "#ff0000", cursor:'pointer', marginLeft:'5px'}}
-                        onClick={() => setEditEmail(!editEmail)} 
-                    />
+                    <div>
+                        <input 
+                            type="text"
+                            {...register('email', { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
+                            className="rounded-lg p-1 border border-sky-300"
+                        />
+                        <FontAwesomeIcon 
+                            icon={faCheck} 
+                            style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}}
+                            onClick={updateEmail} 
+                        />
+                        <FontAwesomeIcon 
+                            icon={faXmark} 
+                            style={{color: "#ff0000", cursor:'pointer', marginLeft:'5px'}}
+                            onClick={() => setEditEmail(!editEmail)} 
+                        />
+                    </div>
+                    {/* error messages */}
+                    {errors.email && (
+                        <div>
+                            {errors.email.type == 'required' && <ErrorMessages message={'Email is required'} />}
+                            {errors.email.type == 'pattern' && <ErrorMessages message={'Please enter a valid email'} />}
+                        </div>
+                    )}
                 </div>
             </div>
 
