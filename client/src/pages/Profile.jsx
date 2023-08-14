@@ -51,9 +51,10 @@ function Profile() {
                 >
                     Personal Info
                 </h2>
+                
                 <AccountInfo info={"Legal Name"} value={userInfo.name} />
                 <AccountInfo info={"Email address"} value={userInfo.email} />
-                <AccountInfo info={"Address"} value={userInfo.address} />
+                <AccountInfo info={"Profile Picture"} value={userInfo.avatar} />
             </div>
 
             {/* logout button */}
