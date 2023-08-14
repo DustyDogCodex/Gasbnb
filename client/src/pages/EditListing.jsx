@@ -138,7 +138,7 @@ function EditListing() {
             /* loading screen with a running pikachu animation :) */
             (
                 <div 
-                    className="w-full h-screen flex justify-center items-center bg-slate-300/80 z-10"
+                    className="w-full h-screen flex justify-center items-center bg-slate-300/80"
                 >
                     <img 
                         src={pikachu}

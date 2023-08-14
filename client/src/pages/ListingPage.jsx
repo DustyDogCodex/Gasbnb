@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark, faLocationDot, faWifi, faTv, faPaw, faDoorClosed, faCarSide, faUser } from "@fortawesome/free-solid-svg-icons"
 import ReservationWidget from "../components/ReservationWidget"
 import { NavBar } from '../components/NavBar'
+import pikachu from '../assets/pikachu.gif'
 
 /* page with detailed and complete information on the user selected listing. User's can access this page by clicking on a listig either on the homepage or in their accounts  */
 function ListingPage() {
@@ -14,20 +15,23 @@ function ListingPage() {
     //state variable to store retrieved listing info
     const [ selectedListing, setSelectedListing ] = useState({})
 
+    //toggle for loading animation while data is fetched from server
+    const [ loading, setLoading ] = useState(true)
+
     //fetching listing data from api
     useEffect(() => {
         const getSelectedListing = async() => {
             axios.get(`http://localhost:5000/listings/available/${listingId}`)
-            .then(res => setSelectedListing(res.data))
+            .then(res => { 
+                setSelectedListing(res.data)
+                setLoading(false)
+            })
             .catch(err => console.log(err))
         }
         getSelectedListing()
     }, []) 
 
-    //useeffect to get owner's name?
-    console.log('selected listing', selectedListing)
-
-    //state variable to toggle showing more photos or not
+    //state variable to toggle showing more photos
     const [ showMore, setShowMore ] = useState(false)
     
     //show more photos modal
@@ -104,8 +108,22 @@ function ListingPage() {
             <div
                 className="flex items-center justify-center p-5 bg-slate-200"
             >
-                {selectedListing  
+                {loading 
                     ? 
+                    /* loading screen with a running pikachu animation :) */
+                    (
+                        <div 
+                            className="w-full h-screen flex justify-center items-center"
+                        >
+                            <img 
+                                src={pikachu}
+                                alt="pikachu running loading animation" 
+                                className="w-60 h-60"
+                            />
+                        </div>
+                    )
+                    :
+                    (
                         <div
                             className="p-3 bg-white rounded-lg xl:w-3/5"
                         >
@@ -287,8 +305,7 @@ function ListingPage() {
                                 <ReservationWidget listing={selectedListing}/>
                             </div>
                         </div>
-                    : 
-                    "Loading"  
+                    ) 
                 }
             </div>
         </>
