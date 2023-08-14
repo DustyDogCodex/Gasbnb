@@ -10,6 +10,7 @@ const listingRoute = require('./routes/listing')
 const bookingRoute = require('./routes/booking')
 const passportConfig = require('./passportConfig')
 const { createAccount } = require('./controller/auth')
+const updateProfilePic = require('./controller/settings')
 require('dotenv').config()
 
 const app = express()
@@ -73,6 +74,7 @@ const upload = multer({ storage })
 
 //ROUTES INVOLVING UPLOADING FILES
 app.post("/auth/register", upload.single('image'), createAccount)
+app.put("/settings/profilepic", upload.single('image'), updateProfilePic)
 
 /* ------------------------------------------------------------------------ */
 
