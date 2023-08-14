@@ -9,16 +9,22 @@ const updateProfilePic = asyncHandler(
         const { userId } = req.body
 
         //find relevant user 
-        const user = User.findById(userId)
-
-        let updatedImage = req.file ? req.file.filename : ''
+        const user = await User.findById(userId)
 
         //unlink files in the future
+        let updatedImagePath = req.file ? req.file.filename : ''
+        
+        //delete previous user profile pic from server
+        fs.unlink('uploadedImages/' + user.avatar, (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
 
         //update user profile pic
         await User.findByIdAndUpdate(
             userId,
-            { profilePic: updatedImage },
+            { profilePic: updatedImagePath },
             { new: true }
         )
 
