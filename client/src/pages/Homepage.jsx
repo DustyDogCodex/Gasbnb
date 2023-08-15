@@ -36,7 +36,7 @@ function Homepage() {
                     /* loading screen with a running pikachu animation :) */
                     (
                         <div 
-                            className="w-full h-screen flex justify-center items-center"
+                            className="w-full flex justify-center items-center"
                         >
                             <img 
                                 src={pikachu}

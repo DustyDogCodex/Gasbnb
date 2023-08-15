@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faL, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../UserContext'
 import axios from 'axios'
 import UserListingDisplayBox from '../components/UserListingDisplayBox'
+import pikachu from '../assets/pikachu.gif'
 
 function MyRentals() {
     //fetching userInfo from context
@@ -12,13 +13,19 @@ function MyRentals() {
 
     //function to store retrieved user created listings from our backend
     const [ userListings, setUserListings ] = useState([])
+
+    //toggle for loading animation while data is fetched from server
+    const [ loading, setLoading ] = useState(true)
   
     //function to fetch listings created by the user
     //sending user id as params to locate listings created by user
     useEffect(() => {
         const getUserListings = async() => {
             axios.get(`http://localhost:5000/listings/userlistings/${userInfo._id}`)
-            .then(res => setUserListings([ ...res.data ]))
+            .then(res => { 
+                setUserListings([ ...res.data ])
+                setLoading(false)
+            })
             .catch(err => console.log(err))
         }
         getUserListings()
@@ -48,20 +55,38 @@ function MyRentals() {
                     My Listings
                 </h1>
 
-                {/* display userlistings. If no userlistings, display "no listings created" instead */}
-                <div>
-                    {userListings.length > 0 
-                        ? 
-                        userListings.map(listing => 
-                            <UserListingDisplayBox 
-                                key={listing._id} 
-                                userListing={listing}
-                            />    
-                        ) 
-                        :
-                        <p className='text-center'>No listings created</p> 
-                    }
-                </div>
+                {loading
+                    ?
+                    /* loading animation */
+                    (
+                        <div 
+                            className="w-full flex justify-center items-center"
+                        >
+                            <img 
+                                src={pikachu}
+                                alt="pikachu running loading animation" 
+                                className="w-60 h-60"
+                            />
+                        </div>
+                    )
+                    :
+                    (
+                        /* display userlistings. If no userlistings, display "no listings created" instead */
+                        <div>
+                            {userListings.length > 0 
+                                ? 
+                                userListings.map(listing => 
+                                    <UserListingDisplayBox 
+                                        key={listing._id} 
+                                        userListing={listing}
+                                    />    
+                                ) 
+                                :
+                                <p className='text-center'>No listings created</p> 
+                            }
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

@@ -25,14 +25,14 @@ function UserBookings({ booking }) {
             >
                 {/* listing title */}
                 <p
-                    className="text-base font-semibold sm:text-xl border-b-2 border-fuchsia-500 py-2"
+                    className="text-sm font-semibold sm:text-xl border-b-2 border-fuchsia-500 py-2"
                 >
                     {listingId.title}
                 </p>
 
                 {/* dates for reservation */}
                 <p
-                    className="mt-2 flex items-center"
+                    className="mt-2 flex items-center text-sm sm:text-base"
                 >
                     <FontAwesomeIcon 
                         icon={faCalendar} 
@@ -43,7 +43,7 @@ function UserBookings({ booking }) {
 
                 {/* num of guests on reservation */}
                 <p
-                    className="mt-2 flex items-center"
+                    className="mt-2 flex items-center text-sm sm:text-base"
                 >
                     <FontAwesomeIcon 
                         icon={faPeopleRoof} 

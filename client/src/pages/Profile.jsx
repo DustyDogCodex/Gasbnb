@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { UserContext } from "../UserContext"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPenToSquare, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faPenToSquare, faCheck, faXmark, faUser } from "@fortawesome/free-solid-svg-icons"
 import ErrorMessages from '../components/ErrorMessages'
 import { useForm } from "react-hook-form"
 
@@ -219,11 +219,24 @@ function Profile() {
                         <div
                             className={`${editPicture ? 'hidden' : ''} flex items-center justify-around`}
                         >
-                            <img 
-                                src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
-                                alt="user profile picture" 
-                                className="w-48 h-48 rounded-lg ml-3 sm:ml-10"
-                            />
+                            {/* if user has an avatar, its displayed, otherwise a default icon is displayed */}
+                            {userInfo.avatar
+                                ?
+                                (
+                                    <img 
+                                        src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
+                                        alt="user profile picture" 
+                                        className="w-48 h-48 rounded-lg ml-3 sm:ml-10"
+                                    />
+                                )
+                                :
+                                (
+                                    <FontAwesomeIcon 
+                                        icon={faUser} 
+                                        style={{color: "grey", height:'50px', width:'50px'}}
+                                    />
+                                )
+                            }
                             <FontAwesomeIcon 
                                 icon={faPenToSquare} 
                                 style={{color: "indigo", cursor:'pointer', marginLeft:'10px'}}

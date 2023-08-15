@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faList, faPeopleRoof } from "@fortawesome/free-solid-svg-icons"
 import { NavBar } from "../components/NavBar"
+import useMediaQuery from '../hooks/useMediaQuery'
 
 function Account() {
 
@@ -13,11 +14,15 @@ function Account() {
     const location = useLocation()
     const subpage = location.pathname.split('/')[2]
 
+    //variable to determine if screen size is above xs/mobile screens
+    const aboveSmallScreens = useMediaQuery('(min-width: 780px)')
+
     return (
         <div
             className="min-h-screen h-full"
         >
-            <NavBar />
+            {/* only display navbar on top for screens above 780px. Below this breakpoint the navbar is on the bottom */}
+            {aboveSmallScreens && <NavBar />}
             <div
                 className="flex flex-col p-10 items-center justify-start bg-stone-200 min-h-screen h-full"
             >

@@ -27,7 +27,7 @@ function App(){
     const { userInfo } = useContext(UserContext)
 
     //variable to determine if screen size is above xs/mobile screens
-    const aboveXSmallScreens = useMediaQuery('(min-width: 780px)')
+    const aboveSmallScreens = useMediaQuery('(min-width: 780px)')
 
     return (
     <>
@@ -80,7 +80,7 @@ function App(){
         </Routes>
 
         {/* nav bar on bottom of screen for mobile/xs screens */}
-        {!aboveXSmallScreens &&
+        {!aboveSmallScreens &&
             (
             <div
                 className="sticky bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
@@ -120,9 +120,9 @@ function App(){
             </div>
         )}
         </BrowserRouter>
-        
+
         {/* footer will be displayed when above xs/mobile screens in place of bottom nav bar */}
-        {aboveXSmallScreens && (<Footer />)}
+        {aboveSmallScreens && (<Footer />)}
     </>
   )
 }
