@@ -39,7 +39,7 @@ function ListingPage() {
     if(showMore){
         return (
             <div
-                className="absolute bg-white flex flex-col items-center justify-center w-screen"
+                className="absolute bg-white flex flex-col items-center justify-center w-screen p-3"
             >
                 <div>
                     <div
@@ -106,7 +106,7 @@ function ListingPage() {
         <>
             <NavBar />
             <div
-                className="flex items-center justify-center p-5 bg-slate-200"
+                className="flex items-center justify-center p-0 sm:p-5 bg-slate-200"
             >
                 {loading 
                     ? 
@@ -149,7 +149,7 @@ function ListingPage() {
 
                             {/* photo gallery */}
                             <div
-                                className="grid grid-cols-[2fr_1fr] gap-2 my-5"
+                                className="flex sm:grid sm:grid-cols-[2fr_1fr] sm:gap-2 my-5"
                             >
                     
                                 {/* main image on left hand side */}
@@ -157,7 +157,7 @@ function ListingPage() {
                                     <img 
                                         src={`http://localhost:5000/uploads/${selectedListing.photos[0]}`} 
                                         alt="main photo for listing" 
-                                        className="aspect-square object-cover rounded-lg mr-3"
+                                        className="aspect-square object-cover rounded-lg mr-3 w-full"
                                     />
                                 )}
                     
@@ -169,20 +169,20 @@ function ListingPage() {
                                         <img 
                                             src={`http://localhost:5000/uploads/${selectedListing.photos[1]}`} 
                                             alt="second photo for listing" 
-                                            className="aspect-square object-cover rounded-lg"
+                                            className="aspect-square object-cover rounded-lg hidden sm:block"
                                         />
                                     )}
                                     {selectedListing?.photos?.[2] && (
                                     <img 
                                         src={`http://localhost:5000/uploads/${selectedListing.photos[2]}`} 
                                         alt="listing photo" 
-                                        className="aspect-square object-cover rounded-lg"
+                                        className="aspect-square object-cover rounded-lg hidden sm:block"
                                     />
                                     )}
 
                                     {/* toggle show more modal for viewing all photos for listing */}
                                     <div
-                                        className="absolute bottom-5 right-2 bg-slate-300/70 p-1 rounded-md cursor-pointer hover:bg-white"
+                                        className="z-5 absolute bottom-5 right-5 sm:bottom-5 sm:right-2 bg-slate-300/70 p-1 rounded-md cursor-pointer hover:bg-white"
                                         onClick={() => setShowMore(true)}
                                     >
                                         Show more photos
@@ -192,7 +192,7 @@ function ListingPage() {
 
                             {/* this div contains listing related information and the reservation widget */}
                             <div
-                                className="flex"
+                                className="flex flex-col justify-center"
                             >
                                 <div>
                                     <div
@@ -268,7 +268,7 @@ function ListingPage() {
                                         </h3>
 
                                         <div
-                                            className="flex flex-wrap p-3 mt-3 rounded-lg border border-fuchsia-300 w-fit"
+                                            className="flex flex-wrap p-3 mt-3 rounded-lg border border-fuchsia-300 w-full sm:w-fit"
                                         >
                                             {selectedListing?.amenities?.map((perk,index) => 
                                             <div

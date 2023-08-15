@@ -16,7 +16,7 @@ function NavBar(){
 
     return(
         <header
-            className="border-b-2 border-gray-100 flex items-center justify-center"
+            className="sticky top-0 border-b-2 border-gray-100 flex items-center justify-center bg-white z-10 py-2"
         >
             <div
                 className="flex items-center justify-between p-1 w-full xl:w-[90%]"
@@ -24,7 +24,7 @@ function NavBar(){
                 {/* logo, always redirects to home */}
                 <Link 
                     to={'/'}
-                    className="flex items-center p-5"
+                    className="hidden sm:flex items-center px-5"
                 >
                     <FontAwesomeIcon 
                         icon={faAirbnb} 
@@ -36,10 +36,10 @@ function NavBar(){
 
                 {/* section in center that includes the search bar + anywhere/any week/ add guests */}
                 <div 
-                    className="flex items-center border-2 p-2 rounded-full text-sm font-semibold font-mont hadow-md shadow-gray-300"
+                    className="flex items-center justify-between border-2 p-2 rounded-full text-sm font-semibold shadow-md shadow-gray-300 w-full sm:w-fit"
                 >
-                    <span className="border-r-2 py-1 px-4 cursor-pointer">Anywhere</span>
-                    <span className="border-r-2 py-1 px-4 cursor-pointer">Any week</span>
+                    <span className="hidden sm:block border-r-2 py-1 px-4 cursor-pointer">Anywhere</span>
+                    <span className="hidden sm:block border-r-2 py-1 px-4 cursor-pointer">Any week</span>
                     <span className="py-1 px-4 cursor-pointer">Add guests</span>
 
                     <button 
@@ -47,13 +47,13 @@ function NavBar(){
                     >
                         <FontAwesomeIcon 
                             icon={faMagnifyingGlass} 
-                            style={{color: "#fffafa",}} 
+                            style={{color: "#fffafa"}} 
                         />
                     </button>
                 </div>
 
                 {/* menu and account section */}
-                <div className="flex items-center p-5">
+                <div className="hidden sm:flex items-center px-5">
                     <div 
                         className="flex items-center border-2 p-2 rounded-full relative cursor-pointer"
                         onClick={() => setShowMenu(!showMenu)}    
