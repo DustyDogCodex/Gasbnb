@@ -18,17 +18,18 @@ import useMediaQuery from "./hooks/useMediaQuery"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
 import { faPlaneDeparture, faUser } from '@fortawesome/free-solid-svg-icons'
+import Footer from './components/Footer'
 
 function App(){
-  //using context to check for logged in user
-  //depending on whether a user is logged in, they will be directed away from certain pages. 
-  //For example, if the user is not logged in and they click the User icon, they will be directed to login first before /account.
-  const { userInfo } = useContext(UserContext)
+    //using context to check for logged in user
+    //depending on whether a user is logged in, they will be directed away from certain pages. 
+    //For example, if the user is not logged in and they click the User icon, they will be directed to login first before /account.
+    const { userInfo } = useContext(UserContext)
 
-  //variable to determine if screen size is above xs/mobile screens
-    const aboveXSmallScreens = useMediaQuery('(min-width: 480px)')
+    //variable to determine if screen size is above xs/mobile screens
+    const aboveXSmallScreens = useMediaQuery('(min-width: 780px)')
 
-  return (
+    return (
     <>
         <BrowserRouter>
         <Routes>
@@ -79,9 +80,10 @@ function App(){
         </Routes>
 
         {/* nav bar on bottom of screen for mobile/xs screens */}
-        {!aboveXSmallScreens && (
+        {!aboveXSmallScreens &&
+            (
             <div
-                className="sticky bottom-0 border-t w-full bg-white py-3 mt-2 flex items-center justify-evenly"
+                className="sticky bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
             >   
                 <Link
                     to={'/account/trips'}
@@ -118,6 +120,9 @@ function App(){
             </div>
         )}
         </BrowserRouter>
+        
+        {/* footer will be displayed when above xs/mobile screens in place of bottom nav bar */}
+        {aboveXSmallScreens && (<Footer />)}
     </>
   )
 }

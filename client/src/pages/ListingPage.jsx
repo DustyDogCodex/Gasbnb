@@ -192,7 +192,7 @@ function ListingPage() {
 
                             {/* this div contains listing related information and the reservation widget */}
                             <div
-                                className="flex flex-col justify-center"
+                                className="flex flex-col sm:flex-row justify-center"
                             >
                                 <div>
                                     <div
@@ -230,10 +230,10 @@ function ListingPage() {
                                         className="mt-5 pb-3 border-b border-red"
                                     >
                                         {fixedDescription?.map((line,index) => 
-                                            <p key={index}>
+                                            <span key={index}>
                                                 {line}
                                                 <br />
-                                            </p>
+                                            </span>
                                         )}
                                     </p>
 
@@ -250,10 +250,10 @@ function ListingPage() {
                                                 className="mt-2 pb-3 border-b border-red"
                                             >
                                                 {fixedAdditionalInfo?.map((line,index) => 
-                                                    <p key={index}>
+                                                    <span key={index}>
                                                         {line}
                                                         <br />
-                                                    </p>)
+                                                    </span>)
                                                 }
                                             </p>
                                         </>

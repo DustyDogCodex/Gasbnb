@@ -1,5 +1,4 @@
 /* this is for listings created by a user that will be displayed in the user's account page, under the My rentals subpage. For the square boxes displayed on the homepage, go to ListingDisplayBox.jsx */
-
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons"
@@ -28,12 +27,12 @@ function UserListingDisplayBox({ userListing }) {
     return (
         <>
         <div
-            className="border p-3 bg-sky-200 rounded-lg flex items-center justify-between cursor-pointer" 
+            className="border p-3 bg-sky-200 rounded-lg flex flex-col sm:flex-row items-center justify-between cursor-pointer" 
         >   
             {/* link to listing page for selected listing */}
             <Link
                 to={`/listing-page/${_id}`}
-                className="flex items-center"
+                className="flex flex-col sm:flex-row items-center"
             >
                 <img 
                     className="w-28 h-28 rounded-lg mr-4"
@@ -42,14 +41,16 @@ function UserListingDisplayBox({ userListing }) {
                 />
 
                 {/* title and location */}
-                <div>
+                <div
+                    className="mt-3 sm:mt-0"
+                >
                     <h4
-                        className="font-semibold"
+                        className="font-semibold text-center sm:text-left"
                     >
                         {title}
                     </h4>
                     <p 
-                        className="text-sm"
+                        className="text-sm text-center sm:text-left"
                     >
                         {location}
                     </p>
@@ -58,7 +59,7 @@ function UserListingDisplayBox({ userListing }) {
 
             {/* edit or delete this post */}
             <div
-                className="flex flex-col gap-2 m-2"
+                className="flex flex-row sm:flex-col gap-2 m-2"
             >
                 {/* edit listing */}
                 <Link
