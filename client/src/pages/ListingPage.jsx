@@ -227,7 +227,7 @@ function ListingPage() {
                                     </h2>
                                 
                                     <p
-                                        className="mt-5"
+                                        className="mt-5 pb-3 border-b border-red"
                                     >
                                         {fixedDescription?.map((line,index) => 
                                             <p key={index}>
@@ -247,7 +247,7 @@ function ListingPage() {
                                             </h3>
 
                                             <p
-                                                className="mt-2"
+                                                className="mt-2 pb-3 border-b border-red"
                                             >
                                                 {fixedAdditionalInfo?.map((line,index) => 
                                                     <p key={index}>
@@ -260,7 +260,9 @@ function ListingPage() {
                                     }
                                     
                                     {/* amenities/What this place offers */}
-                                    <div>
+                                    <div
+                                        className="pb-5 border-b border-red"
+                                    >
                                         <h3
                                             className="mt-5 font-semibold text-base md:text-lg"
                                         >
@@ -286,7 +288,7 @@ function ListingPage() {
 
                                     {/* checkin and checkout times */}
                                     <p
-                                        className="mt-5"
+                                        className="mt-5 pb-3 border-b border-red"
                                     >
                                         <span className="mr-5 font-bold">Check In:</span> 
                                         {selectedListing.checkIn ? MilitaryToStandardTime(selectedListing.checkIn) : 'None'} 
@@ -297,7 +299,7 @@ function ListingPage() {
                                         {selectedListing.checkOut ? MilitaryToStandardTime(selectedListing.checkOut) : 'None'}
                                     </p>
 
-                                    <p className="mt-5">
+                                    <p className="mt-5 pb-3 border-b border-red">
                                         <span className="mr-5 font-bold">Maximum number of guests:</span> {selectedListing.maxGuests}
                                     </p>
                                 </div>

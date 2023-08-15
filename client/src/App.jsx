@@ -1,7 +1,7 @@
 import './App.css'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import { UserContext } from './UserContext'
 import { useContext } from 'react'
 import Homepage from './pages/Homepage'
@@ -14,12 +14,19 @@ import { ListingPage } from './pages/ListingPage'
 import EditListing from './pages/EditListing'
 import ConfirmReservation from './pages/ConfirmReservation'
 import BookingPage from './pages/BookingPage'
+import useMediaQuery from "./hooks/useMediaQuery"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAirbnb } from '@fortawesome/free-brands-svg-icons'
+import { faPlaneDeparture, faUser } from '@fortawesome/free-solid-svg-icons'
 
 function App(){
   //using context to check for logged in user
   //depending on whether a user is logged in, they will be directed away from certain pages. 
   //For example, if the user is not logged in and they click the User icon, they will be directed to login first before /account.
   const { userInfo } = useContext(UserContext)
+
+  //variable to determine if screen size is above xs/mobile screens
+    const aboveXSmallScreens = useMediaQuery('(min-width: 480px)')
 
   return (
     <>
@@ -70,6 +77,46 @@ function App(){
                 element={<BookingPage />}
             />
         </Routes>
+
+        {/* nav bar on bottom of screen for mobile/xs screens */}
+        {!aboveXSmallScreens && (
+            <div
+                className="sticky bottom-0 border-t w-full bg-white py-3 mt-2 flex items-center justify-evenly"
+            >   
+                <Link
+                    to={'/account/trips'}
+                    className='flex flex-col items-center justify-center'
+                >
+                    <FontAwesomeIcon 
+                        icon={faPlaneDeparture} 
+                        style={{ color:'skyblue', height:'25px', width:'25px' }}
+                    />
+                    <span className='text-xs'>Trips</span>
+                </Link>
+
+                <Link
+                    to={'/'}
+                    className='flex flex-col items-center justify-center'
+                >
+                    <FontAwesomeIcon 
+                        icon={faAirbnb} 
+                        style={{ color:'skyblue', height:'25px', width:'25px' }}
+                    />
+                    <span className='text-xs'>Home</span>
+                </Link>
+
+                <Link
+                    to={'/account'}
+                    className='flex flex-col items-center justify-center'
+                >
+                    <FontAwesomeIcon 
+                        icon={faUser} 
+                        style={{ color:'skyblue', height:'25px', width:'25px' }}
+                    />
+                    <span className='text-xs'>Profile</span>
+                </Link>
+            </div>
+        )}
         </BrowserRouter>
     </>
   )

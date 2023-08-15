@@ -33,7 +33,8 @@ function Account() {
                             to={'/account'}
                             className= {`py-2 px-4 mx-3 rounded-full ${subpage == undefined ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faUser} /> <span className="hidden sm:inline">My Profile</span>
+                            <FontAwesomeIcon icon={faUser} /> 
+                            <span className="hidden sm:inline">My Profile</span>
                         </Link>
 
                         {/* trips */}
@@ -41,7 +42,8 @@ function Account() {
                             to={'/account/trips'}
                             className={`py-2 px-4 mx-3 rounded-full ${subpage == 'trips' ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faList} /> <span className="hidden sm:inline">My Trips</span>
+                            <FontAwesomeIcon icon={faList} /> 
+                            <span className="hidden sm:inline">My Trips</span>
                         </Link>
 
                         {/* rentals */}
@@ -49,7 +51,8 @@ function Account() {
                             to={'/account/rentals'}
                             className={`py-2 px-4 mx-3 rounded-full ${subpage == 'rentals' ? 'bg-red text-white rounded-full' : 'hover:bg-slate-500/40'} hover:scale-110`}
                         >
-                            <FontAwesomeIcon icon={faPeopleRoof} /> <span className="hidden sm:inline">My Rentals</span>
+                            <FontAwesomeIcon icon={faPeopleRoof} /> 
+                            <span className="hidden sm:inline">My Rentals</span>
                         </Link>
                     </nav>
 

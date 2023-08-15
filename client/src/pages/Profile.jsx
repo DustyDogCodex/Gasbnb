@@ -7,14 +7,14 @@ import ErrorMessages from '../components/ErrorMessages'
 import { useForm } from "react-hook-form"
 
 function Profile() {
-     //getting userInfo from context
+    //getting userInfo from context
     const { userInfo } = useContext(UserContext)
 
     //variables to track user input
     const { register, handleSubmit, formState: { errors }} = useForm()
     const [ profilePic, setProfilePic ] = useState('')
 
-    //toggle inputs to enter new user info
+    //toggle inputs to edit user info
     const [ editName, setEditName ] = useState(false)
     const [ editEmail, setEditEmail ] = useState(false)
     const [ editPicture, setEditPicture ] = useState(false)
@@ -95,24 +95,26 @@ function Profile() {
             className="flex flex-col items-center justify-center"
         >
             <h1
-                className="text-2xl mb-3 font-mont"
+                className="text-2xl mb-3 border-b border-red"
             >
                 Account
             </h1>
 
+            {/* account owner's name and email */}
             <p
-                className="mb-5"
+                className="mb-5 flex flex-col items-center"
             >
                 <span 
-                    className="text-indigo-500 text-xl font-robotoMono font-semibold">{userInfo?.name}
-                </span>,
+                    className="text-indigo-500 text-base sm:text-xl font-robotoMono font-semibold">{userInfo?.name}
+                </span>
                 <span 
-                    className="text-indigo-500 text-md font-robotoMono font-semibold ml-3">{userInfo?.email}
+                    className="text-indigo-500 text-sm sm:text-md font-robotoMono font-semibold ml-3">{userInfo?.email}
                 </span>
             </p> 
 
+            {/* account info with options to edit and update it */}
             <div
-                className="mt-5 flex items-center justify-between w-3/5 pb-4 border-b border-fuchsia-500"
+                className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
                 <label className="font-bold text-xl">Name</label>
                 <div
@@ -160,7 +162,7 @@ function Profile() {
             </div>
 
             <div
-                className="mt-5 flex items-center justify-between w-3/5 pb-4 border-b border-fuchsia-500"
+                className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
                 <label className="font-bold text-xl">Email</label>
                 <div
@@ -210,7 +212,7 @@ function Profile() {
             </div>
 
             <div
-                className="mt-5 flex items-center justify-between w-3/5 pb-4 border-b border-fuchsia-500"
+                className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
                         <label className="font-bold text-xl">Profile Picture</label>
                         
@@ -220,7 +222,7 @@ function Profile() {
                             <img 
                                 src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
                                 alt="user profile picture" 
-                                className="w-48 h-48 rounded-lg ml-10"
+                                className="w-48 h-48 rounded-lg ml-3 sm:ml-10"
                             />
                             <FontAwesomeIcon 
                                 icon={faPenToSquare} 
