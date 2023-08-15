@@ -6,5 +6,5 @@ html,
 body,
 #root,
 .App{
-    @apply font-roboto
+    @apply font-mont
 }

@@ -17,7 +17,7 @@ function ListingDisplayBox({ listing }) {
             />
 
             <p
-                className="mt-2 font-semibold text-wrap"
+                className="mt-2 font-semibold text-sm text-wrap"
             >
                 {title}
             </p>

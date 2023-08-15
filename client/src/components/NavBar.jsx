@@ -1,7 +1,7 @@
 /* this is the navbar seen at the homepage. This one has additional search bars in the middle that the SmallNavBar does not */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAirbnb } from "@fortawesome/free-brands-svg-icons" 
-import { faMagnifyingGlass, faBars, faCircleUser, faGlobe } from "@fortawesome/free-solid-svg-icons"
+import { faMagnifyingGlass, faBars, faCircleUser } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom'
 import { useState, useContext } from "react"
 import FlyoutMenu from "./FlyoutMenu"
@@ -34,13 +34,13 @@ function NavBar(){
                     <span className="text-red ml-2 text-xl font-bold">gasbnb</span>
                 </Link>
 
-                {/* search bar */}
+                {/* section in center that includes the search bar + anywhere/any week/ add guests */}
                 <div 
-                    className="flex items-center border-2 p-2 rounded-full shadow-md shadow-gray-300"
+                    className="flex items-center border-2 p-2 rounded-full text-sm font-semibold font-mont hadow-md shadow-gray-300"
                 >
-                    <span className="border-r-2 py-1 px-4">Anywhere</span>
-                    <span className="border-r-2 py-1 px-4">Any week</span>
-                    <span className="py-1 px-4">Add guests</span>
+                    <span className="border-r-2 py-1 px-4 cursor-pointer">Anywhere</span>
+                    <span className="border-r-2 py-1 px-4 cursor-pointer">Any week</span>
+                    <span className="py-1 px-4 cursor-pointer">Add guests</span>
 
                     <button 
                         className="bg-red h-10 w-10 rounded-full flex items-center justify-center ml-3 py-1 px-4"
