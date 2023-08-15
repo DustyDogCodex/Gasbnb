@@ -23,6 +23,7 @@ function Account() {
         >
             {/* only display navbar on top for screens above 780px. Below this breakpoint the navbar is on the bottom */}
             {aboveSmallScreens && <NavBar />}
+            
             <div
                 className="flex flex-col p-10 items-center justify-start bg-stone-200 min-h-screen h-full"
             >

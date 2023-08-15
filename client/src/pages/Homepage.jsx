@@ -3,6 +3,7 @@ import { NavBar } from "../components/NavBar"
 import { useEffect, useState } from 'react'
 import ListingDisplayBox from "../components/ListingDisplayBox"
 import pikachu from '../assets/pikachu.gif'
+import Categories from "../components/Categories"
 
 function Homepage() {
     //state variable to store all available listings
@@ -27,6 +28,10 @@ function Homepage() {
     return (
         <>
             <NavBar/>
+
+            {/* categories section */}
+            <Categories />
+
             {/* listing display */}
             <div
                 className="flex items-center justify-center"
