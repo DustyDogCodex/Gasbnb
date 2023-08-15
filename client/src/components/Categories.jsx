@@ -86,15 +86,19 @@ function Categories() {
 
     return (
         <div
-            className="w-full overflow-x-auto flex items-center justify-around py-3 px-8 border-b"
+            className="w-full overflow-x-auto flex items-center justify-center border-b"
         >
-            {categories.map((cat, index) => 
-                <CategoryBox
-                    key={index}
-                    name={cat.name}
-                    icon={cat.icon}
-                />
-            )}
+            <div
+                className="w-full xl:w-[90%] flex items-center justify-around py-3 px-8"
+            >
+                {categories.map((cat, index) => 
+                    <CategoryBox
+                        key={index}
+                        name={cat.name}
+                        icon={cat.icon}
+                    />
+                )}
+            </div>
         </div>
     )
 }
