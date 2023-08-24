@@ -17,7 +17,7 @@ function Homepage() {
         const getListings = async() =>{
             axios.get("https://gasbnb-production.up.railway.app/listings/available")
             .then(res => {
-                setListings(res.data)
+                setListings([ ...res.data ])
                 setLoading(false)
             })
             .catch(err => console.log(err))
