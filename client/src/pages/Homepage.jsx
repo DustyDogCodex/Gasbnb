@@ -57,7 +57,11 @@ function Homepage() {
                         {listings.length > 0 && listings.map((listing,index) => 
                             <ListingDisplayBox 
                                 key={index} 
-                                listing={listing}
+                                id={listing._id}
+                                image={listing.photos[0]}
+                                title={listing.title}
+                                location={listing.location}
+                                price={listing.price}
                             /> 
                         )}
                     </div>
