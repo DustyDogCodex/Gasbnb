@@ -20,7 +20,7 @@ const app = express()
 
 //SETTING UP CORS
 app.use(cors({ 
-    origin: ['http://localhost:5173'],
+    origin: ['https://gasbnb-production.up.railway.app'],
      methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
     credentials: true 
