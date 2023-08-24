@@ -67,7 +67,7 @@ function NavBar(){
                         {userInfo.avatar 
                             ?
                                 <img 
-                                    src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
+                                    src={`https://gasbnb-production.up.railway.app/uploads/${userInfo.avatar}`} 
                                     alt="user profile pic"
                                     className="w-10 h-10 rounded-full ml-3" 
                                 />

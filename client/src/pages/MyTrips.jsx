@@ -17,7 +17,7 @@ function MyTrips() {
     //get all bookings belonging to this user
     useEffect(() => {
         async function userBookings(){
-            axios.get(`http://localhost:5000/bookings/booking-info/${userInfo._id}`)
+            axios.get(`https://gasbnb-production.up.railway.app/bookings/booking-info/${userInfo._id}`)
             .then(res => { 
                 setUserTrips(res.data)
                 setLoading(false)

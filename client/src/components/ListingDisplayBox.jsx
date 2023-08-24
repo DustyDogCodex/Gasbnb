@@ -12,7 +12,7 @@ function ListingDisplayBox({ listing }) {
         >
             <img 
                 className="w-full h-4/5 rounded-lg" 
-                src={`http://localhost:5000/uploads/${photos[0]}`} 
+                src={`https://gasbnb-production.up.railway.app/uploads/${photos[0]}`} 
                 alt="listing cover image" 
             />
 

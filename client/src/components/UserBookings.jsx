@@ -15,7 +15,7 @@ function UserBookings({ booking }) {
             {/* listing's cover image */}
             <img 
                 className="h-36 w-1/3 rounded-lg"
-                src={`http://localhost:5000/uploads/${listingId.photos[0]}`} 
+                src={`https://gasbnb-production.up.railway.app/uploads/${listingId.photos[0]}`} 
                 alt="booking cover image" 
             />
 
@@ -38,7 +38,7 @@ function UserBookings({ booking }) {
                         icon={faCalendar} 
                         style={{color: "#030208", marginRight:'10px', height:'20px', width:'20px'}} 
                     />
-                    <span className="font-bold mr-2">{new Date(checkInDate).toLocaleDateString()}</span> to <span className="font-bold ml-2">{new Date(checkOutDate).toLocaleDateString()}</span>
+                    <span className="font-bold mr-1 text-xs sm:text-base">{new Date(checkInDate).toLocaleDateString()}</span> to <span className="font-bold ml-1 text-xs sm:text-base">{new Date(checkOutDate).toLocaleDateString()}</span>
                 </p>
 
                 {/* num of guests on reservation */}

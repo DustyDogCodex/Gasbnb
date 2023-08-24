@@ -35,7 +35,7 @@ function CreateNewRental() {
     //function to handle adding images that were submiited through a link
     function addLinkImages(e){
         e.preventDefault()
-        axios.post("http://localhost:5000/listings/uploadimage-link",
+        axios.post("https://gasbnb-production.up.railway.app/listings/uploadimage-link",
             { imageLink }
         )
         .then(res => {
@@ -60,7 +60,7 @@ function CreateNewRental() {
             data.append('images', images[i])
         }
 
-        axios.post("http://localhost:5000/listings/uploadimage-device", 
+        axios.post("https://gasbnb-production.up.railway.app/listings/uploadimage-device", 
             data,
             {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -85,7 +85,7 @@ function CreateNewRental() {
 
     //function for submitting data using react-hook-form
     function submitData(data){
-        axios.post("http://localhost:5000/listings/new",
+        axios.post("https://gasbnb-production.up.railway.app/listings/new",
             {
                 id: userInfo._id,
                 data,
@@ -95,7 +95,7 @@ function CreateNewRental() {
         .then(res => {
             //if we get a successful response, we can navigate the user to their rentals page.
             if(res.data){
-                window.location.replace('http://localhost:5173/account/rentals')
+                window.location.replace('https://gasbnb-production.up.railway.app/account/rentals')
             }
         })
         .catch(err => console.log(err))
@@ -374,7 +374,7 @@ function CreateNewRental() {
                         >
                             <img
                                 className="max-w-[300px] max-h-[300px] rounded-xl m-1"
-                                src={`http://localhost:5000/uploads/${photo}`}
+                                src={`https://gasbnb-production.up.railway.app/uploads/${photo}`}
                                 alt="uploaded image"
                             />
 

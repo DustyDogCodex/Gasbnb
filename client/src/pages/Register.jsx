@@ -29,7 +29,7 @@ function Register() {
         }
 
         //post request
-        axios.post('http://localhost:5000/auth/register', 
+        axios.post('https://gasbnb-production.up.railway.app/auth/register', 
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }

@@ -8,6 +8,7 @@ function CategoryBox({ name, icon }) {
             <FontAwesomeIcon
                 icon={icon}
                 style={{ color:'grey', height:'20px', width:'20px' }}
+                className="hover:fill-white"
             />
             <span className="text-xs font-semibold">{name}</span>
         </div>

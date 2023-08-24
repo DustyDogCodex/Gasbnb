@@ -21,7 +21,7 @@ function ListingPage() {
     //fetching listing data from api
     useEffect(() => {
         const getSelectedListing = async() => {
-            axios.get(`http://localhost:5000/listings/available/${listingId}`)
+            axios.get(`https://gasbnb-production.up.railway.app/listings/available/${listingId}`)
             .then(res => { 
                 setSelectedListing(res.data)
                 setLoading(false)
@@ -39,7 +39,7 @@ function ListingPage() {
     if(showMore){
         return (
             <div
-                className="absolute bg-white flex flex-col items-center justify-center w-screen p-3"
+                className="bg-white flex flex-col items-center justify-center w-screen p-2 mt-5"
             >
                 <div>
                     <div
@@ -60,7 +60,7 @@ function ListingPage() {
                         {selectedListing?.photos?.length > 0 && selectedListing.photos.map(photo =>
                             <img 
                                 key={photo}
-                                src={`http://localhost:5000/uploads/${photo}`} 
+                                src={`https://gasbnb-production.up.railway.app/uploads/${photo}`} 
                                 alt="" 
                                 className="rounded-lg my-2"
                             />    
@@ -155,7 +155,7 @@ function ListingPage() {
                                 {/* main image on left hand side */}
                                 {selectedListing?.photos?.[0] && (
                                     <img 
-                                        src={`http://localhost:5000/uploads/${selectedListing.photos[0]}`} 
+                                        src={`https://gasbnb-production.up.railway.app/uploads/${selectedListing.photos[0]}`} 
                                         alt="main photo for listing" 
                                         className="aspect-square object-cover rounded-lg mr-3 w-full"
                                     />
@@ -167,14 +167,14 @@ function ListingPage() {
                                 >
                                     {selectedListing?.photos?.[1] && (
                                         <img 
-                                            src={`http://localhost:5000/uploads/${selectedListing.photos[1]}`} 
+                                            src={`https://gasbnb-production.up.railway.app/uploads/${selectedListing.photos[1]}`} 
                                             alt="second photo for listing" 
                                             className="aspect-square object-cover rounded-lg hidden sm:block"
                                         />
                                     )}
                                     {selectedListing?.photos?.[2] && (
                                     <img 
-                                        src={`http://localhost:5000/uploads/${selectedListing.photos[2]}`} 
+                                        src={`https://gasbnb-production.up.railway.app/uploads/${selectedListing.photos[2]}`} 
                                         alt="listing photo" 
                                         className="aspect-square object-cover rounded-lg hidden sm:block"
                                     />
@@ -208,7 +208,7 @@ function ListingPage() {
                                         {selectedListing?.owner?.avatar
                                             ?
                                             <img 
-                                                src={`http://localhost:5000/uploads/${selectedListing?.owner?.avatar}`} 
+                                                src={`https://gasbnb-production.up.railway.app/uploads/${selectedListing?.owner?.avatar}`} 
                                                 alt={`${selectedListing?.owner?.name}'s profile picture`}
                                                 className="w-14 h-14 rounded-full" 
                                             />

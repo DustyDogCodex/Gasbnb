@@ -4,6 +4,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const multer = require('multer')
+const path = require('path')
+const MongoStore = require('connect-mongo')
 //all imported routes and files
 const authRoute = require('./routes/auth')
 const listingRoute = require('./routes/listing')
@@ -18,20 +20,16 @@ const app = express()
 
 //SETTING UP CORS
 app.use(cors({ 
-    origin: ['http://localhost:5173','http://localhost:5173/login'],
+    origin: ['http://localhost:5173'],
+     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
     credentials: true 
 }))
 app.use(express.json())
 
-//storing a route to the root directory for the project
-//this is used to specify a route to /uploadedImages folder 
-const dirnameSplit = __dirname.split('\\')
-dirnameSplit.splice(-1,1)
-const rootDirectory = dirnameSplit.join('/')
-
 //setting up uploads folder as a static asset
 //now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
-app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
+app.use('/uploads', express.static('uploadedImages'))
 
 //mongodb connection setup
 mongoose.connect(process.env.MONGO_URL)
@@ -42,13 +40,18 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(session({ 
     secret: process.env.SESSION_SECRET,
     resave: false, 
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { 
         sameSite: "lax",
-        secure: "auto",  //for dev environment
+        secure: false,  //for dev environment
         maxAge: 24 * 60 * 60 * 1000 //one day 
-    }
-}));
+    },
+    store: MongoStore.create({ 
+        mongoUrl: process.env.MONGO_URL,
+        dbName: 'test',
+        touchAfter: 24 * 3600 // lazy update unless somethings was changed in session data, time period in seconds
+    })
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.urlencoded({ extended: false }))
@@ -78,6 +81,14 @@ app.post("/auth/register", upload.single('image'), createAccount)
 app.put("/settings/profilepic", upload.single('image'), updateProfilePic)
 
 /* ------------------------------------------------------------------------ */
+
+// Serve static files from the vite build that is now stored in the public folder
+app.use(express.static(path.join(__dirname, 'public')))
+
+// Route for handling all other requests and serving the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
 
 const port = process.env.PORT || 5000
 

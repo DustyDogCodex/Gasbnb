@@ -21,7 +21,7 @@ function ConfirmReservation() {
     //fetching listing info from backend
     useEffect(() => {
         const getListingInfo = async() => {
-            await axios.get(`http://localhost:5000/listings/available/${listingId}`)
+            await axios.get(`https://gasbnb-production.up.railway.app/listings/available/${listingId}`)
             .then(res => setListing(res.data))
             .catch(err => console.log(err))
         }
@@ -31,7 +31,7 @@ function ConfirmReservation() {
     //function to confirm booking and send booking data to server
     async function confirmBooking(e){
         e.preventDefault()
-        axios.post("http://localhost:5000/bookings/new-booking",
+        axios.post("https://gasbnb-production.up.railway.app/bookings/new-booking",
             { userId: userInfo._id, listingId, checkInDate, checkOutDate, numGuests, totalCost }
         ).then(res => {
             if(res.data == 'success'){
@@ -159,7 +159,7 @@ function ConfirmReservation() {
                             >
                                 <img 
                                     className="h-28 rounded-lg" 
-                                    src={`http://localhost:5000/uploads/${listing?.photos?.[0]}`} 
+                                    src={`https://gasbnb-production.up.railway.app/uploads/${listing?.photos?.[0]}`} 
                                     alt={`${listing.title} cover image`} 
                                 />
 

@@ -18,7 +18,7 @@ function Login() {
     //create post request to submit registration info
     //sending watchEmail and watchPassword as passport is expecting these fieldnames and not the data object
     async function loginUser(){
-        axios.post('http://localhost:5000/auth/login', 
+        axios.post('https://gasbnb-production.up.railway.app/auth/login', 
             {
                 email: watchEmail, 
                 password: watchPassword

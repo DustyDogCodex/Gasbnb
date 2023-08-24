@@ -21,7 +21,7 @@ function MyRentals() {
     //sending user id as params to locate listings created by user
     useEffect(() => {
         const getUserListings = async() => {
-            axios.get(`http://localhost:5000/listings/userlistings/${userInfo._id}`)
+            axios.get(`https://gasbnb-production.up.railway.app/listings/userlistings/${userInfo._id}`)
             .then(res => { 
                 setUserListings([ ...res.data ])
                 setLoading(false)

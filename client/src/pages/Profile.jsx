@@ -21,7 +21,7 @@ function Profile() {
 
     //api calls for updating user settings
     async function updateName(data){
-        axios.put(`http://localhost:5000/settings/name`,
+        axios.put(`https://gasbnb-production.up.railway.app/settings/name`,
             { userId: userInfo._id, name: data.name },
             { withCredentials: true }
         )
@@ -36,7 +36,7 @@ function Profile() {
     }
 
     async function updateEmail(data){
-        axios.put(`http://localhost:5000/settings/email`,
+        axios.put(`https://gasbnb-production.up.railway.app/settings/email`,
             { userId: userInfo._id, email: data.email },
             { withCredentials: true }
         )
@@ -61,7 +61,7 @@ function Profile() {
         }
 
         //sending patch request to update post info on server
-        axios.put(`http://localhost:5000/settings/profilepic`,
+        axios.put(`https://gasbnb-production.up.railway.app/settings/profilepic`,
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -79,7 +79,7 @@ function Profile() {
     //function to logout user
     async function logout(){
         await axios.get(
-            'http://localhost:5000/auth/logout',
+            'https://gasbnb-production.up.railway.app/auth/logout',
             { withCredentials: true }
         )
         .then(res => {
@@ -105,10 +105,14 @@ function Profile() {
                 className="mb-5 flex flex-col items-center"
             >
                 <span 
-                    className="text-indigo-500 text-base sm:text-xl font-robotoMono font-semibold">{userInfo?.name}
+                    className="text-indigo-500 text-base sm:text-xl font-robotoMono font-semibold"
+                >
+                    {userInfo?.name}
                 </span>
                 <span 
-                    className="text-indigo-500 text-sm sm:text-md font-robotoMono font-semibold ml-3">{userInfo?.email}
+                    className="text-indigo-500 text-sm sm:text-md font-robotoMono font-semibold ml-3"
+                >
+                    {userInfo?.email}
                 </span>
             </p> 
 
@@ -116,7 +120,7 @@ function Profile() {
             <div
                 className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
-                <label className="font-bold text-xl">Name</label>
+                <label className="font-bold text-lg sm:text-xl">Name</label>
                 <div
                     className={`${editName ? 'hidden' : ''} flex items-center justify-around`}
                 >
@@ -164,7 +168,7 @@ function Profile() {
             <div
                 className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
-                <label className="font-bold text-xl">Email</label>
+                <label className="font-bold text-lg sm:text-xl">Email</label>
                 <div
                     className={`${editEmail ? 'hidden' : ''} flex items-center justify-around`}
                 >
@@ -214,7 +218,7 @@ function Profile() {
             <div
                 className="mt-5 flex items-center justify-between w-full sm:w-3/5 pb-4 border-b border-fuchsia-500"
             >
-                        <label className="font-bold text-xl">Profile Picture</label>
+                        <label className="font-bold text-lg sm:text-xl">Profile Picture</label>
                         
                         <div
                             className={`${editPicture ? 'hidden' : ''} flex items-center justify-around`}
@@ -224,7 +228,7 @@ function Profile() {
                                 ?
                                 (
                                     <img 
-                                        src={`http://localhost:5000/uploads/${userInfo.avatar}`} 
+                                        src={`https://gasbnb-production.up.railway.app/uploads/${userInfo.avatar}`} 
                                         alt="user profile picture" 
                                         className="w-48 h-48 rounded-lg ml-3 sm:ml-10"
                                     />

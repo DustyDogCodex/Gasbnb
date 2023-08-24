@@ -15,7 +15,7 @@ function Homepage() {
     //using useEffect to make an API call to retrieve all available listings and display it on homepage
     useEffect(() => {
         const getListings = async() =>{
-            axios.get("http://localhost:5000/listings/available")
+            axios.get("https://gasbnb-production.up.railway.app/listings/available")
             .then(res => {
                 setListings(res.data)
                 setLoading(false)
