@@ -27,10 +27,6 @@ app.use(cors({
 }))
 app.use(express.json())
 
-//setting up uploads folder as a static asset
-//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
-app.use('/uploads', express.static('uploadedImages'))
-
 //mongodb connection setup
 mongoose.connect(process.env.MONGO_URL)
 .then(console.log('Established connection to database!'))
@@ -85,12 +81,9 @@ app.put("/settings/profilepic", upload.single('image'), updateProfilePic)
 // Serve static files from the vite build that is now stored in the public folder
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Route for handling all other requests and serving the React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))
-})
-
-const port = process.env.PORT || 5000
+//setting up uploads folder as a static asset
+//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
+app.use('/uploads', express.static('uploadedImages'))
 
 //routes for registering and authenticating users
 app.use('/auth', authRoute)
@@ -100,6 +93,13 @@ app.use('/listings', listingRoute)
 app.use('/bookings', bookingRoute)
 //routes for creating/updating/deleting listings
 app.use('/settings', settingsRoute)
+
+// Route for handling all other requests and serving the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+const port = process.env.PORT || 5000
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

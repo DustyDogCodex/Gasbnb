@@ -26,7 +26,7 @@ const upload = multer({ storage: storage })
 Router.get('/available', 
     asyncHandler(async(req,res) => {
         let allListings = await Listing.find()
-        console.log('all listings',allListings)
+        console.log('all listings', allListings)
         res.send(allListings)
     }
 ))
