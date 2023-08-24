@@ -19,6 +19,7 @@ function Homepage() {
             .then(res => {
                 setListings([ ...res.data ])
                 setLoading(false)
+                console.log('listings', listings)
             })
             .catch(err => console.log(err))
         }
@@ -58,7 +59,7 @@ function Homepage() {
                             <ListingDisplayBox 
                                 key={index} 
                                 id={listing._id}
-                                image={listing.photos[0]}
+                                image={listing?.photos?.[0] ?? null}
                                 title={listing.title}
                                 location={listing.location}
                                 price={listing.price}
