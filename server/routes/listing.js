@@ -25,7 +25,8 @@ const upload = multer({ storage: storage })
 //for getting all available listings to display on the homepage
 Router.get('/available', 
     asyncHandler(async(req,res) => {
-        const allListings = await Listing.find()
+        let allListings = await Listing.find()
+        console.log('all listings',allListings)
         res.send(allListings)
     }
 ))
