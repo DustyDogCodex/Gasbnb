@@ -82,43 +82,47 @@ function App(){
         {/* nav bar on bottom of screen for mobile/xs screens */}
         {!aboveSmallScreens &&
             (
-            <div
-                className="fixed bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
-            >   
-                <Link
-                    to={'/account/trips'}
-                    className='flex flex-col items-center justify-center'
-                >
-                    <FontAwesomeIcon 
-                        icon={faPlaneDeparture} 
-                        style={{ color:'skyblue', height:'25px', width:'25px' }}
-                    />
-                    <span className='text-xs'>Trips</span>
-                </Link>
+                <>
+                    <div className="w-full h-40" />
+                    <div
+                        className="fixed bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
+                    >   
+                        <Link
+                            to={'/account/trips'}
+                            className='flex flex-col items-center justify-center'
+                        >
+                            <FontAwesomeIcon 
+                                icon={faPlaneDeparture} 
+                                style={{ color:'skyblue', height:'25px', width:'25px' }}
+                            />
+                            <span className='text-xs'>Trips</span>
+                        </Link>
 
-                <Link
-                    to={'/'}
-                    className='flex flex-col items-center justify-center'
-                >
-                    <FontAwesomeIcon 
-                        icon={faAirbnb} 
-                        style={{ color:'skyblue', height:'25px', width:'25px' }}
-                    />
-                    <span className='text-xs'>Home</span>
-                </Link>
+                        <Link
+                            to={'/'}
+                            className='flex flex-col items-center justify-center'
+                        >
+                            <FontAwesomeIcon 
+                                icon={faAirbnb} 
+                                style={{ color:'skyblue', height:'25px', width:'25px' }}
+                            />
+                            <span className='text-xs'>Home</span>
+                        </Link>
 
-                <Link
-                    to={'/account'}
-                    className='flex flex-col items-center justify-center'
-                >
-                    <FontAwesomeIcon 
-                        icon={faUser} 
-                        style={{ color:'skyblue', height:'25px', width:'25px' }}
-                    />
-                    <span className='text-xs'>Profile</span>
-                </Link>
-            </div>
-        )}
+                        <Link
+                            to={'/account'}
+                            className='flex flex-col items-center justify-center'
+                        >
+                            <FontAwesomeIcon 
+                                icon={faUser} 
+                                style={{ color:'skyblue', height:'25px', width:'25px' }}
+                            />
+                            <span className='text-xs'>Profile</span>
+                        </Link>
+                    </div>
+                </>
+            )
+        }
         </BrowserRouter>
 
         {/* footer will be displayed when above xs/mobile screens in place of bottom nav bar */}

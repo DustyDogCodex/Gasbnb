@@ -34,7 +34,7 @@ function Homepage() {
 
             {/* listing display */}
             <div
-                className="flex items-center justify-center pb-36 sm:pb-5"
+                className="flex items-center justify-center"
             >
                 {loading 
                     ?
@@ -67,8 +67,6 @@ function Homepage() {
                     </div>
                 }
             </div>
-
-            <div className="w-full pb-36 sm:pb-0" />
         </>
     )
 }
