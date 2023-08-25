@@ -43,7 +43,7 @@ function ConfirmReservation() {
 
     return (
         <div 
-            className="w-screen h-screen p-10 flex item-center justify-center bg-stone-200"
+            className="w-screen h-screen p-10 flex item-center justify-center bg-stone-200 pb-36 sm:pb-5"
         >
             <div
                 className="flex bg-white border rounded-lg w-full lg:w-3/5 lg:items-center lg:justify-center"

@@ -103,7 +103,7 @@ function CreateNewRental() {
 
     return (
         <div
-            className="flex flex-col items-center border p-3 rounded-lg"
+            className="flex flex-col items-center border p-3 rounded-lg pb-36 sm:pb-5"
         >
             <h1
                 className="text-3xl mb-5"

@@ -57,7 +57,7 @@ function Register() {
         <>
         <NavBar/>
         <div 
-            className="flex items-center justify-center p-10 bg-stone-200 min-h-screen h-full"
+            className="flex items-center justify-center p-10 bg-stone-200 min-h-screen h-full pb-36 sm:pb-5"
         >   
             <div
                 className="flex flex-col items-center justify-center bg-white p-16 rounded-lg"

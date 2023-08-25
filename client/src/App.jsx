@@ -83,7 +83,7 @@ function App(){
         {!aboveSmallScreens &&
             (
             <div
-                className="fixed bottom-0 mt-3 border-t w-full bg-white py-3 flex items-center justify-evenly"
+                className="fixed bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
             >   
                 <Link
                     to={'/account/trips'}

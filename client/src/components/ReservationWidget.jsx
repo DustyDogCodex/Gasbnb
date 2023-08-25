@@ -34,7 +34,7 @@ function ReservationWidget({ listing }) {
     
     return (
         <div 
-            className="mt-3 ml-0 sm:ml-10 border-2 rounded-lg p-3 shadow-xl shadow-slate-300 h-fit w-full sm:w-fit "
+            className="mt-3 ml-0 sm:ml-10 border-2 rounded-lg p-3 shadow-xl shadow-slate-300 h-fit w-full sm:w-fit"
         >
             <h1>
                 <strong className="text-2xl font-bold">${listing.price}</strong> night
@@ -118,8 +118,8 @@ function ReservationWidget({ listing }) {
             {/* price calculator widget for calculating the price for selected dates */}
             <PriceCalculator 
                 price={listing?.price} 
-                checkIn={watchCheckIn} 
-                checkOut={watchCheckOut} 
+                checkIn={watchCheckIn ? watchCheckIn : today} 
+                checkOut={watchCheckOut ? watchCheckOut : dateOneWeekFromToday} 
             />
         </div>
     )

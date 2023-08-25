@@ -52,7 +52,7 @@ function Homepage() {
                     )
                     :
                     <div
-                        className="mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 h-screen w-screen xl:w-[90%]"
+                        className="pb-36 sm:pb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 h-screen w-screen xl:w-[90%]"
                     >
                         {listings.length > 0 && listings.map((listing,index) => 
                             <ListingDisplayBox 

@@ -19,7 +19,7 @@ function Account() {
 
     return (
         <div
-            className="min-h-screen h-full"
+            className="min-h-screen h-full pb-36 sm:pb-5"
         >
             {/* only display navbar on top for screens above 780px. Below this breakpoint the navbar is on the bottom */}
             {aboveSmallScreens && <NavBar />}

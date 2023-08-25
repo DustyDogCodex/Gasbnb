@@ -39,7 +39,7 @@ function ListingPage() {
     if(showMore){
         return (
             <div
-                className="bg-white flex flex-col items-center justify-center w-screen p-2 mt-5"
+                className="bg-white flex flex-col items-center justify-center w-screen p-2 mt-5 mb-36 sm:mb-5"
             >
                 <div>
                     <div
@@ -106,7 +106,7 @@ function ListingPage() {
         <>
             <NavBar />
             <div
-                className="flex items-center justify-center p-0 sm:p-5 bg-slate-200"
+                className="pb-36 sm:pb-5 flex items-center justify-center p-0 sm:p-5 bg-slate-200"
             >
                 {loading 
                     ? 

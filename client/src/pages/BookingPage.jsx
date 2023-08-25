@@ -42,7 +42,7 @@ function BookingPage() {
         <>
         <NavBar />
         <div
-            className="h-screen flex flex-col items-center justify-center bg-stone-200"
+            className="h-screen flex flex-col items-center justify-center bg-stone-200 pb-36 sm:pb-5"
         >
             {loading 
                 ?   
