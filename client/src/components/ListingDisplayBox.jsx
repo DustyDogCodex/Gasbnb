@@ -5,14 +5,14 @@ function ListingDisplayBox({ id, image, title, location, price }) {
     return (
         <Link
             to={`listing-page/${id}`}
-            className="h-80 xl:h-96 m-3"
+            className="h-88 xl:h-96 m-3"
         >
             {image &&
-            <img 
-                className="w-full h-4/5 rounded-lg" 
-                src={`https://gasbnb-production.up.railway.app/uploads/${image}`} 
-                alt="listing cover image" 
-            />
+                <img 
+                    className="w-full h-4/5 rounded-lg" 
+                    src={`https://gasbnb-production.up.railway.app/uploads/${image}`} 
+                    alt="listing cover image" 
+                />
             }   
 
             <p

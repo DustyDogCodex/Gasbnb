@@ -83,7 +83,6 @@ function App(){
         {!aboveSmallScreens &&
             (
                 <>
-                    <div className="w-full h-40" />
                     <div
                         className="fixed bottom-0 border-t w-full bg-white py-3 flex items-center justify-evenly"
                     >   

@@ -34,7 +34,7 @@ function Homepage() {
 
             {/* listing display */}
             <div
-                className="flex items-center justify-center"
+                className="flex items-center justify-center min-h-screen h-full w-screen pb-40 sm:pb-0"
             >
                 {loading 
                     ?
@@ -52,9 +52,9 @@ function Homepage() {
                     )
                     :
                     <div
-                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 h-screen w-screen xl:w-[90%]"
+                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 xl:w-[90%]"
                     >
-                        {listings.length > 0 && listings.map((listing,index) => 
+                        {listings.map((listing,index) => 
                             <ListingDisplayBox 
                                 key={index} 
                                 id={listing._id}
