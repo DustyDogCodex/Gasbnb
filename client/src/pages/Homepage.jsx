@@ -17,10 +17,8 @@ function Homepage() {
         const getListings = async() =>{
             axios.get("https://gasbnb-production.up.railway.app/listings/available")
             .then(res => {
-                console.log('res.data for listings', res)
                 setListings([ ...res.data ])
                 setLoading(false)
-                console.log('listings', listings)
             })
             .catch(err => console.log(err))
         }
@@ -54,13 +52,13 @@ function Homepage() {
                     )
                     :
                     <div
-                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 h-screen w-screen xl:w-[90%]"
+                        className="mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 p-8 h-screen w-screen xl:w-[90%]"
                     >
                         {listings.length > 0 && listings.map((listing,index) => 
                             <ListingDisplayBox 
                                 key={index} 
                                 id={listing._id}
-                                image={listing?.photos?.[0] ?? null}
+                                image={listing?.photos[0]}
                                 title={listing.title}
                                 location={listing.location}
                                 price={listing.price}
