@@ -67,6 +67,8 @@ function Homepage() {
                     </div>
                 }
             </div>
+
+            <div className="w-full pb-36 sm:pb-0" />
         </>
     )
 }
