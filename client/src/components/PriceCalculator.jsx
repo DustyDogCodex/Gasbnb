@@ -1,11 +1,4 @@
 function PriceCalculator({ price, checkIn, checkOut }) {
-
-    //calculating difference in days
-    //difference in time divided by one week's worth of milliseconds. This gives the time difference in days
-    //this will be used to calculate the total price of the reservation
-    console.log('diff in days', (new Date(checkOut) - new Date(checkIn)) / (24 * 60 * 60 * 1000))
-    console.log('checkin & checkOut', checkIn, checkOut)
-    console.log('price in price calculator', price)
     return (
         <>
             <div
