@@ -172,7 +172,7 @@ function ConfirmReservation() {
 
                             {/* price calculation for selected dates */}
                             <PriceCalculator 
-                                price={listing.price} 
+                                price={listing?.price} 
                                 checkIn={checkInDate} 
                                 checkOut={checkOutDate}
                             />
