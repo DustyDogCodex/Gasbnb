@@ -34,7 +34,7 @@ function Homepage() {
 
             {/* listing display */}
             <div
-                className="flex items-center justify-center min-h-screen h-full w-screen pb-40 sm:pb-0"
+                className="flex items-start justify-center min-h-screen h-full w-full pb-36 sm:pb-0"
             >
                 {loading 
                     ?
