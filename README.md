@@ -6,8 +6,9 @@
     A full stack clone of Airbnb built using React, Express, MongoDb and TailwindCSS. Currently in the process of turning this from a one page front-end clone of the AirBnB home page into a full stack MERN AirBnB clone. Check back in later to see the fully functioning app!
 </p>
 
+<h3 align='center'>when you and the bois get a sick deal on that gasbnb down in tahoe:</h3>
 <div align='center'>
-    <img src='https://tenor.com/view/airport-seinfeld-funny-run-lets-go-gif-13734995.gif'>
+    <img src='https://media1.giphy.com/media/XdPYDCGqky4Y2vNsRS/giphy.gif?cid=ecf05e473275n9eri7i750tbirblrbc0hwjhfw978l4ckvm0&ep=v1_gifs_related&rid=giphy.gif&ct=g'>
 </div>
 
 ## Table of Contents
