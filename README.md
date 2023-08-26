@@ -23,15 +23,20 @@
 
 ## Features
 
-- Integration of React components and Bootstrap styles.
-- Responsive design that adapts to various screen sizes.
-- Content can changed quickly for easy expansion and customisation.
-- Simple project structure that promotes scalability.
-- Pre-configured GitHub pages scripts for easy deployment to GH Pages.
+- Modern and sleek design using React + TailwindCSS
+- Responsive design that adapts to various screen sizes
+- Intuitive navbar for mobile and small screens
+- User authentication and authorisation
+- Add images to your listing through links or directly from your device
+- Book reservations for already existing listings and create your own listings
+- Expired reservations are automatically removed a day after checkout date
 
 ### Future enhancements:
 
-- To be added
+- Adding functionality to search bar to filter through available listings
+- Adding categories bar to find listings by category
+- Improved user profiles in listing pages to see more info about users creating listings
+- User reviews section
 
 ## Getting Started
 
@@ -57,21 +62,27 @@ Before you begin, ensure you have the following installed:
    cd Gasbnb
    ```
 
-3. Install the dependencies:
+3. Install dependencies in client and root folders:
 
    ```bash
    npm install
    ```
 
+4. Create an ```.env``` file with the following variables:
+    ```
+    MONGO_URL = your_mongodb_connection_string
+    SESSION_SECRET = your_session_secret_key
+    ```
+
 ## Usage
 
-Since this project is scaffolded using Vite, to run the development server and view the project in your browser, run:
+To run the development server and view the project in your browser, run:
 
 ```bash
-npm run dev
+npm run devstart
 ```
 
-This will launch the application at `http://localhost:5173`.
+This will launch the application at `http://localhost:5000`.
 
 ## License
 

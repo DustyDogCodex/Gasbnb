@@ -86,10 +86,10 @@ function Categories() {
 
     return (
         <div
-            className="w-full overflow-x-auto flex items-center justify-center border-b"
+            className="w-full flex items-center justify-center border-b"
         >
             <div
-                className="w-full xl:w-[90%] flex items-center justify-around py-3 px-8"
+                className="w-full xl:w-[90%] overflow-x-auto flex items-center justify-around py-3 px-8"
             >
                 {categories.map((cat, index) => 
                     <CategoryBox
